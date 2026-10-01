@@ -30,6 +30,11 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
+            'role' => 'anggota',
+            'nis_nip' => fake()->numerify('#####'),
+            'kelas' => fake()->randomElement(['X IPA 1', 'X IPS 1', 'XI IPA 1', 'XI IPS 1', 'XII IPA 1', 'XII IPS 1']),
+            'no_hp' => fake()->numerify('08##########'),
+            'status' => 'aktif',
         ];
     }
 
@@ -40,6 +45,27 @@ class UserFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
+        ]);
+    }
+
+    /**
+     * Set user as admin.
+     */
+    public function admin(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role' => 'admin',
+            'kelas' => null,
+        ]);
+    }
+
+    /**
+     * Set user as nonaktif.
+     */
+    public function nonaktif(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'status' => 'nonaktif',
         ]);
     }
 }

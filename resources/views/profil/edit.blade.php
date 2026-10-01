@@ -1,0 +1,117 @@
+@extends('layouts.app')
+
+@section('title', 'Edit Profil — Perpustakaan')
+
+@section('content')
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <h1 class="page-title">Profil Saya</h1>
+            <p class="page-subtitle">Kelola informasi akun Anda</p>
+
+            <div class="card-perpus mb-4">
+                <div class="card-header">
+                    <i class="bi bi-person-circle me-2"></i> Informasi Profil
+                </div>
+                <div class="card-body p-4">
+                    <form method="POST" action="{{ route('profil.update') }}" class="form-perpus">
+                        @csrf
+                        @method('PUT')
+
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nama Lengkap</label>
+                            <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                   id="name" name="name" value="{{ old('name', $user->name) }}" required>
+                            @error('name')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control @error('email') is-invalid @enderror"
+                                   id="email" name="email" value="{{ old('email', $user->email) }}" required>
+                            @error('email')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="nis_nip" class="form-label">NIS/NIP</label>
+                                <input type="text" class="form-control @error('nis_nip') is-invalid @enderror"
+                                       id="nis_nip" name="nis_nip" value="{{ old('nis_nip', $user->nis_nip) }}">
+                                @error('nis_nip')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="kelas" class="form-label">Kelas</label>
+                                <input type="text" class="form-control @error('kelas') is-invalid @enderror"
+                                       id="kelas" name="kelas" value="{{ old('kelas', $user->kelas) }}">
+                                @error('kelas')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="no_hp" class="form-label">No. HP</label>
+                                <input type="text" class="form-control @error('no_hp') is-invalid @enderror"
+                                       id="no_hp" name="no_hp" value="{{ old('no_hp', $user->no_hp) }}">
+                                @error('no_hp')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-hijau">
+                            <i class="bi bi-check-lg me-1"></i> Simpan Perubahan
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            {{-- Ganti Password --}}
+            <div class="card-perpus">
+                <div class="card-header">
+                    <i class="bi bi-shield-lock me-2"></i> Ganti Password
+                </div>
+                <div class="card-body p-4">
+                    <form method="POST" action="{{ route('profil.password') }}" class="form-perpus">
+                        @csrf
+                        @method('PUT')
+
+                        <div class="mb-3">
+                            <label for="current_password" class="form-label">Password Saat Ini</label>
+                            <input type="password" class="form-control @error('current_password') is-invalid @enderror"
+                                   id="current_password" name="current_password" required>
+                            @error('current_password')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="new_password" class="form-label">Password Baru</label>
+                                <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                       id="new_password" name="password" placeholder="Minimal 8 karakter" required>
+                                @error('password')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="password_confirmation" class="form-label">Konfirmasi Password Baru</label>
+                                <input type="password" class="form-control" id="password_confirmation"
+                                       name="password_confirmation" required>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-hijau">
+                            <i class="bi bi-lock me-1"></i> Ubah Password
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

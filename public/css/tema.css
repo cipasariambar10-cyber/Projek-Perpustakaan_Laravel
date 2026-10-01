@@ -1,0 +1,915 @@
+/*
+|--------------------------------------------------------------------------
+| tema.css — Variabel Warna & Gaya Global Perpustakaan
+|--------------------------------------------------------------------------
+| Dibuat oleh: Shyfha
+| Semua warna dipakai lewat variabel CSS ini.
+| JANGAN menulis kode warna langsung di halaman lain.
+|--------------------------------------------------------------------------
+*/
+
+/* ===== Import Google Fonts ===== */
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,400&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* ===== Variabel Warna Utama ===== */
+:root {
+    /* --- Warna Utama --- */
+    --hijau-tua:        #2F5D50;
+    --hijau-tua-hover:  #245045;
+    --hijau-tua-light:  #3A7566;
+    --emas:             #D9A441;
+    --emas-hover:       #C4922F;
+    --emas-light:       #E8BE6A;
+    --krem:             #FAF7F0;
+    --krem-gelap:       #F0EBE0;
+    --putih:            #FFFFFF;
+
+    /* --- Teks --- */
+    --teks:             #26302B;
+    --teks-lembut:      #5B665F;
+    --teks-muted:       #8A9490;
+
+    /* --- Garis & Border --- */
+    --garis:            rgba(38, 48, 43, 0.15);
+    --garis-tebal:      rgba(38, 48, 43, 0.25);
+
+    /* --- Status Peminjaman --- */
+    --status-diajukan:      #E5A100;
+    --status-diajukan-bg:   #FFF8E1;
+    --status-dipinjam:      #1976D2;
+    --status-dipinjam-bg:   #E3F2FD;
+    --status-dikembalikan:  #2F5D50;
+    --status-dikembalikan-bg: #E8F5E9;
+    --status-terlambat:     #B3261E;
+    --status-terlambat-bg:  #FDECEA;
+    --status-ditolak:       #6B7280;
+    --status-ditolak-bg:    #F3F4F6;
+
+    /* --- Bayangan --- */
+    --shadow-sm:    0 1px 3px rgba(38, 48, 43, 0.08);
+    --shadow-md:    0 4px 12px rgba(38, 48, 43, 0.10);
+    --shadow-lg:    0 8px 30px rgba(38, 48, 43, 0.12);
+    --shadow-xl:    0 12px 40px rgba(38, 48, 43, 0.15);
+
+    /* --- Border Radius --- */
+    --radius-sm:    6px;
+    --radius-md:    10px;
+    --radius-lg:    16px;
+    --radius-xl:    24px;
+    --radius-pill:  50px;
+
+    /* --- Transisi --- */
+    --transisi:     all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transisi-cepat: all 0.15s ease;
+
+    /* --- Font --- */
+    --font-judul:   'Merriweather', Georgia, 'Times New Roman', serif;
+    --font-isi:     'Poppins', 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+/* ===== Reset & Base ===== */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-isi);
+    color: var(--teks);
+    background-color: var(--krem);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-judul);
+    color: var(--teks);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+a {
+    color: var(--hijau-tua);
+    text-decoration: none;
+    transition: var(--transisi-cepat);
+}
+
+a:hover {
+    color: var(--hijau-tua-hover);
+}
+
+/* ===== Navbar ===== */
+.navbar-perpus {
+    background: var(--putih);
+    border-bottom: 1px solid var(--garis);
+    box-shadow: var(--shadow-sm);
+    padding: 0.6rem 0;
+    transition: var(--transisi);
+}
+
+.navbar-perpus .navbar-brand {
+    font-family: var(--font-judul);
+    font-weight: 700;
+    font-size: 1.35rem;
+    color: var(--hijau-tua);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.navbar-perpus .navbar-brand .brand-icon {
+    font-size: 1.6rem;
+    color: var(--emas);
+}
+
+.navbar-perpus .nav-link {
+    font-family: var(--font-isi);
+    font-weight: 500;
+    color: var(--teks-lembut);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-sm);
+    transition: var(--transisi-cepat);
+    font-size: 0.92rem;
+}
+
+.navbar-perpus .nav-link:hover,
+.navbar-perpus .nav-link.active {
+    color: var(--hijau-tua);
+    background: rgba(47, 93, 80, 0.06);
+}
+
+.navbar-perpus .nav-link.active {
+    font-weight: 600;
+}
+
+.navbar-perpus .dropdown-menu {
+    border: 1px solid var(--garis);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    padding: 0.5rem;
+}
+
+.navbar-perpus .dropdown-item {
+    border-radius: var(--radius-sm);
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    transition: var(--transisi-cepat);
+}
+
+.navbar-perpus .dropdown-item:hover {
+    background: rgba(47, 93, 80, 0.06);
+    color: var(--hijau-tua);
+}
+
+/* ===== Tombol ===== */
+.btn-hijau {
+    background-color: var(--hijau-tua);
+    border-color: var(--hijau-tua);
+    color: var(--putih);
+    font-family: var(--font-isi);
+    font-weight: 600;
+    padding: 0.55rem 1.5rem;
+    border-radius: var(--radius-sm);
+    transition: var(--transisi);
+    font-size: 0.9rem;
+    letter-spacing: 0.02em;
+}
+
+.btn-hijau:hover,
+.btn-hijau:focus {
+    background-color: var(--hijau-tua-hover);
+    border-color: var(--hijau-tua-hover);
+    color: var(--putih);
+    box-shadow: 0 4px 12px rgba(47, 93, 80, 0.3);
+    transform: translateY(-1px);
+}
+
+.btn-hijau:active {
+    transform: translateY(0);
+}
+
+.btn-emas {
+    background-color: var(--emas);
+    border-color: var(--emas);
+    color: var(--putih);
+    font-family: var(--font-isi);
+    font-weight: 600;
+    padding: 0.55rem 1.5rem;
+    border-radius: var(--radius-sm);
+    transition: var(--transisi);
+    font-size: 0.9rem;
+}
+
+.btn-emas:hover,
+.btn-emas:focus {
+    background-color: var(--emas-hover);
+    border-color: var(--emas-hover);
+    color: var(--putih);
+    box-shadow: 0 4px 12px rgba(217, 164, 65, 0.3);
+    transform: translateY(-1px);
+}
+
+.btn-outline-hijau {
+    background-color: transparent;
+    border: 2px solid var(--hijau-tua);
+    color: var(--hijau-tua);
+    font-family: var(--font-isi);
+    font-weight: 600;
+    padding: 0.5rem 1.5rem;
+    border-radius: var(--radius-sm);
+    transition: var(--transisi);
+    font-size: 0.9rem;
+}
+
+.btn-outline-hijau:hover {
+    background-color: var(--hijau-tua);
+    color: var(--putih);
+    box-shadow: 0 4px 12px rgba(47, 93, 80, 0.3);
+    transform: translateY(-1px);
+}
+
+/* ===== Kartu ===== */
+.card-perpus {
+    background: var(--putih);
+    border: 1px solid var(--garis);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transisi);
+    overflow: hidden;
+}
+
+.card-perpus:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.card-perpus .card-header {
+    background: transparent;
+    border-bottom: 1px solid var(--garis);
+    padding: 1rem 1.25rem;
+    font-family: var(--font-judul);
+    font-weight: 700;
+    color: var(--hijau-tua);
+    font-size: 1.05rem;
+}
+
+.card-perpus .card-body {
+    padding: 1.25rem;
+}
+
+/* ===== Statistik Dashboard ===== */
+.stat-card {
+    background: var(--putih);
+    border: 1px solid var(--garis);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    text-align: center;
+    transition: var(--transisi);
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--hijau-tua), var(--emas));
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+.stat-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-3px);
+}
+
+.stat-card .stat-icon {
+    font-size: 2rem;
+    color: var(--hijau-tua);
+    margin-bottom: 0.75rem;
+    opacity: 0.85;
+}
+
+.stat-card .stat-number {
+    font-family: var(--font-judul);
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--hijau-tua);
+    line-height: 1.1;
+}
+
+.stat-card .stat-label {
+    font-size: 0.85rem;
+    color: var(--teks-lembut);
+    margin-top: 0.25rem;
+    font-weight: 500;
+}
+
+/* ===== Badge Status ===== */
+.badge-status {
+    font-family: var(--font-isi);
+    font-weight: 600;
+    font-size: 0.78rem;
+    padding: 0.35em 0.85em;
+    border-radius: var(--radius-pill);
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+}
+
+.badge-diajukan {
+    background-color: var(--status-diajukan-bg);
+    color: var(--status-diajukan);
+}
+
+.badge-dipinjam {
+    background-color: var(--status-dipinjam-bg);
+    color: var(--status-dipinjam);
+}
+
+.badge-dikembalikan {
+    background-color: var(--status-dikembalikan-bg);
+    color: var(--status-dikembalikan);
+}
+
+.badge-terlambat {
+    background-color: var(--status-terlambat-bg);
+    color: var(--status-terlambat);
+}
+
+.badge-ditolak {
+    background-color: var(--status-ditolak-bg);
+    color: var(--status-ditolak);
+}
+
+/* ===== Badge Akun ===== */
+.badge-aktif {
+    background-color: var(--status-dikembalikan-bg);
+    color: var(--status-dikembalikan);
+}
+
+.badge-nonaktif {
+    background-color: var(--status-ditolak-bg);
+    color: var(--status-ditolak);
+}
+
+.badge-admin {
+    background: linear-gradient(135deg, var(--hijau-tua), var(--hijau-tua-light));
+    color: var(--putih);
+}
+
+.badge-anggota {
+    background-color: var(--status-dipinjam-bg);
+    color: var(--status-dipinjam);
+}
+
+/* ===== Tabel ===== */
+.table-perpus {
+    font-family: var(--font-isi);
+    font-size: 0.9rem;
+}
+
+.table-perpus thead th {
+    background-color: var(--hijau-tua);
+    color: var(--putih);
+    font-weight: 600;
+    border: none;
+    padding: 0.85rem 1rem;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+}
+
+.table-perpus thead th:first-child {
+    border-radius: var(--radius-sm) 0 0 0;
+}
+
+.table-perpus thead th:last-child {
+    border-radius: 0 var(--radius-sm) 0 0;
+}
+
+.table-perpus tbody td {
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid var(--garis);
+    vertical-align: middle;
+}
+
+.table-perpus tbody tr {
+    transition: var(--transisi-cepat);
+}
+
+.table-perpus tbody tr:hover {
+    background-color: rgba(47, 93, 80, 0.03);
+}
+
+/* ===== Form ===== */
+.form-perpus .form-label {
+    font-weight: 600;
+    color: var(--teks);
+    font-size: 0.88rem;
+    margin-bottom: 0.4rem;
+}
+
+.form-perpus .form-control,
+.form-perpus .form-select {
+    border: 1.5px solid var(--garis-tebal);
+    border-radius: var(--radius-sm);
+    padding: 0.65rem 1rem;
+    font-size: 0.9rem;
+    transition: var(--transisi-cepat);
+    background-color: var(--putih);
+}
+
+.form-perpus .form-control:focus,
+.form-perpus .form-select:focus {
+    border-color: var(--hijau-tua);
+    box-shadow: 0 0 0 3px rgba(47, 93, 80, 0.12);
+}
+
+.form-perpus .form-control::placeholder {
+    color: var(--teks-muted);
+}
+
+.form-perpus .form-text {
+    font-size: 0.8rem;
+    color: var(--teks-muted);
+}
+
+/* ===== Halaman Auth (Login / Register) ===== */
+.auth-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--krem) 0%, var(--krem-gelap) 100%);
+    padding: 2rem 1rem;
+}
+
+.auth-card {
+    background: var(--putih);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    max-width: 460px;
+    padding: 2.5rem;
+    border: 1px solid var(--garis);
+    animation: fadeInUp 0.5s ease-out;
+}
+
+.auth-card .auth-logo {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.auth-card .auth-logo i {
+    font-size: 3rem;
+    color: var(--emas);
+    margin-bottom: 0.75rem;
+    display: block;
+}
+
+.auth-card .auth-logo h2 {
+    font-family: var(--font-judul);
+    color: var(--hijau-tua);
+    font-size: 1.6rem;
+    margin-bottom: 0.25rem;
+}
+
+.auth-card .auth-logo p {
+    color: var(--teks-lembut);
+    font-size: 0.9rem;
+}
+
+/* ===== Sidebar (Admin) ===== */
+.sidebar-perpus {
+    background: var(--putih);
+    border-right: 1px solid var(--garis);
+    min-height: calc(100vh - 62px);
+    padding: 1.5rem 0;
+    box-shadow: var(--shadow-sm);
+}
+
+.sidebar-perpus .sidebar-heading {
+    font-family: var(--font-isi);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--teks-muted);
+    padding: 0.5rem 1.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.sidebar-perpus .nav-link {
+    font-family: var(--font-isi);
+    color: var(--teks-lembut);
+    padding: 0.65rem 1.5rem;
+    font-size: 0.88rem;
+    font-weight: 500;
+    border-radius: 0;
+    transition: var(--transisi-cepat);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border-left: 3px solid transparent;
+}
+
+.sidebar-perpus .nav-link:hover {
+    background: rgba(47, 93, 80, 0.05);
+    color: var(--hijau-tua);
+    border-left-color: rgba(47, 93, 80, 0.3);
+}
+
+.sidebar-perpus .nav-link.active {
+    color: var(--hijau-tua);
+    font-weight: 600;
+    background: rgba(47, 93, 80, 0.08);
+    border-left-color: var(--hijau-tua);
+}
+
+.sidebar-perpus .nav-link i {
+    width: 20px;
+    text-align: center;
+    font-size: 1rem;
+}
+
+/* ===== Content Area ===== */
+.content-area {
+    padding: 2rem;
+    min-height: calc(100vh - 62px);
+}
+
+.page-title {
+    font-family: var(--font-judul);
+    color: var(--hijau-tua);
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.page-subtitle {
+    color: var(--teks-lembut);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+/* ===== Beranda ===== */
+.hero-section {
+    background: linear-gradient(135deg, var(--hijau-tua) 0%, var(--hijau-tua-light) 50%, var(--hijau-tua-hover) 100%);
+    color: var(--putih);
+    padding: 5rem 0 4rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 60%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(217, 164, 65, 0.1) 0%, transparent 70%);
+    animation: heroGlow 8s ease-in-out infinite;
+}
+
+.hero-section h1 {
+    font-family: var(--font-judul);
+    font-size: 2.6rem;
+    font-weight: 900;
+    color: var(--putih);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.hero-section .hero-accent {
+    color: var(--emas);
+}
+
+.hero-section p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    max-width: 600px;
+    line-height: 1.7;
+}
+
+.section-title {
+    font-family: var(--font-judul);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--hijau-tua);
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--emas), var(--emas-light));
+    border-radius: 2px;
+    margin-top: 0.75rem;
+}
+
+.section-subtitle {
+    color: var(--teks-lembut);
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+}
+
+/* ===== Kartu Buku ===== */
+.book-card {
+    background: var(--putih);
+    border: 1px solid var(--garis);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: var(--transisi);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.book-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+}
+
+.book-card .book-cover {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    border-bottom: 1px solid var(--garis);
+}
+
+.book-card .book-cover-placeholder {
+    width: 100%;
+    height: 260px;
+    background: linear-gradient(135deg, var(--hijau-tua), var(--hijau-tua-light));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--putih);
+    border-bottom: 1px solid var(--garis);
+}
+
+.book-card .book-cover-placeholder i {
+    font-size: 3rem;
+    opacity: 0.7;
+    margin-bottom: 0.5rem;
+}
+
+.book-card .book-cover-placeholder span {
+    font-size: 0.8rem;
+    opacity: 0.5;
+}
+
+.book-card .card-body {
+    padding: 1rem 1.25rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.book-card .book-title {
+    font-family: var(--font-judul);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--teks);
+    margin-bottom: 0.35rem;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.book-card .book-author {
+    font-size: 0.85rem;
+    color: var(--teks-lembut);
+    margin-bottom: 0.75rem;
+}
+
+.book-card .book-category {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--emas);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+}
+
+.book-card .book-meta {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--garis);
+    font-size: 0.8rem;
+    color: var(--teks-lembut);
+}
+
+/* ===== Footer ===== */
+.footer-perpus {
+    background: var(--hijau-tua);
+    color: rgba(255, 255, 255, 0.8);
+    padding: 3rem 0 1.5rem;
+}
+
+.footer-perpus h5 {
+    font-family: var(--font-judul);
+    color: var(--putih);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.footer-perpus a {
+    color: rgba(255, 255, 255, 0.7);
+    transition: var(--transisi-cepat);
+}
+
+.footer-perpus a:hover {
+    color: var(--emas);
+}
+
+.footer-perpus .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-top: 1.5rem;
+    margin-top: 2rem;
+    font-size: 0.85rem;
+    text-align: center;
+    opacity: 0.7;
+}
+
+/* ===== Alert ===== */
+.alert-perpus {
+    border-radius: var(--radius-sm);
+    border: none;
+    font-size: 0.9rem;
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.alert-perpus.alert-success {
+    background: var(--status-dikembalikan-bg);
+    color: var(--status-dikembalikan);
+}
+
+.alert-perpus.alert-danger {
+    background: var(--status-terlambat-bg);
+    color: var(--status-terlambat);
+}
+
+.alert-perpus.alert-warning {
+    background: var(--status-diajukan-bg);
+    color: var(--status-diajukan);
+}
+
+.alert-perpus.alert-info {
+    background: var(--status-dipinjam-bg);
+    color: var(--status-dipinjam);
+}
+
+/* ===== Pagination ===== */
+.pagination .page-link {
+    color: var(--hijau-tua);
+    border-color: var(--garis);
+    font-family: var(--font-isi);
+    font-size: 0.88rem;
+    transition: var(--transisi-cepat);
+}
+
+.pagination .page-link:hover {
+    background-color: rgba(47, 93, 80, 0.08);
+    border-color: var(--hijau-tua);
+    color: var(--hijau-tua);
+}
+
+.pagination .page-item.active .page-link {
+    background-color: var(--hijau-tua);
+    border-color: var(--hijau-tua);
+    color: var(--putih);
+}
+
+/* ===== Empty State ===== */
+.empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--teks-lembut);
+}
+
+.empty-state i {
+    font-size: 3.5rem;
+    opacity: 0.4;
+    margin-bottom: 1rem;
+    display: block;
+    color: var(--hijau-tua);
+}
+
+.empty-state h5 {
+    font-family: var(--font-judul);
+    color: var(--teks);
+    margin-bottom: 0.5rem;
+}
+
+.empty-state p {
+    font-size: 0.9rem;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* ===== Animasi ===== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes heroGlow {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(3deg) scale(1.05); }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--krem);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(47, 93, 80, 0.25);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(47, 93, 80, 0.4);
+}
+
+/* ===== Utilitas ===== */
+.text-hijau { color: var(--hijau-tua) !important; }
+.text-emas { color: var(--emas) !important; }
+.text-lembut { color: var(--teks-lembut) !important; }
+.bg-krem { background-color: var(--krem) !important; }
+.bg-hijau { background-color: var(--hijau-tua) !important; }
+.border-garis { border-color: var(--garis) !important; }
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 3rem 0 2.5rem;
+    }
+
+    .hero-section h1 {
+        font-size: 1.8rem;
+    }
+
+    .content-area {
+        padding: 1.25rem;
+    }
+
+    .sidebar-perpus {
+        min-height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--garis);
+    }
+
+    .auth-card {
+        padding: 1.75rem;
+    }
+
+    .stat-card {
+        padding: 1rem;
+    }
+
+    .stat-card .stat-number {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .page-title {
+        font-size: 1.3rem;
+    }
+
+    .table-perpus {
+        font-size: 0.82rem;
+    }
+}
