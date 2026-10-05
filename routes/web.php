@@ -5,6 +5,9 @@ use App\Http\Controllers\BerandaController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AnggotaController;
+use App\Http\Controllers\Admin\BukuController;
+use App\Http\Controllers\Admin\KategoriController;
+use App\Http\Controllers\KatalogController;
 use App\Http\Controllers\ProfilController;
 
 /*
@@ -19,9 +22,8 @@ Route::get('/', [BerandaController::class, 'index'])->name('beranda');
 | KATALOG — Placeholder (milik Nasya)
 |--------------------------------------------------------------------------
 */
-Route::get('/katalog', function () {
-    return view('katalog.index');
-})->name('katalog.index');
+Route::get('/katalog', [KatalogController::class, 'index'])->name('katalog.index');
+Route::get('/katalog/{book}', [KatalogController::class, 'show'])->whereNumber('book')->name('katalog.show');
 
 /*
 |--------------------------------------------------------------------------
@@ -67,6 +69,10 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 | Nasya: tambahkan rute buku di sini
 |--------------------------------------------------------------------------
 */
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::resource('kategori', KategoriController::class)->except('show');
+    Route::resource('buku', BukuController::class);
+});
 
 /*
 |--------------------------------------------------------------------------
