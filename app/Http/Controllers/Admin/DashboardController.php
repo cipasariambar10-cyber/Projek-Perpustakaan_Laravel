@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Book;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -24,14 +25,8 @@ class DashboardController extends Controller
             'total_terlambat' => 0,
         ];
 
-        // Load statistik buku jika tabel sudah ada (milik Nasya)
-        try {
-            if (\Schema::hasTable('books')) {
-                $stats['total_buku'] = \DB::table('books')->count();
-            }
-        } catch (\Exception $e) {
-            // Tabel belum ada
-        }
+        // Total buku (milik Nasya)
+        $stats['total_buku'] = Book::count();
 
         // Load statistik peminjaman jika tabel sudah ada (milik Hayfa)
         try {
@@ -39,7 +34,7 @@ class DashboardController extends Controller
                 $stats['total_dipinjam'] = \DB::table('loans')->where('status', 'dipinjam')->count();
                 $stats['total_terlambat'] = \DB::table('loans')
                     ->where('status', 'dipinjam')
-                    ->where('batas_kembali', '<', now())
+                    ->whereDate('batas_kembali', '<', now()->toDateString())
                     ->count();
             }
         } catch (\Exception $e) {

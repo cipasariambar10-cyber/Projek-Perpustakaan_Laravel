@@ -25,8 +25,8 @@
                 <div class="col-sm-6 col-xl-3">
                     <div class="stat-card">
                         <div class="stat-icon"><i class="bi bi-people-fill"></i></div>
-                        <div class="stat-number">{{ number_format($stats['anggota_aktif']) }}</div>
-                        <div class="stat-label">Anggota Aktif</div>
+                        <div class="stat-number">{{ number_format($stats['total_anggota']) }}</div>
+                        <div class="stat-label">Total Anggota</div>
                     </div>
                 </div>
                 <div class="col-sm-6 col-xl-3">

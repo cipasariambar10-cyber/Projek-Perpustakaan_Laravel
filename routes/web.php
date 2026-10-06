@@ -6,6 +6,8 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AnggotaController;
 use App\Http\Controllers\Admin\PeminjamanController;
+use App\Http\Controllers\Admin\BukuController;
+use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\AnggotaPeminjamanController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\KatalogController;
@@ -19,7 +21,7 @@ Route::get('/', [BerandaController::class, 'index'])->name('beranda');
 
 /*
 |--------------------------------------------------------------------------
-| KATALOG — Placeholder (milik Nasya)
+| KATALOG — Placeholder (milik Nasya) / Diupdate Katalog Buku Lengkap
 |--------------------------------------------------------------------------
 */
 Route::get('/katalog', [KatalogController::class, 'index'])->name('katalog.index');
@@ -67,9 +69,12 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 /*
 |--------------------------------------------------------------------------
 | MODUL BUKU — CRUD buku & kategori (milik Nasya)
-| Nasya: tambahkan rute buku di sini
 |--------------------------------------------------------------------------
 */
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::resource('kategori', KategoriController::class)->except('show');
+    Route::resource('buku', BukuController::class);
+});
 
 /*
 |--------------------------------------------------------------------------

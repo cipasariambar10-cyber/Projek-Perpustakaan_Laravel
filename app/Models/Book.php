@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Book extends Model
 {
@@ -28,19 +29,21 @@ class Book extends Model
         'jumlah_halaman',
     ];
 
+    protected function casts(): array
+    {
+        return [
+            'tahun_terbit' => 'integer',
+            'stok' => 'integer',
+        ];
+    }
+
     /* ===== Relasi ===== */
 
-    /**
-     * Relasi ke peminjaman (milik Hayfa).
-     */
     public function loans(): HasMany
     {
         return $this->hasMany(Loan::class);
     }
 
-    /**
-     * Relasi ke kategori (milik Nasya).
-     */
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
@@ -48,9 +51,6 @@ class Book extends Model
 
     /* ===== Helper Stok (milik Hayfa) ===== */
 
-    /**
-     * Apakah buku masih tersedia untuk dipinjam?
-     */
     public function tersedia(): bool
     {
         return $this->stok > 0;
