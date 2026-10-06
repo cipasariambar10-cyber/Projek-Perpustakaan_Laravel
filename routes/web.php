@@ -5,7 +5,10 @@ use App\Http\Controllers\BerandaController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AnggotaController;
+use App\Http\Controllers\Admin\PeminjamanController;
+use App\Http\Controllers\AnggotaPeminjamanController;
 use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\KatalogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +22,9 @@ Route::get('/', [BerandaController::class, 'index'])->name('beranda');
 | KATALOG — Placeholder (milik Nasya)
 |--------------------------------------------------------------------------
 */
-Route::get('/katalog', function () {
-    return view('katalog.index');
-})->name('katalog.index');
+Route::get('/katalog', [KatalogController::class, 'index'])->name('katalog.index');
+Route::get('/katalog/{book}', [KatalogController::class, 'show'])->name('katalog.show');
+Route::post('/katalog/{book}/pinjam', [KatalogController::class, 'pinjam'])->name('katalog.pinjam');
 
 /*
 |--------------------------------------------------------------------------
@@ -71,6 +74,18 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 /*
 |--------------------------------------------------------------------------
 | MODUL PEMINJAMAN — Peminjaman & pengembalian (milik Hayfa)
-| Hayfa: tambahkan rute peminjaman di sini
 |--------------------------------------------------------------------------
 */
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/peminjaman', [PeminjamanController::class, 'index'])->name('peminjaman.index');
+    Route::get('/peminjaman/create', [PeminjamanController::class, 'create'])->name('peminjaman.create');
+    Route::post('/peminjaman', [PeminjamanController::class, 'store'])->name('peminjaman.store');
+    Route::get('/peminjaman/{peminjaman}', [PeminjamanController::class, 'show'])->name('peminjaman.show');
+    Route::patch('/peminjaman/{peminjaman}/kembalikan', [PeminjamanController::class, 'kembalikan'])->name('peminjaman.kembalikan');
+    Route::delete('/peminjaman/{peminjaman}', [PeminjamanController::class, 'destroy'])->name('peminjaman.destroy');
+});
+
+// Riwayat peminjaman untuk anggota (hanya melihat)
+Route::middleware('auth')->group(function () {
+    Route::get('/anggota/peminjaman', [AnggotaPeminjamanController::class, 'index'])->name('anggota.peminjaman');
+});
