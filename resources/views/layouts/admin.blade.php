@@ -228,7 +228,7 @@
                     <ul class="list-unstyled" style="font-size: 0.9rem; line-height: 2;">
                         <li><i class="bi bi-geo-alt me-2" style="color: var(--emas);"></i> Jl. Pendidikan No. 1</li>
                         <li><i class="bi bi-clock me-2" style="color: var(--emas);"></i> Senin–Jumat: 07.00–15.00</li>
-                        <li><i class="bi bi-envelope me-2" style="color: var(--emas);"></i> perpus@sekolah.sch.id</li>
+                        <li><i class="bi bi-envelope me-2" style="color: var(--emas);"></i> perpus@gmail.com</li>
                     </ul>
                 </div>
             </div>

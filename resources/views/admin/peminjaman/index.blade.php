@@ -47,7 +47,7 @@
                     <form method="GET" action="{{ route('admin.peminjaman.index') }}" class="row g-3 align-items-end form-perpus">
                         <div class="col-md-5">
                             <label class="form-label"><i class="bi bi-search me-1"></i> Pencarian</label>
-                            <input type="text" name="cari" class="form-control" placeholder="Nama anggota, NIS/NIP, atau judul buku..." value="{{ request('cari') }}">
+                            <input type="text" name="cari" class="form-control" placeholder="Nama anggota, NISN, atau judul buku..." value="{{ request('cari') }}">
                         </div>
                         <div class="col-md-3">
                             <label class="form-label"><i class="bi bi-funnel me-1"></i> Status</label>

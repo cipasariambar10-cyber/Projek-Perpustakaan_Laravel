@@ -23,7 +23,7 @@
                                 <span class="input-group-text" style="background:var(--putih);border-color:var(--garis-tebal);">
                                     <i class="bi bi-search" style="color:var(--teks-muted);"></i>
                                 </span>
-                                <input type="text" name="search" class="form-control" placeholder="Nama, email, atau NIS/NIP..."
+                                <input type="text" name="search" class="form-control" placeholder="Nama, email, atau NISN..."
                                        value="{{ request('search') }}" style="border-color:var(--garis-tebal);">
                             </div>
                         </div>
@@ -67,7 +67,7 @@
                                 <tr>
                                     <th style="width: 40px;">#</th>
                                     <th>Nama</th>
-                                    <th>NIS/NIP</th>
+                                    <th>NISN</th>
                                     <th>Kelas</th>
                                     <th>No. HP</th>
                                     <th>Role</th>

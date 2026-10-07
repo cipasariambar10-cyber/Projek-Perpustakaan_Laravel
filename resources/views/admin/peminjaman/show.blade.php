@@ -48,7 +48,7 @@
                                     </div>
                                     <table style="font-size:0.88rem; line-height:2;">
                                         <tr>
-                                            <td style="color: var(--teks-lembut); padding-right:1rem;">NIS/NIP</td>
+                                            <td style="color: var(--teks-lembut); padding-right:1rem;">NISN</td>
                                             <td class="fw-semibold">{{ $peminjaman->user->nis_nip ?? '—' }}</td>
                                         </tr>
                                         <tr>

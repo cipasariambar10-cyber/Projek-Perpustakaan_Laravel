@@ -64,9 +64,9 @@
                         </div>
 
                         <div class="row">
-                            {{-- NIS/NIP --}}
+                            {{-- NISN --}}
                             <div class="col-md-4 mb-3">
-                                <label for="nis_nip" class="form-label">NIS/NIP</label>
+                                <label for="nis_nip" class="form-label">NISN</label>
                                 <input type="text" class="form-control @error('nis_nip') is-invalid @enderror"
                                        id="nis_nip" name="nis_nip" value="{{ old('nis_nip', $anggota->nis_nip) }}">
                                 @error('nis_nip')

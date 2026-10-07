@@ -62,7 +62,7 @@
                                     <thead>
                                         <tr>
                                             <th>Nama</th>
-                                            <th>NIS/NIP</th>
+                                            <th>NISN</th>
                                             <th>Kelas</th>
                                             <th>Status</th>
                                         </tr>

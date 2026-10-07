@@ -52,7 +52,7 @@
             </div>
 
             <div class="row">
-                {{-- NIS/NIP --}}
+                {{-- NISN --}}
                 <div class="col-md-6 mb-3">
                     <label for="nis_nip" class="form-label">
                         <i class="bi bi-card-text me-1"></i> NISN

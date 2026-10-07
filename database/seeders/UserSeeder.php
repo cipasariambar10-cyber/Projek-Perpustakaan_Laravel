@@ -31,56 +31,56 @@ class UserSeeder extends Seeder
         $anggota = [
             [
                 'name' => 'Siti Nurhaliza',
-                'email' => 'siti@siswa.sch.id',
+                'email' => 'siti@gmail.com',
                 'nis_nip' => '12001',
                 'kelas' => 'XII IPA 1',
                 'no_hp' => '081234567891',
             ],
             [
                 'name' => 'Ahmad Fauzi',
-                'email' => 'ahmad@siswa.sch.id',
+                'email' => 'ahmad@gmail.com',
                 'nis_nip' => '12002',
                 'kelas' => 'XII IPA 2',
                 'no_hp' => '081234567892',
             ],
             [
                 'name' => 'Dewi Lestari',
-                'email' => 'dewi@siswa.sch.id',
+                'email' => 'dewi@gmail.com',
                 'nis_nip' => '11001',
                 'kelas' => 'XI IPS 1',
                 'no_hp' => '081234567893',
             ],
             [
                 'name' => 'Budi Santoso',
-                'email' => 'budi@siswa.sch.id',
+                'email' => 'budi@gmail.com',
                 'nis_nip' => '11002',
                 'kelas' => 'XI IPA 1',
                 'no_hp' => '081234567894',
             ],
             [
                 'name' => 'Rina Marlina',
-                'email' => 'rina@siswa.sch.id',
+                'email' => 'rina@gmail.com',
                 'nis_nip' => '10001',
                 'kelas' => 'X IPA 1',
                 'no_hp' => '081234567895',
             ],
             [
                 'name' => 'Dimas Pratama',
-                'email' => 'dimas@siswa.sch.id',
+                'email' => 'dimas@gmail.com',
                 'nis_nip' => '10002',
                 'kelas' => 'X IPS 1',
                 'no_hp' => '081234567896',
             ],
             [
                 'name' => 'Anisa Rahma',
-                'email' => 'anisa@siswa.sch.id',
+                'email' => 'anisa@gmail.com',
                 'nis_nip' => '12003',
                 'kelas' => 'XII IPS 1',
                 'no_hp' => '081234567897',
             ],
             [
                 'name' => 'Yoga Firmansyah',
-                'email' => 'yoga@siswa.sch.id',
+                'email' => 'yoga@gmail.com',
                 'nis_nip' => '11003',
                 'kelas' => 'XI IPA 2',
                 'no_hp' => '081234567898',
@@ -100,7 +100,7 @@ class UserSeeder extends Seeder
 
         // Satu anggota nonaktif untuk testing
         User::updateOrCreate(
-            ['email' => 'nonaktif@siswa.sch.id'],
+            ['email' => 'nonaktif@gmail.com'],
             [
                 'name' => 'Pengguna Nonaktif',
                 'password' => Hash::make('siswa123'),
