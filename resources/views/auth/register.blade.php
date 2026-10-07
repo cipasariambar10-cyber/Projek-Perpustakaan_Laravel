@@ -55,7 +55,7 @@
                 {{-- NIS/NIP --}}
                 <div class="col-md-6 mb-3">
                     <label for="nis_nip" class="form-label">
-                        <i class="bi bi-card-text me-1"></i> NIS/NIP
+                        <i class="bi bi-card-text me-1"></i> NISN
                     </label>
                     <input type="text"
                            class="form-control @error('nis_nip') is-invalid @enderror"
@@ -78,7 +78,7 @@
                            id="kelas"
                            name="kelas"
                            value="{{ old('kelas') }}"
-                           placeholder="Contoh: XII IPA 1">
+                           placeholder="Contoh: XII PPLG 2">
                     @error('kelas')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror

@@ -67,13 +67,8 @@
             </div>
 
             {{-- Tombol Masuk --}}
-            <button type="submit" class="btn btn-hijau w-100 py-2 mb-2">
+            <button type="submit" class="btn btn-hijau w-100 py-2 mb-3">
                 <i class="bi bi-box-arrow-in-right me-1"></i> Masuk
-            </button>
-            
-            {{-- Fast Login Admin --}}
-            <button type="button" class="btn btn-outline-secondary w-100 py-2 mb-3" onclick="loginAsAdmin()">
-                <i class="bi bi-shield-lock me-1"></i> Masuk sebagai Admin
             </button>
 
             <p class="text-center mb-0" style="font-size: 0.9rem; color: var(--teks-lembut);">
@@ -97,12 +92,6 @@
             input.type = 'password';
             icon.classList.replace('bi-eye-slash', 'bi-eye');
         }
-    }
-
-    function loginAsAdmin() {
-        document.getElementById('email').value = 'admin@perpustakaan.sch.id';
-        document.getElementById('password').value = 'admin123';
-        document.querySelector('.form-perpus').submit();
     }
 </script>
 @endpush

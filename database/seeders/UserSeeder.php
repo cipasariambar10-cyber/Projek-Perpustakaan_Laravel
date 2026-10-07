@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
     {
         // ===== ADMIN =====
         User::updateOrCreate(
-            ['email' => 'admin@perpustakaan.sch.id'],
+            ['email' => 'adminperpustakaan@gmail.com'],
             [
                 'name' => 'Admin Perpustakaan',
                 'password' => Hash::make('admin123'),
