@@ -67,6 +67,16 @@ class Book extends Model
                   ->orWhere('isbn', 'ilike', "%{$term}%");
             });
         }
+
+        return $query;
+    }
+
+    /**
+     * Alias scopeCari agar kompatibel jika dipanggil dengan ->cari()
+     */
+    public function scopeCari($query, $term)
+    {
+        return $this->scopeSearch($query, $term);
     }
 
     public function scopeKategori($query, $categoryId)

@@ -89,7 +89,7 @@
         </div>
 
         @if($buku->hasPages())
-        <div class="d-flex justify-content-between align-items-center px-3 py-3">
+        <div class="d-flex justify-content-between align-items-center px-3 py-3 border-top">
             <div class="text-lembut" style="font-size:0.85rem;">
                 Menampilkan {{ $buku->firstItem() }}–{{ $buku->lastItem() }} dari {{ $buku->total() }} data
             </div>

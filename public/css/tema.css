@@ -913,3 +913,38 @@ a:hover {
         font-size: 0.82rem;
     }
 }
+
+/* ===== Pagination Global ===== */
+.pagination {
+    margin-bottom: 0;
+    gap: 4px;
+}
+.pagination .page-item .page-link {
+    color: var(--hijau-tua);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--garis);
+    background-color: var(--putih);
+    padding: 0.35rem 0.75rem;
+    font-size: 0.875rem;
+    transition: var(--transisi-cepat);
+}
+.pagination .page-item .page-link:hover {
+    background-color: var(--krem-gelap);
+    color: var(--hijau-tua-hover);
+    border-color: var(--garis-tebal);
+}
+.pagination .page-item.active .page-link {
+    background-color: var(--hijau-tua);
+    border-color: var(--hijau-tua);
+    color: var(--putih);
+}
+.pagination .page-item.disabled .page-link {
+    color: var(--teks-muted);
+    background-color: transparent;
+    border-color: var(--garis);
+}
+.pagination svg {
+    width: 1rem !important;
+    height: 1rem !important;
+}
+
