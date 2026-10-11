@@ -8,7 +8,7 @@
                     <h1 class="page-title">Peminjaman</h1>
                     <p class="page-subtitle mb-0">Kelola peminjaman dan pengembalian buku</p>
                 </div>
-                <a href="{{ route('admin.peminjaman.create') }}" class="btn btn-hijau">
+                <a href="{{ route('admin.peminjaman.create') }}" class="btn btn-emas">
                     <i class="bi bi-plus-circle me-2"></i> Catat Peminjaman
                 </a>
             </div>
@@ -16,25 +16,25 @@
             {{-- Kartu Statistik Peminjaman --}}
             <div class="row g-3 mb-4">
                 <div class="col-6 col-md-3">
-                    <div class="stat-card" style="padding:1rem;">
+                    <div class="stat-card stat-green" style="padding:1rem;">
                         <div class="stat-number" style="font-size:1.5rem;">{{ number_format($stats['total']) }}</div>
                         <div class="stat-label">Total Transaksi</div>
                     </div>
                 </div>
                 <div class="col-6 col-md-3">
-                    <div class="stat-card" style="padding:1rem;">
+                    <div class="stat-card stat-blue" style="padding:1rem;">
                         <div class="stat-number" style="font-size:1.5rem; color: var(--status-dipinjam);">{{ number_format($stats['dipinjam']) }}</div>
                         <div class="stat-label">Sedang Dipinjam</div>
                     </div>
                 </div>
                 <div class="col-6 col-md-3">
-                    <div class="stat-card" style="padding:1rem;">
+                    <div class="stat-card stat-gold" style="padding:1rem;">
                         <div class="stat-number" style="font-size:1.5rem; color: var(--status-dikembalikan);">{{ number_format($stats['dikembalikan']) }}</div>
                         <div class="stat-label">Dikembalikan</div>
                     </div>
                 </div>
                 <div class="col-6 col-md-3">
-                    <div class="stat-card" style="padding:1rem;">
+                    <div class="stat-card stat-red" style="padding:1rem;">
                         <div class="stat-number" style="font-size:1.5rem; color: var(--status-terlambat);">{{ number_format($stats['terlambat']) }}</div>
                         <div class="stat-label">Terlambat</div>
                     </div>
@@ -98,7 +98,7 @@
                                     <td>
                                         <div class="d-flex align-items-center gap-2">
                                             <div class="d-flex align-items-center justify-content-center rounded-circle"
-                                                 style="width:30px;height:30px;background:var(--hijau-tua);color:var(--putih);font-size:0.72rem;font-weight:600;flex-shrink:0;">
+                                                 style="width:32px;height:32px;background:var(--gradient-green);color:var(--cream-50);font-size:0.75rem;font-weight:600;flex-shrink:0;box-shadow:var(--shadow-sm);">
                                                 {{ strtoupper(substr($loan->user->name ?? '?', 0, 1)) }}
                                             </div>
                                             <div>

@@ -60,6 +60,6 @@
     </div>
 </div>
 <div class="d-flex gap-2 mt-4">
-    <button type="submit" class="btn btn-hijau"><i class="bi bi-check-lg me-1"></i> Simpan</button>
+    <button type="submit" class="btn btn-emas"><i class="bi bi-check-lg me-1"></i> Simpan</button>
     <a href="{{ route('admin.buku.index') }}" class="btn btn-outline-hijau">Batal</a>
 </div>

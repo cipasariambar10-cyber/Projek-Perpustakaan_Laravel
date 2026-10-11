@@ -8,7 +8,7 @@
         <h1 class="page-title">Kelola Kategori</h1>
         <p class="page-subtitle mb-0">Daftar kategori buku perpustakaan</p>
     </div>
-    <a href="{{ route('admin.kategori.create') }}" class="btn btn-hijau">
+    <a href="{{ route('admin.kategori.create') }}" class="btn btn-emas">
         <i class="bi bi-plus-circle me-1"></i> Tambah Kategori
     </a>
 </div>
@@ -34,7 +34,7 @@
                         <td>{{ $k->books_count }} buku</td>
                         <td>
                             <div class="d-flex gap-1">
-                                <a href="{{ route('admin.kategori.edit', $k) }}" class="btn btn-sm btn-outline-secondary" title="Ubah">
+                                <a href="{{ route('admin.kategori.edit', $k) }}" class="btn btn-sm btn-hijau" title="Ubah">
                                     <i class="bi bi-pencil"></i>
                                 </a>
                                 <form method="POST" action="{{ route('admin.kategori.destroy', $k) }}"

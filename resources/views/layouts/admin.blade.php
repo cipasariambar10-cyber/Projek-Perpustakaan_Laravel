@@ -24,7 +24,7 @@
     <nav class="navbar navbar-expand-lg navbar-perpus sticky-top">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
-                <i class="bi bi-lamp-fill brand-icon" style="color: var(--emas);"></i>
+                <i class="bi bi-lamp-fill brand-icon"></i>
                 Lentera Pustaka
             </a>
 
@@ -111,7 +111,7 @@
                             </a>
                         </li>
                         <li class="nav-item ms-lg-2">
-                            <a class="btn btn-hijau btn-sm px-3" href="{{ route('register') }}">
+                            <a class="btn btn-emas btn-sm px-3" href="{{ route('register') }}">
                                 <i class="bi bi-person-plus me-1"></i> Daftar
                             </a>
                         </li>
@@ -119,7 +119,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" role="button" data-bs-toggle="dropdown">
                                 <div class="d-flex align-items-center justify-content-center rounded-circle"
-                                     style="width:32px;height:32px;background:var(--hijau-tua);color:var(--putih);font-size:0.85rem;font-weight:600;">
+                                     style="width:34px;height:34px;background:var(--gradient-green);color:var(--cream-50);font-size:0.85rem;font-weight:600;box-shadow:var(--shadow-sm);">
                                     {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
                                 </div>
                                 <span class="d-none d-lg-inline">{{ auth()->user()->name }}</span>
@@ -207,7 +207,7 @@
         <div class="container">
             <div class="row g-4">
                 <div class="col-lg-4">
-                    <h5><i class="bi bi-lamp-fill me-2" style="color: var(--emas);"></i>Lentera Pustaka</h5>
+                    <h5><i class="bi bi-lamp-fill me-2" style="color: var(--gold-400);"></i>Lentera Pustaka</h5>
                     <p style="font-size: 0.9rem; line-height: 1.8;">
                         Sistem informasi perpustakaan sekolah untuk memudahkan pengelolaan buku,
                         peminjaman, dan keanggotaan.
@@ -226,9 +226,9 @@
                 <div class="col-lg-4">
                     <h5>Kontak</h5>
                     <ul class="list-unstyled" style="font-size: 0.9rem; line-height: 2;">
-                        <li><i class="bi bi-geo-alt me-2" style="color: var(--emas);"></i> Jl. Laladon No. 1</li>
-                        <li><i class="bi bi-clock me-2" style="color: var(--emas);"></i> Senin–Jumat: 07.00–15.00</li>
-                        <li><i class="bi bi-envelope me-2" style="color: var(--emas);"></i> perpus@gmail.com</li>
+                        <li><i class="bi bi-geo-alt me-2" style="color: var(--gold-400);"></i> Jl. Laladon No. 1</li>
+                        <li><i class="bi bi-clock me-2" style="color: var(--gold-400);"></i> Senin–Jumat: 07.00–15.00</li>
+                        <li><i class="bi bi-envelope me-2" style="color: var(--gold-400);"></i> perpus@gmail.com</li>
                     </ul>
                 </div>
             </div>

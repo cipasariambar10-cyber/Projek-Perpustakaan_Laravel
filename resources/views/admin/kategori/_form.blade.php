@@ -6,6 +6,6 @@
     @error('nama')<div class="invalid-feedback">{{ $message }}</div>@enderror
 </div>
 <div class="d-flex gap-2">
-    <button type="submit" class="btn btn-hijau"><i class="bi bi-check-lg me-1"></i> Simpan</button>
+    <button type="submit" class="btn btn-emas"><i class="bi bi-check-lg me-1"></i> Simpan</button>
     <a href="{{ route('admin.kategori.index') }}" class="btn btn-outline-hijau">Batal</a>
 </div>

@@ -121,7 +121,7 @@
 
                         {{-- Tombol --}}
                         <div class="d-flex gap-2 mt-3">
-                            <button type="submit" class="btn btn-hijau">
+                            <button type="submit" class="btn btn-emas">
                                 <i class="bi bi-check-lg me-1"></i> Perbarui
                             </button>
                             <a href="{{ route('admin.anggota.index') }}" class="btn btn-outline-hijau">

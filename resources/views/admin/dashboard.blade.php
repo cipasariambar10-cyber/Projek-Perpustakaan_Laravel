@@ -16,30 +16,30 @@
             {{-- Kartu Statistik --}}
             <div class="row g-4 mb-4">
                 <div class="col-sm-6 col-xl-3">
-                    <div class="stat-card">
-                        <div class="stat-icon"><i class="bi bi-book-half"></i></div>
+                    <div class="stat-card stat-green">
+                        <div class="stat-icon-wrapper"><i class="bi bi-book-half"></i></div>
                         <div class="stat-number">{{ number_format($stats['total_buku']) }}</div>
                         <div class="stat-label">Total Buku</div>
                     </div>
                 </div>
                 <div class="col-sm-6 col-xl-3">
-                    <div class="stat-card">
-                        <div class="stat-icon"><i class="bi bi-people-fill"></i></div>
+                    <div class="stat-card stat-gold">
+                        <div class="stat-icon-wrapper"><i class="bi bi-people-fill"></i></div>
                         <div class="stat-number">{{ number_format($stats['total_anggota']) }}</div>
                         <div class="stat-label">Total Anggota</div>
                     </div>
                 </div>
                 <div class="col-sm-6 col-xl-3">
-                    <div class="stat-card">
-                        <div class="stat-icon" style="color: var(--status-dipinjam);"><i class="bi bi-arrow-left-right"></i></div>
-                        <div class="stat-number" style="color: var(--status-dipinjam);">{{ number_format($stats['total_dipinjam']) }}</div>
+                    <div class="stat-card stat-blue">
+                        <div class="stat-icon-wrapper"><i class="bi bi-arrow-left-right"></i></div>
+                        <div class="stat-number">{{ number_format($stats['total_dipinjam']) }}</div>
                         <div class="stat-label">Sedang Dipinjam</div>
                     </div>
                 </div>
                 <div class="col-sm-6 col-xl-3">
-                    <div class="stat-card">
-                        <div class="stat-icon" style="color: var(--status-terlambat);"><i class="bi bi-exclamation-triangle-fill"></i></div>
-                        <div class="stat-number" style="color: var(--status-terlambat);">{{ number_format($stats['total_terlambat']) }}</div>
+                    <div class="stat-card stat-red">
+                        <div class="stat-icon-wrapper"><i class="bi bi-exclamation-triangle-fill"></i></div>
+                        <div class="stat-number">{{ number_format($stats['total_terlambat']) }}</div>
                         <div class="stat-label">Terlambat</div>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                                             <td>
                                                 <div class="d-flex align-items-center gap-2">
                                                     <div class="d-flex align-items-center justify-content-center rounded-circle"
-                                                         style="width:32px;height:32px;background:var(--hijau-tua);color:var(--putih);font-size:0.75rem;font-weight:600;flex-shrink:0;">
+                                                         style="width:34px;height:34px;background:var(--gradient-green);color:var(--cream-50);font-size:0.78rem;font-weight:600;flex-shrink:0;box-shadow:var(--shadow-sm);">
                                                         {{ strtoupper(substr($a->name, 0, 1)) }}
                                                     </div>
                                                     <div>
@@ -139,7 +139,7 @@
                         </div>
                         <div class="card-body">
                             <div class="d-grid gap-2">
-                                <a href="{{ route('admin.anggota.create') }}" class="btn btn-hijau btn-sm">
+                                <a href="{{ route('admin.anggota.create') }}" class="btn btn-emas btn-sm">
                                     <i class="bi bi-person-plus me-2"></i> Tambah Anggota
                                 </a>
                                 @if(Route::has('admin.buku.create'))

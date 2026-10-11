@@ -1,73 +1,134 @@
 /*
 |--------------------------------------------------------------------------
-| tema.css — Variabel Warna & Gaya Global Perpustakaan
+| tema.css — Variabel Tema & Sistem Desain Terpusat "Lentera Pustaka"
 |--------------------------------------------------------------------------
-| Dibuat oleh: Shyfha
-| Semua warna dipakai lewat variabel CSS ini.
-| JANGAN menulis kode warna langsung di halaman lain.
+| Sentralisasi warna: Hijau Tua, Emas, dan Krem dengan sentuhan Mesh Gradient
+| modern bergaya Stripe, glassmorphism, dan transisi halus di semua halaman.
 |--------------------------------------------------------------------------
 */
 
 /* ===== Import Google Fonts ===== */
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,400&family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
 
-/* ===== Variabel Warna Utama ===== */
+/* ==========================================================================
+   LANGKAH 1 - SENTRALISASI TEMA (CSS VARIABLES)
+   ========================================================================== */
 :root {
-    /* --- Warna Utama --- */
-    --hijau-tua:        #2F5D50;
-    --hijau-tua-hover:  #245045;
-    --hijau-tua-light:  #3A7566;
-    --emas:             #D9A441;
-    --emas-hover:       #C4922F;
-    --emas-light:       #E8BE6A;
-    --krem:             #FAF7F0;
-    --krem-gelap:       #F0EBE0;
-    --putih:            #FFFFFF;
+    /* --- Palet Hijau Tua --- */
+    --green-950: #0D1C17;
+    --green-900: #162E27;
+    --green-800: #1F4037;
+    --green-700: #2F5D50;
+    --green-600: #36695B;
+    --green-500: #3E7B68;
+    --green-400: #55937F;
+    --green-300: #6FA593;
+    --green-200: #9EC3B6;
+    --green-100: #D0E3DC;
+    --green-50:  #EBF3F0;
 
-    /* --- Teks --- */
-    --teks:             #26302B;
-    --teks-lembut:      #5B665F;
-    --teks-muted:       #8A9490;
+    /* --- Palet Emas (Gold) --- */
+    --gold-900:  #5E410B;
+    --gold-800:  #8C6219;
+    --gold-700:  #B8862F;
+    --gold-600:  #C7943B;
+    --gold-500:  #D4A24C;
+    --gold-400:  #E2B55E;
+    --gold-300:  #F0C674;
+    --gold-200:  #F7DCA0;
+    --gold-100:  #FBF0D4;
+    --gold-50:   #FDF9EE;
 
-    /* --- Garis & Border --- */
-    --garis:            rgba(38, 48, 43, 0.15);
-    --garis-tebal:      rgba(38, 48, 43, 0.25);
+    /* --- Palet Krem (Cream) --- */
+    --cream-50:  #FDFBF6;
+    --cream-100: #FAF6EE;
+    --cream-200: #F3EBDA;
+    --cream-300: #E7DCBF;
+    --cream-400: #D8C7A4;
+
+    /* --- Warna Dasar Pendukung --- */
+    --putih:      #FFFFFF;
+    --danger-500: #B3261E;
+    --danger-600: #96241D;
+    --danger-700: #7A1D17;
+
+    /* --- Gradasi Utama --- */
+    --gradient-hero:      linear-gradient(135deg, var(--green-800), var(--green-700) 50%, var(--green-500));
+    --gradient-hero-dark: linear-gradient(135deg, var(--green-950) 0%, var(--green-900) 45%, var(--green-800) 100%);
+    --gradient-gold:      linear-gradient(135deg, var(--gold-300), var(--gold-500) 55%, var(--gold-700));
+    --gradient-gold-hover:linear-gradient(135deg, var(--gold-400), var(--gold-600) 55%, var(--gold-800));
+    --gradient-green:     linear-gradient(135deg, var(--green-500), var(--green-800));
+    --gradient-green-hover: linear-gradient(135deg, var(--green-400), var(--green-700));
+    --gradient-cream:     linear-gradient(180deg, var(--cream-50), var(--cream-200));
+    --gradient-cream-subtle: linear-gradient(180deg, var(--cream-50) 0%, var(--cream-100) 100%);
+    --gradient-footer:    linear-gradient(180deg, var(--green-800), var(--green-900));
+    --gradient-sidebar:   linear-gradient(180deg, var(--green-800) 0%, var(--green-950) 100%);
+    --gradient-danger:    linear-gradient(135deg, #C23A33 0%, #941F1A 100%);
+    --gradient-danger-hover: linear-gradient(135deg, #D4453E 0%, #A62520 100%);
+
+    /* --- Bayangan (Shadows) --- */
+    --shadow-soft:        0 10px 30px rgba(31, 64, 55, 0.12);
+    --shadow-gold:        0 8px 24px rgba(212, 162, 76, 0.35);
+    --shadow-gold-hover:  0 12px 28px rgba(212, 162, 76, 0.45);
+    --shadow-green:       0 8px 24px rgba(31, 64, 55, 0.28);
+    --shadow-green-hover: 0 12px 28px rgba(31, 64, 55, 0.38);
+    --shadow-card:        0 6px 20px rgba(22, 46, 39, 0.06);
+    --shadow-card-hover:  0 16px 36px rgba(22, 46, 39, 0.14);
+    --shadow-sm:          0 2px 6px rgba(31, 64, 55, 0.06);
+    --shadow-md:          0 8px 20px rgba(31, 64, 55, 0.10);
+    --shadow-lg:          0 14px 34px rgba(31, 64, 55, 0.14);
+    --shadow-xl:          0 20px 48px rgba(31, 64, 55, 0.18);
+    --shadow-danger:      0 8px 22px rgba(179, 38, 30, 0.32);
+
+    /* --- Variabel Kompatibilitas Versi Lama --- */
+    --hijau-tua:        var(--green-800);
+    --hijau-tua-hover:  var(--green-900);
+    --hijau-tua-light:  var(--green-500);
+    --emas:             var(--gold-500);
+    --emas-hover:       var(--gold-700);
+    --emas-light:       var(--gold-300);
+    --krem:             var(--cream-50);
+    --krem-gelap:       var(--cream-200);
+
+    /* --- Tipografi & Teks --- */
+    --teks:             var(--green-900);
+    --teks-lembut:      var(--green-700);
+    --teks-muted:       #6B8077;
+    --font-judul:       'Merriweather', Georgia, serif;
+    --font-isi:         'Plus Jakarta Sans', 'Poppins', system-ui, sans-serif;
+
+    /* --- Garis Pembatas (Border) --- */
+    --garis:            rgba(31, 64, 55, 0.12);
+    --garis-tebal:      rgba(31, 64, 55, 0.22);
+    --garis-gold:       rgba(212, 162, 76, 0.35);
 
     /* --- Status Peminjaman --- */
-    --status-diajukan:      #E5A100;
-    --status-diajukan-bg:   #FFF8E1;
-    --status-dipinjam:      #1976D2;
-    --status-dipinjam-bg:   #E3F2FD;
-    --status-dikembalikan:  #2F5D50;
-    --status-dikembalikan-bg: #E8F5E9;
-    --status-terlambat:     #B3261E;
-    --status-terlambat-bg:  #FDECEA;
-    --status-ditolak:       #6B7280;
-    --status-ditolak-bg:    #F3F4F6;
-
-    /* --- Bayangan --- */
-    --shadow-sm:    0 1px 3px rgba(38, 48, 43, 0.08);
-    --shadow-md:    0 4px 12px rgba(38, 48, 43, 0.10);
-    --shadow-lg:    0 8px 30px rgba(38, 48, 43, 0.12);
-    --shadow-xl:    0 12px 40px rgba(38, 48, 43, 0.15);
+    --status-diajukan:        #8C6219;
+    --status-diajukan-bg:     linear-gradient(135deg, #FFF9EA 0%, #FCE8BD 100%);
+    --status-dipinjam:        #1A567D;
+    --status-dipinjam-bg:     linear-gradient(135deg, #E6F3FB 0%, #CFE6F8 100%);
+    --status-dikembalikan:    #1B5E4B;
+    --status-dikembalikan-bg: linear-gradient(135deg, #E6F6F0 0%, #CDEFE2 100%);
+    --status-terlambat:       #96241D;
+    --status-terlambat-bg:    linear-gradient(135deg, #FDEBEA 0%, #FAD4D2 100%);
+    --status-ditolak:         #505B56;
+    --status-ditolak-bg:      linear-gradient(135deg, #F0F3F2 0%, #DFE4E2 100%);
 
     /* --- Border Radius --- */
-    --radius-sm:    6px;
-    --radius-md:    10px;
-    --radius-lg:    16px;
-    --radius-xl:    24px;
-    --radius-pill:  50px;
+    --radius-sm:   8px;
+    --radius-md:   12px;
+    --radius-lg:   18px;
+    --radius-xl:   26px;
+    --radius-pill: 50px;
 
-    /* --- Transisi --- */
-    --transisi:     all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transisi-cepat: all 0.15s ease;
-
-    /* --- Font --- */
-    --font-judul:   'Merriweather', Georgia, 'Times New Roman', serif;
-    --font-isi:     'Poppins', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    /* --- Transisi Halus --- */
+    --transisi:       all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transisi-cepat: all 0.2s ease;
 }
 
-/* ===== Reset & Base ===== */
+/* ==========================================================================
+   RESET & DASAR
+   ========================================================================== */
 *, *::before, *::after {
     box-sizing: border-box;
 }
@@ -75,386 +136,1577 @@
 body {
     font-family: var(--font-isi);
     color: var(--teks);
-    background-color: var(--krem);
+    background: var(--cream-50);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-judul);
-    color: var(--teks);
+    color: var(--green-900);
     font-weight: 700;
     line-height: 1.3;
 }
 
 a {
-    color: var(--hijau-tua);
+    color: var(--green-700);
     text-decoration: none;
     transition: var(--transisi-cepat);
 }
 
 a:hover {
-    color: var(--hijau-tua-hover);
+    color: var(--gold-600);
 }
 
-/* ===== Navbar ===== */
+/* ==========================================================================
+   LANGKAH 2 - NAVBAR (GLASSMORPHISM & AKSEN EMAS)
+   ========================================================================== */
 .navbar-perpus {
-    background: var(--putih);
-    border-bottom: 1px solid var(--garis);
-    box-shadow: var(--shadow-sm);
-    padding: 0.6rem 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 2px solid transparent;
+    border-image: var(--gradient-gold) 1;
+    box-shadow: 0 4px 20px rgba(22, 46, 39, 0.06);
+    padding: 0.75rem 0;
     transition: var(--transisi);
+    position: sticky;
+    top: 0;
+    z-index: 1030;
 }
 
 .navbar-perpus .navbar-brand {
     font-family: var(--font-judul);
     font-weight: 700;
     font-size: 1.35rem;
-    color: var(--hijau-tua);
+    color: var(--green-900);
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.6rem;
+    letter-spacing: -0.01em;
 }
 
 .navbar-perpus .navbar-brand .brand-icon {
     font-size: 1.6rem;
-    color: var(--emas);
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 4px rgba(212, 162, 76, 0.3));
 }
 
 .navbar-perpus .nav-link {
     font-family: var(--font-isi);
     font-weight: 500;
     color: var(--teks-lembut);
-    padding: 0.5rem 1rem;
+    padding: 0.55rem 1.1rem;
     border-radius: var(--radius-sm);
     transition: var(--transisi-cepat);
     font-size: 0.92rem;
+    position: relative;
 }
 
-.navbar-perpus .nav-link:hover,
-.navbar-perpus .nav-link.active {
-    color: var(--hijau-tua);
+.navbar-perpus .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--gradient-gold);
+    border-radius: 2px;
+    transform: translateX(-50%);
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+}
+
+.navbar-perpus .nav-link:hover {
+    color: var(--green-900);
     background: rgba(47, 93, 80, 0.06);
 }
 
+.navbar-perpus .nav-link:hover::after,
+.navbar-perpus .nav-link.active::after {
+    width: 60%;
+}
+
 .navbar-perpus .nav-link.active {
+    color: var(--green-900);
+    background: rgba(62, 123, 104, 0.12);
     font-weight: 600;
+    box-shadow: inset 0 0 0 1px rgba(62, 123, 104, 0.2);
+}
+
+/* Penjajaran Panah Dropdown Sejajar di Kanan Nama Akun */
+.navbar-perpus .nav-link.dropdown-toggle {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    white-space: nowrap !important;
+}
+
+.navbar-perpus .dropdown-toggle::after {
+    display: inline-block !important;
+    vertical-align: middle !important;
+    margin-left: 2px !important;
+    margin-top: 0 !important;
+    flex-shrink: 0 !important;
 }
 
 .navbar-perpus .dropdown-menu {
-    border: 1px solid var(--garis);
+    background: rgba(253, 251, 246, 0.96);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--cream-300);
     border-radius: var(--radius-md);
-    box-shadow: var(--shadow-md);
-    padding: 0.5rem;
+    box-shadow: var(--shadow-soft);
+    padding: 0.6rem;
 }
 
 .navbar-perpus .dropdown-item {
     border-radius: var(--radius-sm);
-    padding: 0.5rem 1rem;
+    padding: 0.55rem 1rem;
     font-size: 0.9rem;
+    color: var(--teks);
     transition: var(--transisi-cepat);
 }
 
 .navbar-perpus .dropdown-item:hover {
-    background: rgba(47, 93, 80, 0.06);
-    color: var(--hijau-tua);
+    background: rgba(47, 93, 80, 0.08);
+    color: var(--green-900);
+    transform: translateX(2px);
 }
 
-/* ===== Tombol ===== */
-.btn-hijau {
-    background-color: var(--hijau-tua);
-    border-color: var(--hijau-tua);
-    color: var(--putih);
-    font-family: var(--font-isi);
-    font-weight: 600;
-    padding: 0.55rem 1.5rem;
-    border-radius: var(--radius-sm);
-    transition: var(--transisi);
-    font-size: 0.9rem;
-    letter-spacing: 0.02em;
-}
-
-.btn-hijau:hover,
-.btn-hijau:focus {
-    background-color: var(--hijau-tua-hover);
-    border-color: var(--hijau-tua-hover);
-    color: var(--putih);
-    box-shadow: 0 4px 12px rgba(47, 93, 80, 0.3);
-    transform: translateY(-1px);
-}
-
-.btn-hijau:active {
-    transform: translateY(0);
-}
-
+/* ==========================================================================
+   LANGKAH 2 - TOMBOL (GRADASI EMAS, HIJAU, OUTLINE, DANGER)
+   ========================================================================== */
 .btn-emas {
-    background-color: var(--emas);
-    border-color: var(--emas);
-    color: var(--putih);
+    background: var(--gradient-gold);
+    border: none;
+    color: var(--putih) !important;
     font-family: var(--font-isi);
     font-weight: 600;
-    padding: 0.55rem 1.5rem;
+    padding: 0.6rem 1.6rem;
     border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-gold);
     transition: var(--transisi);
-    font-size: 0.9rem;
+    font-size: 0.92rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn-emas:hover,
 .btn-emas:focus {
-    background-color: var(--emas-hover);
-    border-color: var(--emas-hover);
-    color: var(--putih);
-    box-shadow: 0 4px 12px rgba(217, 164, 65, 0.3);
-    transform: translateY(-1px);
-}
-
-.btn-outline-hijau {
-    background-color: transparent;
-    border: 2px solid var(--hijau-tua);
-    color: var(--hijau-tua);
-    font-family: var(--font-isi);
-    font-weight: 600;
-    padding: 0.5rem 1.5rem;
-    border-radius: var(--radius-sm);
-    transition: var(--transisi);
-    font-size: 0.9rem;
-}
-
-.btn-outline-hijau:hover {
-    background-color: var(--hijau-tua);
-    color: var(--putih);
-    box-shadow: 0 4px 12px rgba(47, 93, 80, 0.3);
-    transform: translateY(-1px);
-}
-
-/* ===== Kartu ===== */
-.card-perpus {
-    background: var(--putih);
-    border: 1px solid var(--garis);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-sm);
-    transition: var(--transisi);
-    overflow: hidden;
-}
-
-.card-perpus:hover {
-    box-shadow: var(--shadow-md);
+    background: var(--gradient-gold-hover);
+    color: var(--putih) !important;
+    box-shadow: var(--shadow-gold-hover);
     transform: translateY(-2px);
 }
 
-.card-perpus .card-header {
-    background: transparent;
-    border-bottom: 1px solid var(--garis);
-    padding: 1rem 1.25rem;
+.btn-emas:active {
+    transform: translateY(1px) scale(0.97) !important;
+}
+
+.btn-hijau,
+.btn-success {
+    background: var(--gradient-green) !important;
+    border: none !important;
+    color: var(--putih) !important;
+    font-family: var(--font-isi);
+    font-weight: 600;
+    padding: 0.6rem 1.6rem;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-green) !important;
+    transition: var(--transisi) !important;
+    font-size: 0.92rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-hijau:hover,
+.btn-hijau:focus,
+.btn-success:hover,
+.btn-success:focus {
+    background: var(--gradient-green-hover) !important;
+    color: var(--putih) !important;
+    box-shadow: var(--shadow-green-hover) !important;
+    transform: translateY(-2px);
+}
+
+.btn-hijau:active,
+.btn-success:active {
+    transform: translateY(1px) scale(0.97) !important;
+}
+
+.btn-outline-hijau,
+.btn-outline-success {
+    background: transparent !important;
+    border: 2px solid var(--green-700) !important;
+    color: var(--green-800) !important;
+    font-family: var(--font-isi);
+    font-weight: 600;
+    padding: 0.55rem 1.5rem;
+    border-radius: var(--radius-sm);
+    transition: var(--transisi) !important;
+    font-size: 0.92rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-outline-hijau:hover,
+.btn-outline-hijau:focus,
+.btn-outline-success:hover,
+.btn-outline-success:focus {
+    background: var(--gradient-green) !important;
+    border-color: transparent !important;
+    color: var(--putih) !important;
+    box-shadow: var(--shadow-green) !important;
+    transform: translateY(-2px);
+}
+
+.btn-outline-hijau:active,
+.btn-outline-success:active {
+    transform: translateY(1px) scale(0.97) !important;
+}
+
+/* Tombol Aksi Hapus / Bahaya (Merah Marun Lembut) */
+.btn-danger {
+    background: var(--gradient-danger) !important;
+    border: none !important;
+    color: var(--putih) !important;
+    box-shadow: var(--shadow-danger) !important;
+    transition: var(--transisi) !important;
+}
+
+.btn-danger:hover,
+.btn-danger:focus {
+    background: var(--gradient-danger-hover) !important;
+    box-shadow: 0 12px 26px rgba(179, 38, 30, 0.42) !important;
+    transform: translateY(-2px);
+}
+
+.btn-danger:active {
+    transform: translateY(1px) scale(0.97) !important;
+}
+
+.btn-outline-danger {
+    background: transparent !important;
+    border: 1.5px solid var(--danger-500) !important;
+    color: var(--danger-600) !important;
+    border-radius: var(--radius-sm);
+    transition: var(--transisi) !important;
+}
+
+.btn-outline-danger:hover,
+.btn-outline-danger:focus {
+    background: var(--gradient-danger) !important;
+    border-color: transparent !important;
+    color: var(--putih) !important;
+    box-shadow: var(--shadow-danger) !important;
+    transform: translateY(-2px);
+}
+
+.btn-outline-danger:active {
+    transform: translateY(1px) scale(0.97) !important;
+}
+
+/* ==========================================================================
+   LANGKAH 2 - HERO SECTION (STRIPE MESH GRADIENT, NOISE & ORBS)
+   ========================================================================== */
+.hero-section {
+    background: linear-gradient(135deg, #162E27 0%, #1F4037 35%, #2F5D50 70%, #3E7B68 100%);
+    background-size: 200% 200%;
+    animation: heroBgShift 20s ease-in-out infinite alternate;
+    color: var(--putih);
+    padding: 5.5rem 0 4.25rem;
+    position: relative;
+    overflow: hidden;
+    border-radius: 0 0 44px 44px;
+    box-shadow: 0 16px 40px rgba(22, 46, 39, 0.18);
+}
+
+@keyframes heroBgShift {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 50% 100%; }
+}
+
+/* ==========================================================================
+   A.1 & A.6 - MESH GRADIENT (4 BLUR ORBS) & BENTUK GEOMETRIS SAMAR
+   ========================================================================== */
+.hero-blobs {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.hero-blob {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    will-change: transform;
+}
+
+/* Blob 1: Hijau toska terang rgba(111,165,147,0.40) - blur 80px */
+.hero-blob-1 {
+    top: -15%;
+    right: -8%;
+    width: 580px;
+    height: 580px;
+    background: radial-gradient(circle, rgba(111, 165, 147, 0.40) 0%, rgba(111, 165, 147, 0.10) 55%, transparent 75%);
+    filter: blur(80px);
+    animation: heroMeshDrift1 22s ease-in-out infinite alternate;
+}
+
+/* Blob 2: Hijau sedang rgba(62,123,104,0.50) - blur 85px */
+.hero-blob-2 {
+    bottom: -18%;
+    left: -10%;
+    width: 620px;
+    height: 620px;
+    background: radial-gradient(circle, rgba(62, 123, 104, 0.50) 0%, rgba(62, 123, 104, 0.12) 55%, transparent 75%);
+    filter: blur(85px);
+    animation: heroMeshDrift2 26s ease-in-out infinite alternate;
+}
+
+/* Blob 3: Emas sangat tipis rgba(240,198,116,0.12) - blur 75px */
+.hero-blob-3 {
+    top: 25%;
+    right: 15%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(240, 198, 116, 0.12) 0%, rgba(240, 198, 116, 0.03) 50%, transparent 75%);
+    filter: blur(75px);
+    animation: heroMeshDrift3 28s ease-in-out infinite alternate;
+}
+
+/* Blob 4: Hijau gelap rgba(22,46,39,0.50) kedalaman - blur 90px */
+.hero-blob-4 {
+    top: 8%;
+    left: 20%;
+    width: 560px;
+    height: 560px;
+    background: radial-gradient(circle, rgba(22, 46, 39, 0.50) 0%, rgba(22, 46, 39, 0.15) 55%, transparent 75%);
+    filter: blur(90px);
+    animation: heroMeshDrift4 30s ease-in-out infinite alternate;
+}
+
+@keyframes heroMeshDrift1 {
+    0% { transform: translate3d(0, 0, 0) scale(1); }
+    50% { transform: translate3d(-70px, 45px, 0) scale(1.14); }
+    100% { transform: translate3d(-35px, 85px, 0) scale(0.94); }
+}
+
+@keyframes heroMeshDrift2 {
+    0% { transform: translate3d(0, 0, 0) scale(1); }
+    50% { transform: translate3d(75px, -55px, 0) scale(1.10); }
+    100% { transform: translate3d(45px, -85px, 0) scale(0.92); }
+}
+
+@keyframes heroMeshDrift3 {
+    0% { transform: translate3d(0, 0, 0) scale(1); }
+    50% { transform: translate3d(-75px, -40px, 0) scale(1.16); }
+    100% { transform: translate3d(40px, 55px, 0) scale(0.95); }
+}
+
+@keyframes heroMeshDrift4 {
+    0% { transform: translate3d(0, 0, 0) scale(1); }
+    50% { transform: translate3d(55px, 65px, 0) scale(1.12); }
+    100% { transform: translate3d(-45px, 30px, 0) scale(0.94); }
+}
+
+/* Bentuk Geometris Samar Berputar di Sudut */
+.hero-geom-shapes {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.hero-ring {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    will-change: transform;
+}
+
+.hero-ring-1 {
+    top: -110px;
+    left: -90px;
+    width: 380px;
+    height: 380px;
+    border: 1px solid rgba(212, 162, 76, 0.14);
+    animation: ringRotate 50s linear infinite;
+}
+
+.hero-ring-1::after {
+    content: '';
+    position: absolute;
+    inset: 28px;
+    border-radius: 50%;
+    border: 1px dashed rgba(240, 198, 116, 0.10);
+}
+
+.hero-ring-2 {
+    bottom: -130px;
+    right: -90px;
+    width: 440px;
+    height: 440px;
+    border: 1px solid rgba(212, 162, 76, 0.12);
+    animation: ringRotateReverse 60s linear infinite;
+}
+
+.hero-ring-2::after {
+    content: '';
+    position: absolute;
+    inset: 35px;
+    border-radius: 50%;
+    border: 1px dashed rgba(111, 165, 147, 0.16);
+}
+
+@keyframes ringRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes ringRotateReverse {
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
+}
+
+/* ==========================================================================
+   A.4 - BERKAS CAHAYA LEMBUT (LIGHT RAYS)
+   ========================================================================== */
+.hero-light-rays {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.hero-ray {
+    position: absolute;
+    top: -60%;
+    width: 140px;
+    height: 220%;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(240, 198, 116, 0.03) 25%,
+        rgba(255, 255, 255, 0.08) 50%,
+        rgba(240, 198, 116, 0.03) 75%,
+        transparent 100%
+    );
+    transform: rotate(-35deg) translate3d(-180%, 0, 0);
+    pointer-events: none;
+    will-change: transform, opacity;
+}
+
+.hero-ray-1 {
+    animation: raySweep 13s ease-in-out infinite;
+}
+
+.hero-ray-2 {
+    animation: raySweep 15s ease-in-out infinite 5s;
+}
+
+.hero-ray-3 {
+    animation: raySweep 14s ease-in-out infinite 9.5s;
+}
+
+@keyframes raySweep {
+    0% {
+        transform: rotate(-35deg) translate3d(-200%, 0, 0);
+        opacity: 0;
+    }
+    12% {
+        opacity: 0.9;
+    }
+    55% {
+        opacity: 0.9;
+    }
+    68%, 100% {
+        transform: rotate(-35deg) translate3d(360%, 0, 0);
+        opacity: 0;
+    }
+}
+
+/* ==========================================================================
+   A.5 - TEKSTUR GRAIN / NOISE TIPIS
+   ========================================================================== */
+.hero-noise {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 3;
+    mix-blend-mode: overlay;
+}
+
+/* ==========================================================================
+   A.3 - PARTIKEL EMAS MELAYANG (KUNANG-KUNANG / LENTERA)
+   ========================================================================== */
+.hero-particles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 4;
+}
+
+.hero-particle {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, #FFF4D9 0%, var(--gold-400) 65%, var(--gold-600) 100%);
+    box-shadow: 0 0 8px rgba(240, 198, 116, 0.7);
+    pointer-events: none;
+    animation: particleFloatDrift linear infinite;
+    will-change: transform, opacity;
+}
+
+@keyframes particleFloatDrift {
+    0% {
+        transform: translate3d(0, 0, 0) scale(0.7);
+        opacity: 0.15;
+    }
+    25% {
+        transform: translate3d(14px, -110px, 0) scale(1.05);
+        opacity: 0.58;
+    }
+    50% {
+        transform: translate3d(-12px, -210px, 0) scale(0.85);
+        opacity: 0.22;
+    }
+    75% {
+        transform: translate3d(16px, -310px, 0) scale(1.15);
+        opacity: 0.60;
+    }
+    100% {
+        transform: translate3d(6px, -420px, 0) scale(0.7);
+        opacity: 0;
+    }
+}
+
+/* ==========================================================================
+   B.1 - LENCANA KECIL & TITIK BERDENYUT (PULSING GLOW DOT)
+   ========================================================================== */
+.hero-badge-wrapper {
+    display: flex;
+    justify-content: center;
+    animation: heroFadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 18px;
+    background: rgba(253, 251, 246, 0.10);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(240, 198, 116, 0.38);
+    border-radius: var(--radius-full);
+    color: var(--cream-100);
+    font-size: 0.86rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+}
+
+.badge-pulse-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gold-400);
+    box-shadow: 0 0 0 0 rgba(240, 198, 116, 0.7);
+    animation: dotPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes dotPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(240, 198, 116, 0.85);
+        transform: scale(0.95);
+    }
+    70% {
+        box-shadow: 0 0 0 8px rgba(240, 198, 116, 0);
+        transform: scale(1.15);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(240, 198, 116, 0);
+        transform: scale(0.95);
+    }
+}
+
+/* ==========================================================================
+   B.2 & B.3 - JUDUL PER KATA & KILAU EMAS PADA "LITERASI"
+   ========================================================================== */
+.hero-title {
     font-family: var(--font-judul);
-    font-weight: 700;
-    color: var(--hijau-tua);
-    font-size: 1.05rem;
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--putih);
+    line-height: 1.25;
 }
 
-.card-perpus .card-body {
-    padding: 1.25rem;
+.hero-word {
+    display: inline-block;
+    animation: wordReveal 0.75s cubic-bezier(0.16, 1, 0.3, 1) var(--delay, 0s) both;
+    will-change: transform, opacity, filter;
 }
 
-/* ===== Statistik Dashboard ===== */
-.stat-card {
-    background: var(--putih);
-    border: 1px solid var(--garis);
-    border-radius: var(--radius-md);
-    padding: 1.5rem;
-    text-align: center;
-    transition: var(--transisi);
+@keyframes wordReveal {
+    0% {
+        opacity: 0;
+        transform: translateY(22px);
+        filter: blur(8px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+/* Kilau Emas Melintas pada Kata "Literasi" */
+.hero-accent-shimmer {
+    background: linear-gradient(
+        120deg,
+        #D4A24C 0%,
+        #FFE9B8 25%,
+        #F0C674 50%,
+        #D4A24C 75%,
+        #FFE9B8 100%
+    );
+    background-size: 250% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: wordReveal 0.75s cubic-bezier(0.16, 1, 0.3, 1) var(--delay, 0s) both,
+               textShimmer 6s ease-in-out infinite 0.8s;
+    filter: drop-shadow(0 2px 10px rgba(212, 162, 76, 0.45));
+}
+
+@keyframes textShimmer {
+    0% {
+        background-position: 120% 0;
+    }
+    45%, 100% {
+        background-position: -120% 0;
+    }
+}
+
+/* ==========================================================================
+   B.4 & B.5 - PARAGRAF & PENCARIAN DENGAN INTERAKSI FOKUS & SHINE
+   ========================================================================== */
+.hero-desc {
+    font-size: 1.15rem;
+    color: rgba(253, 251, 246, 0.94);
+    line-height: 1.75;
+    animation: heroFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.60s both;
+}
+
+.hero-search-wrapper {
+    animation: heroFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.75s both;
+}
+
+.search-hero-box {
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.search-hero-box:focus-within {
+    transform: scale(1.02);
+    border-color: var(--gold-400) !important;
+    box-shadow: 0 16px 44px rgba(13, 28, 23, 0.32), 0 0 0 4px rgba(212, 162, 76, 0.28) !important;
+}
+
+/* Kilau pada Tombol "Cari" saat Hover */
+.btn-emas-search {
     position: relative;
     overflow: hidden;
 }
 
-.stat-card::before {
+.btn-emas-search::after {
     content: '';
     position: absolute;
     top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--hijau-tua), var(--emas));
-    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    left: -130%;
+    width: 65%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.40),
+        transparent
+    );
+    transform: skewX(-25deg);
+    pointer-events: none;
+    transition: none;
 }
 
-.stat-card:hover {
-    box-shadow: var(--shadow-md);
-    transform: translateY(-3px);
+.btn-emas-search:hover::after {
+    left: 180%;
+    transition: left 0.75s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.stat-card .stat-icon {
-    font-size: 2rem;
-    color: var(--hijau-tua);
-    margin-bottom: 0.75rem;
-    opacity: 0.85;
+/* ==========================================================================
+   B.7 - INDIKATOR SCROLL KECIL DI BAWAH HERO
+   ========================================================================== */
+.hero-scroll-indicator {
+    display: flex;
+    justify-content: center;
+    animation: heroFadeUp 0.8s ease 1s both;
 }
 
-.stat-card .stat-number {
+.scroll-down-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(240, 198, 116, 0.80);
+    transition: color 0.3s ease, transform 0.3s ease;
+    padding: 6px;
+    border-radius: 50%;
+}
+
+.scroll-down-link:hover {
+    color: #FFFFFF;
+    transform: translateY(3px);
+}
+
+.scroll-arrow {
+    font-size: 1.6rem;
+    animation: arrowBounce 2s ease-in-out infinite;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25));
+}
+
+@keyframes arrowBounce {
+    0%, 100% { transform: translateY(0); opacity: 0.65; }
+    50% { transform: translateY(7px); opacity: 1; }
+}
+
+@keyframes heroFadeUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================================================
+   LANGKAH 2 - SECTION KREM & JUDUL SECTION
+   ========================================================================== */
+.section-cream,
+.bg-cream,
+section.section-krem {
+    background: var(--gradient-cream);
+}
+
+/* ==========================================================================
+   1. LATAR SECTION (BUKU TERBARU & BUKU POPULER)
+   ========================================================================== */
+.section-buku-terbaru {
+    background: linear-gradient(180deg, #FDFBF6 0%, #FAF3E6 50%, #F6EEDC 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.section-buku-populer {
+    background: linear-gradient(180deg, #F4F7F2 0%, #EEF4ED 50%, #E9F0EA 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Pola Halus (Titik Opasitas 3.5%) di Latar */
+.section-buku-terbaru::before,
+.section-buku-populer::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(31, 64, 55, 0.16) 1.2px, transparent 1.2px);
+    background-size: 26px 26px;
+    opacity: 0.035;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* 2 Glow Blur Sangat Tipis Bergerak Pelan di Sudut */
+.section-glow-orbs {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.section-glow-1,
+.section-glow-2 {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    will-change: transform;
+}
+
+.section-buku-terbaru .section-glow-1 {
+    top: -12%;
+    left: -8%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(111, 165, 147, 0.12) 0%, transparent 70%);
+    animation: sectionGlowMove1 20s ease-in-out infinite alternate;
+}
+
+.section-buku-terbaru .section-glow-2 {
+    bottom: -12%;
+    right: -8%;
+    width: 520px;
+    height: 520px;
+    background: radial-gradient(circle, rgba(240, 198, 116, 0.12) 0%, transparent 70%);
+    animation: sectionGlowMove2 24s ease-in-out infinite alternate;
+}
+
+.section-buku-populer .section-glow-1 {
+    bottom: -12%;
+    left: -8%;
+    width: 520px;
+    height: 520px;
+    background: radial-gradient(circle, rgba(240, 198, 116, 0.12) 0%, transparent 70%);
+    animation: sectionGlowMove1 22s ease-in-out infinite alternate;
+}
+
+.section-buku-populer .section-glow-2 {
+    top: -12%;
+    right: -8%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(111, 165, 147, 0.12) 0%, transparent 70%);
+    animation: sectionGlowMove2 26s ease-in-out infinite alternate;
+}
+
+@keyframes sectionGlowMove1 {
+    0% { transform: translate3d(0, 0, 0) scale(1); }
+    100% { transform: translate3d(55px, 45px, 0) scale(1.10); }
+}
+
+@keyframes sectionGlowMove2 {
+    0% { transform: translate3d(0, 0, 0) scale(1); }
+    100% { transform: translate3d(-45px, -55px, 0) scale(1.08); }
+}
+
+/* Lencana Kecil di Atas Judul Section ("Koleksi Baru" & "Favorit Anggota") */
+.section-badge-wrapper {
+    margin-bottom: 0.4rem;
+}
+
+.section-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 4px 14px;
+    background: rgba(47, 93, 80, 0.08);
+    border: 1px solid rgba(212, 162, 76, 0.35);
+    border-radius: 999px;
+    color: var(--green-900);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    box-shadow: 0 2px 8px rgba(31, 64, 55, 0.04);
+}
+
+.badge-dot-emas {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold-500);
+    box-shadow: 0 0 6px rgba(212, 162, 76, 0.65);
+}
+
+/* Pemisah Lengkungan / Gelombang Halus antar Section */
+.section-curve-divider {
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    pointer-events: none;
+    position: relative;
+    z-index: 2;
+}
+
+.section-curve-divider svg {
+    display: block;
+    width: 100%;
+    height: 34px;
+}
+
+.section-title {
     font-family: var(--font-judul);
-    font-size: 2rem;
-    font-weight: 900;
-    color: var(--hijau-tua);
-    line-height: 1.1;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--green-900);
+    margin-bottom: 0.5rem;
+    position: relative;
+    opacity: 1 !important;
+    transform: none !important;
 }
 
-.stat-card .stat-label {
-    font-size: 0.85rem;
+/* C.1 - Garis Aksen Emas Memanjang dari 0 ke Lebar Penuh saat Terlihat */
+.section-title::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 4px;
+    background: var(--gradient-gold);
+    border-radius: 4px;
+    margin-top: 0.85rem;
+    box-shadow: 0 2px 6px rgba(212, 162, 76, 0.4);
+    transition: width 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+}
+
+.section-title.is-revealed::after {
+    width: 64px;
+}
+
+.section-subtitle {
     color: var(--teks-lembut);
-    margin-top: 0.25rem;
-    font-weight: 500;
+    font-size: 0.96rem;
+    margin-bottom: 2rem;
 }
 
-/* ===== Badge Status ===== */
+/* ==========================================================================
+   C.2 - SCROLL REVEAL (INTERSECTION OBSERVER) & C.3 STAT WOBBLE
+   ========================================================================== */
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Ikon Statistik Berdenyut Halus saat Terlihat */
+.stat-icon-wobble {
+    display: inline-block;
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.stat-section.is-revealed .stat-icon-wobble {
+    animation: iconPulsePop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s both;
+}
+
+@keyframes iconPulsePop {
+    0% { transform: scale(0.8) rotate(-12deg); }
+    60% { transform: scale(1.22) rotate(10deg); }
+    100% { transform: scale(1) rotate(0deg); }
+}
+
+/* ==========================================================================
+   2. KARTU BUKU (RASIO 2:3, COVER ZOOM 1.03, GLOW TOSKA, SLIM 5-KOLOM)
+   ========================================================================== */
+.book-card {
+    background: var(--putih);
+    border: 1px solid var(--garis);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-card);
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    will-change: transform, box-shadow;
+    backface-visibility: hidden;
+}
+
+.book-card:hover {
+    box-shadow: 0 16px 36px rgba(22, 46, 39, 0.14), 0 4px 12px rgba(212, 162, 76, 0.18) !important;
+    transform: translateY(-6px) !important;
+    border-color: var(--gold-400) !important;
+}
+
+.book-card .book-cover-container,
+.book-card .position-relative:first-child {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    background: var(--green-950);
+    flex-shrink: 0;
+}
+
+.book-card .book-cover,
+.book-card .card-img-top {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    box-shadow: 0 4px 12px rgba(22, 46, 39, 0.08);
+    border-bottom: 1px solid var(--garis);
+    display: block;
+}
+
+/* Seluruh kartu naik bersama saat hover; cover tidak mengalami distorsi scale mandiri */
+.book-card:hover .book-cover,
+.book-card:hover .card-img-top,
+.book-card:hover .book-cover-placeholder {
+    transform: none;
+}
+
+/* Kilau Emas Tipis yang Bergeser Melintasi Sampul */
+.book-card .book-cover-container::after,
+.book-card .position-relative:first-child::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -130%;
+    width: 65%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.10) 25%,
+        rgba(240, 198, 116, 0.38) 50%,
+        rgba(255, 255, 255, 0.10) 75%,
+        transparent 100%
+    );
+    transform: skewX(-25deg);
+    pointer-events: none;
+    z-index: 3;
+}
+
+.book-card:hover .book-cover-container::after,
+.book-card:hover .position-relative:first-child::after {
+    left: 170%;
+    transition: left 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Area Tanpa Sampul dengan Gradasi Hijau & Glow Toska Bersih di Sudut */
+.book-card .book-cover-placeholder {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 2 / 3;
+    background: linear-gradient(135deg, var(--green-900) 0%, var(--green-700) 50%, var(--green-500) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--cream-50);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    border-bottom: 1px solid var(--garis);
+    position: relative;
+    overflow: hidden;
+}
+
+.book-card .book-cover-placeholder::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    right: -20%;
+    width: 85%;
+    height: 85%;
+    background: radial-gradient(circle, rgba(111, 165, 147, 0.42) 0%, rgba(62, 123, 104, 0.12) 50%, transparent 70%);
+}
+
+.book-card .book-cover-placeholder i {
+    font-size: 2.6rem;
+    color: var(--gold-300);
+    margin-bottom: 0.35rem;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.25));
+}
+
+.book-card .book-cover-placeholder span {
+    font-size: 0.78rem;
+    color: var(--cream-100);
+    letter-spacing: 0.05em;
+    opacity: 0.9;
+}
+
+.book-card .card-body {
+    padding: 0.85rem 0.95rem;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Area Judul + Penulis: Jarak minimal 12px antara nama penulis dan footer/pemisah */
+.book-card .book-info-top {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin-bottom: 12px;
+}
+
+.book-card .book-category {
+    font-size: 0.70rem;
+    font-weight: 700;
+    color: var(--gold-700);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.35rem;
+    display: block;
+    line-height: 1.2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Judul Buku: Maksimal 2 baris (line-clamp: 2), tinggi area judul tetap setara 2 baris */
+.book-card .book-title,
+.book-card .card-title {
+    font-family: var(--font-judul);
+    font-size: 0.90rem;
+    font-weight: 700;
+    color: var(--green-900);
+    margin-bottom: 0.25rem;
+    line-height: 1.35;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    height: calc(0.90rem * 1.35 * 2);
+    min-height: calc(0.90rem * 1.35 * 2);
+    max-height: calc(0.90rem * 1.35 * 2);
+}
+
+.book-card .book-author,
+.book-card .card-text {
+    font-size: 0.78rem;
+    color: var(--teks-lembut);
+    margin-bottom: 0;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Footer Kartu Beranda: Pemisah, Tahun, Stok */
+.book-card .book-meta {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0.65rem;
+    border-top: 1px solid var(--cream-200);
+    font-size: 0.74rem;
+    color: var(--teks-lembut);
+    width: 100%;
+    flex-shrink: 0;
+}
+
+.book-card .book-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.74rem;
+    color: var(--teks-lembut);
+    white-space: nowrap;
+}
+
+.book-card .book-meta span i {
+    font-size: 0.74rem;
+    color: var(--gold-600);
+}
+
+/* Tombol Aksi Katalog: Detail & Pinjam (Lebar 50% dikurangi gap, tinggi sama, tidak terpotong) */
+.book-card .book-actions {
+    margin-top: auto;
+    display: flex;
+    gap: 8px;
+    padding-top: 16px; /* Jarak minimal 16px antara penulis dan tombol */
+    width: 100%;
+}
+
+.book-card .book-actions > .btn,
+.book-card .book-actions > form {
+    flex: 1 1 0;
+    width: 0;
+    min-width: 0;
+    margin: 0;
+}
+
+.book-card .book-actions > form {
+    display: flex;
+}
+
+.book-card .book-actions > form > .btn {
+    width: 100%;
+}
+
+.book-card .book-actions .btn {
+    height: 34px;
+    min-height: 34px;
+    max-height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.5rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    white-space: nowrap;
+    border-radius: 999px;
+    box-sizing: border-box;
+    line-height: 1;
+}
+
+.book-card .card-body .btn {
+    letter-spacing: 0.02em;
+}
+
+@media (max-width: 575.98px) {
+    .book-card .card-body {
+        padding: 0.65rem 0.75rem;
+    }
+    .book-card .book-info-top {
+        margin-bottom: 10px;
+    }
+    .book-card .book-title,
+    .book-card .card-title {
+        font-size: 0.82rem;
+        height: calc(0.82rem * 1.3 * 2);
+        min-height: calc(0.82rem * 1.3 * 2);
+        max-height: calc(0.82rem * 1.3 * 2);
+    }
+    .book-card .book-author,
+    .book-card .card-text {
+        font-size: 0.72rem;
+    }
+    .book-card .book-meta {
+        font-size: 0.68rem;
+        padding-top: 0.5rem;
+    }
+    .book-card .book-meta span {
+        font-size: 0.68rem;
+        gap: 3px;
+    }
+    .book-card .book-meta span i {
+        font-size: 0.68rem;
+    }
+    .book-card .book-actions {
+        padding-top: 14px;
+        gap: 6px;
+    }
+    .book-card .book-actions .btn {
+        height: 32px;
+        min-height: 32px;
+        font-size: 0.72rem;
+        padding: 0 0.35rem;
+    }
+}
+
+/* ==========================================================================
+   GRID KATALOG BUKU (CSS GRID: 5 KOLOM DESKTOP, 4 LAPTOP, 3 TABLET, 2 MOBILE)
+   Baris terakhir rata kiri dengan lebar kartu sama persis dengan baris lain.
+   ========================================================================== */
+.katalog-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important; /* Mobile: 2 kolom */
+    gap: 1.25rem !important; /* 20px di mobile */
+    width: 100% !important;
+    margin: 0 !important;
+}
+
+@media (min-width: 768px) {
+    .katalog-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important; /* Tablet: 3 kolom */
+        gap: 1.5rem !important; /* 24px */
+    }
+}
+
+@media (min-width: 992px) {
+    .katalog-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr)) !important; /* Laptop kecil: 4 kolom */
+        gap: 1.5rem !important; /* 24px */
+    }
+}
+
+@media (min-width: 1200px) {
+    .katalog-grid {
+        grid-template-columns: repeat(5, minmax(0, 1fr)) !important; /* Desktop lebar: 5 kolom */
+        gap: 1.5rem !important; /* 24px */
+    }
+}
+
+.katalog-grid > * {
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+}
+
+/* ==========================================================================
+   GRID KARTU BUKU BERANDA
+   Desktop lebar (>=1200px): 5 kolom, Laptop kecil: 4, Tablet: 3, Mobile: 2
+   Pengaman baris terakhir: diratakan di tengah jika jumlah tidak kelipatan 5
+   ========================================================================== */
+.books-grid-row {
+    --bs-gutter-x: 1.25rem; /* 20px di mobile */
+    --bs-gutter-y: 1.25rem; /* 20px */
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: calc(-0.5 * var(--bs-gutter-x));
+    margin-left: calc(-0.5 * var(--bs-gutter-x));
+    margin-top: calc(-1 * var(--bs-gutter-y));
+    justify-content: center !important;
+}
+
+@media (min-width: 768px) {
+    .books-grid-row {
+        --bs-gutter-x: 1.5rem; /* 24px di tablet, laptop, dan desktop */
+        --bs-gutter-y: 1.5rem; /* 24px */
+    }
+}
+
+.books-grid-row > * {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    padding-right: calc(var(--bs-gutter-x) * 0.5);
+    padding-left: calc(var(--bs-gutter-x) * 0.5);
+    margin-top: var(--bs-gutter-y);
+    /* Mobile (<768px): 2 kolom */
+    width: 50% !important;
+    max-width: 50% !important;
+}
+
+@media (min-width: 768px) {
+    /* Tablet (768px - 991px): 3 kolom */
+    .books-grid-row > * {
+        width: 33.33333333% !important;
+        max-width: 33.33333333% !important;
+    }
+}
+
+@media (min-width: 992px) {
+    /* Laptop kecil (992px - 1199px): 4 kolom */
+    .books-grid-row > * {
+        width: 25% !important;
+        max-width: 25% !important;
+    }
+}
+
+@media (min-width: 1200px) {
+    /* Desktop lebar (>=1200px): 5 kolom */
+    .books-grid-row > * {
+        width: 20% !important;
+        max-width: 20% !important;
+    }
+}
+
+/* ==========================================================================
+   LANGKAH 2 - BADGE STATUS (GRADASI LEMBUT & JELAS)
+   ========================================================================== */
 .badge-status {
     font-family: var(--font-isi);
     font-weight: 600;
     font-size: 0.78rem;
-    padding: 0.35em 0.85em;
+    padding: 0.42em 0.95em;
     border-radius: var(--radius-pill);
     letter-spacing: 0.02em;
     text-transform: capitalize;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
 .badge-diajukan {
-    background-color: var(--status-diajukan-bg);
+    background: var(--status-diajukan-bg);
     color: var(--status-diajukan);
+    border: 1px solid rgba(184, 134, 47, 0.28);
 }
 
 .badge-dipinjam {
-    background-color: var(--status-dipinjam-bg);
+    background: var(--status-dipinjam-bg);
     color: var(--status-dipinjam);
+    border: 1px solid rgba(26, 86, 125, 0.28);
 }
 
-.badge-dikembalikan {
-    background-color: var(--status-dikembalikan-bg);
+.badge-dikembalikan,
+.badge-tersedia,
+.badge-aktif {
+    background: var(--status-dikembalikan-bg);
     color: var(--status-dikembalikan);
+    border: 1px solid rgba(27, 94, 75, 0.28);
 }
 
-.badge-terlambat {
-    background-color: var(--status-terlambat-bg);
+.badge-terlambat,
+.badge-habis,
+.badge-nonaktif {
+    background: var(--status-terlambat-bg);
     color: var(--status-terlambat);
+    border: 1px solid rgba(150, 36, 29, 0.28);
 }
 
 .badge-ditolak {
-    background-color: var(--status-ditolak-bg);
+    background: var(--status-ditolak-bg);
     color: var(--status-ditolak);
-}
-
-/* ===== Badge Akun ===== */
-.badge-aktif {
-    background-color: var(--status-dikembalikan-bg);
-    color: var(--status-dikembalikan);
-}
-
-.badge-nonaktif {
-    background-color: var(--status-ditolak-bg);
-    color: var(--status-ditolak);
+    border: 1px solid rgba(80, 91, 86, 0.28);
 }
 
 .badge-admin {
-    background: linear-gradient(135deg, var(--hijau-tua), var(--hijau-tua-light));
-    color: var(--putih);
+    background: linear-gradient(135deg, var(--green-800) 0%, var(--green-600) 100%);
+    color: var(--cream-50);
+    border: 1px solid var(--gold-400);
+    box-shadow: 0 2px 8px rgba(31, 64, 55, 0.25);
 }
 
 .badge-anggota {
-    background-color: var(--status-dipinjam-bg);
+    background: var(--status-dipinjam-bg);
     color: var(--status-dipinjam);
+    border: 1px solid rgba(26, 86, 125, 0.28);
 }
 
-/* ===== Tabel ===== */
-.table-perpus {
-    font-family: var(--font-isi);
-    font-size: 0.9rem;
-}
-
-.table-perpus thead th {
-    background-color: var(--hijau-tua);
+/* ==========================================================================
+   LANGKAH 2 - CTA & FOOTER
+   ========================================================================== */
+.cta-section {
+    background: var(--gradient-hero);
     color: var(--putih);
-    font-weight: 600;
-    border: none;
-    padding: 0.85rem 1rem;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+    padding: 5rem 0;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
 }
 
-.table-perpus thead th:first-child {
-    border-radius: var(--radius-sm) 0 0 0;
+.cta-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 65%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(212, 162, 76, 0.24) 0%, transparent 65%);
+    pointer-events: none;
 }
 
-.table-perpus thead th:last-child {
-    border-radius: 0 var(--radius-sm) 0 0;
+.footer-perpus {
+    background: var(--gradient-footer);
+    color: rgba(253, 251, 246, 0.85);
+    padding: 3.75rem 0 1.75rem;
+    border-top: 2px solid transparent;
+    border-image: var(--gradient-gold) 1;
+    position: relative;
+    margin-top: auto;
 }
 
-.table-perpus tbody td {
-    padding: 0.85rem 1rem;
-    border-bottom: 1px solid var(--garis);
-    vertical-align: middle;
+.footer-perpus::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 20%;
+    width: 60%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 0%, rgba(212, 162, 76, 0.08) 0%, transparent 70%);
+    pointer-events: none;
 }
 
-.table-perpus tbody tr {
+.footer-perpus h5 {
+    font-family: var(--font-judul);
+    color: var(--cream-50);
+    font-size: 1.15rem;
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+}
+
+.footer-perpus a {
+    color: rgba(253, 251, 246, 0.78);
     transition: var(--transisi-cepat);
 }
 
-.table-perpus tbody tr:hover {
-    background-color: rgba(47, 93, 80, 0.03);
+.footer-perpus a:hover {
+    color: var(--gold-300);
+    transform: translateX(2px);
+    display: inline-block;
 }
 
-/* ===== Form ===== */
-.form-perpus .form-label {
-    font-weight: 600;
-    color: var(--teks);
-    font-size: 0.88rem;
-    margin-bottom: 0.4rem;
+.footer-perpus .footer-bottom {
+    border-top: 1px solid rgba(253, 251, 246, 0.12);
+    padding-top: 1.5rem;
+    margin-top: 2.25rem;
+    font-size: 0.86rem;
+    text-align: center;
+    color: rgba(253, 251, 246, 0.65);
 }
 
-.form-perpus .form-control,
-.form-perpus .form-select {
-    border: 1.5px solid var(--garis-tebal);
-    border-radius: var(--radius-sm);
-    padding: 0.65rem 1rem;
-    font-size: 0.9rem;
-    transition: var(--transisi-cepat);
-    background-color: var(--putih);
-}
-
-.form-perpus .form-control:focus,
-.form-perpus .form-select:focus {
-    border-color: var(--hijau-tua);
-    box-shadow: 0 0 0 3px rgba(47, 93, 80, 0.12);
-}
-
-.form-perpus .form-control::placeholder {
-    color: var(--teks-muted);
-}
-
-.form-perpus .form-text {
-    font-size: 0.8rem;
-    color: var(--teks-muted);
-}
-
-/* ===== Halaman Auth (Login / Register) ===== */
+/* ==========================================================================
+   LANGKAH 3 - HALAMAN AUTH (LOGIN & REGISTER)
+   ========================================================================== */
 .auth-wrapper {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, var(--krem) 0%, var(--krem-gelap) 100%);
-    padding: 2rem 1rem;
+    background: radial-gradient(circle at 18% 22%, rgba(212, 162, 76, 0.24) 0%, transparent 45%),
+                radial-gradient(circle at 82% 78%, rgba(62, 123, 104, 0.32) 0%, transparent 50%),
+                radial-gradient(circle at 50% 10%, rgba(111, 165, 147, 0.18) 0%, transparent 40%),
+                linear-gradient(135deg, var(--green-950) 0%, var(--green-900) 50%, var(--green-800) 100%);
+    padding: 2.5rem 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-wrapper::before {
+    content: '';
+    position: absolute;
+    width: 420px;
+    height: 420px;
+    background: radial-gradient(circle, rgba(212, 162, 76, 0.16) 0%, transparent 70%);
+    top: 8%;
+    left: 5%;
+    border-radius: 50%;
+    filter: blur(40px);
+    pointer-events: none;
+}
+
+.auth-wrapper::after {
+    content: '';
+    position: absolute;
+    width: 460px;
+    height: 460px;
+    background: radial-gradient(circle, rgba(62, 123, 104, 0.26) 0%, transparent 70%);
+    bottom: 5%;
+    right: 5%;
+    border-radius: 50%;
+    filter: blur(50px);
+    pointer-events: none;
 }
 
 .auth-card {
-    background: var(--putih);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-lg);
+    background: rgba(253, 251, 246, 0.94);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: var(--radius-xl);
+    box-shadow: 0 20px 50px rgba(13, 28, 23, 0.42), 0 0 0 1px rgba(212, 162, 76, 0.28);
     width: 100%;
     max-width: 460px;
-    padding: 2.5rem;
-    border: 1px solid var(--garis);
+    padding: 2.75rem;
+    position: relative;
+    z-index: 1;
     animation: fadeInUp 0.5s ease-out;
 }
 
@@ -464,31 +1716,85 @@ a:hover {
 }
 
 .auth-card .auth-logo i {
-    font-size: 3rem;
-    color: var(--emas);
+    font-size: 3.2rem;
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 4px 8px rgba(212, 162, 76, 0.35));
     margin-bottom: 0.75rem;
-    display: block;
+    display: inline-block;
 }
 
 .auth-card .auth-logo h2 {
     font-family: var(--font-judul);
-    color: var(--hijau-tua);
-    font-size: 1.6rem;
-    margin-bottom: 0.25rem;
+    color: var(--green-900);
+    font-size: 1.7rem;
+    margin-bottom: 0.35rem;
+    font-weight: 800;
 }
 
 .auth-card .auth-logo p {
     color: var(--teks-lembut);
-    font-size: 0.9rem;
+    font-size: 0.92rem;
 }
 
-/* ===== Sidebar (Admin) ===== */
+/* ==========================================================================
+   LANGKAH 3 & 4 - FORM, INPUT & KONTROL
+   ========================================================================== */
+.form-perpus .form-label {
+    font-weight: 600;
+    color: var(--green-900);
+    font-size: 0.88rem;
+    margin-bottom: 0.45rem;
+}
+
+.form-perpus .form-control,
+.form-perpus .form-select {
+    border: 1.5px solid var(--cream-300);
+    border-radius: var(--radius-md);
+    padding: 0.65rem 1rem;
+    font-size: 0.92rem;
+    transition: var(--transisi-cepat);
+    background-color: var(--putih);
+    color: var(--teks);
+}
+
+.form-perpus .form-control:focus,
+.form-perpus .form-select:focus {
+    border-color: var(--gold-500);
+    box-shadow: 0 0 0 3.5px rgba(212, 162, 76, 0.22);
+    background-color: var(--putih);
+    outline: none;
+}
+
+.form-perpus .form-control::placeholder {
+    color: var(--teks-muted);
+}
+
+.form-perpus .form-text {
+    font-size: 0.82rem;
+    color: var(--teks-muted);
+}
+
+.form-check-input:checked {
+    background-color: var(--green-700);
+    border-color: var(--green-700);
+}
+
+.form-check-input:focus {
+    border-color: var(--gold-500);
+    box-shadow: 0 0 0 3px rgba(212, 162, 76, 0.22);
+}
+
+/* ==========================================================================
+   LANGKAH 4 - AREA ADMIN (SIDEBAR, CONTENT AREA, KARTU STATISTIK)
+   ========================================================================== */
 .sidebar-perpus {
-    background: var(--putih);
-    border-right: 1px solid var(--garis);
-    min-height: calc(100vh - 62px);
-    padding: 1.5rem 0;
-    box-shadow: var(--shadow-sm);
+    background: var(--gradient-sidebar);
+    border-right: 1px solid rgba(212, 162, 76, 0.16);
+    min-height: calc(100vh - 65px);
+    padding: 1.75rem 0;
+    box-shadow: 4px 0 20px rgba(13, 28, 23, 0.12);
 }
 
 .sidebar-perpus .sidebar-heading {
@@ -496,335 +1802,396 @@ a:hover {
     font-size: 0.72rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--teks-muted);
-    padding: 0.5rem 1.5rem;
-    margin-bottom: 0.25rem;
+    letter-spacing: 0.1em;
+    color: var(--gold-300);
+    opacity: 0.85;
+    padding: 0.5rem 1.75rem;
+    margin-bottom: 0.35rem;
 }
 
 .sidebar-perpus .nav-link {
     font-family: var(--font-isi);
-    color: var(--teks-lembut);
-    padding: 0.65rem 1.5rem;
-    font-size: 0.88rem;
+    color: var(--cream-200);
+    padding: 0.75rem 1.75rem;
+    font-size: 0.9rem;
     font-weight: 500;
     border-radius: 0;
     transition: var(--transisi-cepat);
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.85rem;
     border-left: 3px solid transparent;
-}
-
-.sidebar-perpus .nav-link:hover {
-    background: rgba(47, 93, 80, 0.05);
-    color: var(--hijau-tua);
-    border-left-color: rgba(47, 93, 80, 0.3);
-}
-
-.sidebar-perpus .nav-link.active {
-    color: var(--hijau-tua);
-    font-weight: 600;
-    background: rgba(47, 93, 80, 0.08);
-    border-left-color: var(--hijau-tua);
 }
 
 .sidebar-perpus .nav-link i {
     width: 20px;
     text-align: center;
-    font-size: 1rem;
+    font-size: 1.05rem;
+    color: var(--gold-300);
+    transition: transform 0.2s ease;
 }
 
-/* ===== Content Area ===== */
+.sidebar-perpus .nav-link:hover {
+    background: rgba(212, 162, 76, 0.10);
+    color: var(--cream-50);
+    border-left-color: var(--gold-400);
+}
+
+.sidebar-perpus .nav-link:hover i {
+    transform: translateX(2px);
+}
+
+.sidebar-perpus .nav-link.active {
+    color: var(--gold-300);
+    font-weight: 600;
+    background: linear-gradient(90deg, rgba(212, 162, 76, 0.22) 0%, rgba(212, 162, 76, 0.04) 100%);
+    border-left-color: var(--gold-400);
+}
+
+.sidebar-perpus .nav-link.active i {
+    color: var(--gold-400);
+}
+
 .content-area {
-    padding: 2rem;
-    min-height: calc(100vh - 62px);
+    padding: 2.25rem;
+    min-height: calc(100vh - 65px);
+    background: var(--gradient-cream);
 }
 
 .page-title {
     font-family: var(--font-judul);
-    color: var(--hijau-tua);
-    font-size: 1.6rem;
+    color: var(--green-900);
+    font-size: 1.75rem;
     font-weight: 700;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.35rem;
+    letter-spacing: -0.01em;
 }
 
 .page-subtitle {
     color: var(--teks-lembut);
-    font-size: 0.9rem;
+    font-size: 0.92rem;
     margin-bottom: 1.5rem;
 }
 
-/* ===== Beranda ===== */
-.hero-section {
-    background: linear-gradient(135deg, var(--hijau-tua) 0%, var(--hijau-tua-light) 50%, var(--hijau-tua-hover) 100%);
-    color: var(--putih);
-    padding: 5rem 0 4rem;
-    position: relative;
-    overflow: hidden;
-}
-
-.hero-section::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -20%;
-    width: 60%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(217, 164, 65, 0.1) 0%, transparent 70%);
-    animation: heroGlow 8s ease-in-out infinite;
-}
-
-.hero-section h1 {
-    font-family: var(--font-judul);
-    font-size: 2.6rem;
-    font-weight: 900;
-    color: var(--putih);
-    margin-bottom: 1rem;
-    line-height: 1.2;
-}
-
-.hero-section .hero-accent {
-    color: var(--emas);
-}
-
-.hero-section p {
-    font-size: 1.1rem;
-    opacity: 0.9;
-    max-width: 600px;
-    line-height: 1.7;
-}
-
-.section-title {
-    font-family: var(--font-judul);
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: var(--hijau-tua);
-    margin-bottom: 0.5rem;
-    position: relative;
-}
-
-.section-title::after {
-    content: '';
-    display: block;
-    width: 50px;
-    height: 3px;
-    background: linear-gradient(90deg, var(--emas), var(--emas-light));
-    border-radius: 2px;
-    margin-top: 0.75rem;
-}
-
-.section-subtitle {
-    color: var(--teks-lembut);
-    font-size: 0.95rem;
-    margin-bottom: 2rem;
-}
-
-/* ===== Kartu Buku ===== */
-.book-card {
+/* ==========================================================================
+   LANGKAH 4 - KARTU & KARTU STATISTIK (DASHBOARD)
+   ========================================================================== */
+.card-perpus {
     background: var(--putih);
     border: 1px solid var(--garis);
-    border-radius: var(--radius-md);
-    overflow: hidden;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
     transition: var(--transisi);
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+    overflow: hidden;
 }
 
-.book-card:hover {
-    box-shadow: var(--shadow-lg);
+.card-perpus:hover {
+    box-shadow: var(--shadow-card-hover);
+}
+
+.card-perpus .card-header {
+    background: rgba(253, 251, 246, 0.7);
+    border-bottom: 1px solid var(--cream-200);
+    padding: 1.1rem 1.4rem;
+    font-family: var(--font-judul);
+    font-weight: 700;
+    color: var(--green-900);
+    font-size: 1.05rem;
+}
+
+.card-perpus .card-body {
+    padding: 1.4rem;
+}
+
+/* Kartu Statistik Dashboard Bergradasi */
+.stat-card {
+    background: var(--putih);
+    border: 1px solid var(--garis);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem 1.25rem;
+    text-align: center;
+    transition: var(--transisi);
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+}
+
+.stat-card:hover {
+    box-shadow: var(--shadow-card-hover);
     transform: translateY(-4px);
+    border-color: var(--gold-300);
 }
 
-.book-card .book-cover {
-    width: 100%;
-    height: 260px;
-    object-fit: cover;
-    border-bottom: 1px solid var(--garis);
-}
-
-.book-card .book-cover-placeholder {
-    width: 100%;
-    height: 260px;
-    background: linear-gradient(135deg, var(--hijau-tua), var(--hijau-tua-light));
-    display: flex;
-    flex-direction: column;
+.stat-card .stat-icon-wrapper {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 0.85rem;
+    font-size: 1.4rem;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+/* Variasi Gradasi Kartu Statistik */
+.stat-card.stat-green,
+.stat-card:nth-child(1) {
+    background: linear-gradient(145deg, #ffffff 0%, var(--green-50) 100%);
+}
+.stat-card.stat-green .stat-icon-wrapper,
+.stat-card:nth-child(1) .stat-icon {
+    background: var(--gradient-green);
     color: var(--putih);
-    border-bottom: 1px solid var(--garis);
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.85rem;
+    font-size: 1.4rem;
+    box-shadow: 0 4px 14px rgba(31, 64, 55, 0.25);
 }
 
-.book-card .book-cover-placeholder i {
-    font-size: 3rem;
-    opacity: 0.7;
-    margin-bottom: 0.5rem;
+.stat-card.stat-gold,
+.stat-card:nth-child(2) {
+    background: linear-gradient(145deg, #ffffff 0%, var(--gold-50) 100%);
+}
+.stat-card.stat-gold .stat-icon-wrapper,
+.stat-card:nth-child(2) .stat-icon {
+    background: var(--gradient-gold);
+    color: var(--putih);
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.85rem;
+    font-size: 1.4rem;
+    box-shadow: 0 4px 14px rgba(212, 162, 76, 0.28);
 }
 
-.book-card .book-cover-placeholder span {
-    font-size: 0.8rem;
-    opacity: 0.5;
+.stat-card.stat-blue,
+.stat-card:nth-child(3) {
+    background: linear-gradient(145deg, #ffffff 0%, #F0F7FC 100%);
+}
+.stat-card.stat-blue .stat-icon-wrapper,
+.stat-card:nth-child(3) .stat-icon {
+    background: linear-gradient(135deg, #216093 0%, #153E5E 100%);
+    color: var(--putih) !important;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.85rem;
+    font-size: 1.4rem;
+    box-shadow: 0 4px 14px rgba(26, 86, 125, 0.25);
 }
 
-.book-card .card-body {
-    padding: 1rem 1.25rem;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+.stat-card.stat-red,
+.stat-card:nth-child(4) {
+    background: linear-gradient(145deg, #ffffff 0%, #FDF2F2 100%);
+}
+.stat-card.stat-red .stat-icon-wrapper,
+.stat-card:nth-child(4) .stat-icon {
+    background: var(--gradient-danger);
+    color: var(--putih) !important;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.85rem;
+    font-size: 1.4rem;
+    box-shadow: 0 4px 14px rgba(179, 38, 30, 0.25);
 }
 
-.book-card .book-title {
+.stat-card .stat-number {
     font-family: var(--font-judul);
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--teks);
-    margin-bottom: 0.35rem;
-    line-height: 1.4;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    font-size: 2.1rem;
+    font-weight: 900;
+    color: var(--green-900);
+    line-height: 1.1;
 }
 
-.book-card .book-author {
-    font-size: 0.85rem;
+.stat-card .stat-label {
+    font-size: 0.86rem;
     color: var(--teks-lembut);
-    margin-bottom: 0.75rem;
+    margin-top: 0.35rem;
+    font-weight: 500;
 }
 
-.book-card .book-category {
-    font-size: 0.75rem;
+/* ==========================================================================
+   LANGKAH 4 - TABEL (HEADER HIJAU TUA GRADASI, SELANG-SELING KREM, HOVER EMAS)
+   ========================================================================== */
+.table-perpus {
+    font-family: var(--font-isi);
+    font-size: 0.9rem;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.table-perpus thead th {
+    background: linear-gradient(135deg, var(--green-900) 0%, var(--green-800) 100%);
+    color: var(--cream-50);
     font-weight: 600;
-    color: var(--emas);
+    border: none;
+    padding: 0.95rem 1.15rem;
+    font-size: 0.84rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    margin-bottom: 0.5rem;
+    white-space: nowrap;
 }
 
-.book-card .book-meta {
-    margin-top: auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 0.75rem;
-    border-top: 1px solid var(--garis);
-    font-size: 0.8rem;
-    color: var(--teks-lembut);
+.table-perpus thead th:first-child {
+    border-top-left-radius: var(--radius-sm);
 }
 
-/* ===== Footer ===== */
-.footer-perpus {
-    background: var(--hijau-tua);
-    color: rgba(255, 255, 255, 0.8);
-    padding: 3rem 0 1.5rem;
+.table-perpus thead th:last-child {
+    border-top-right-radius: var(--radius-sm);
 }
 
-.footer-perpus h5 {
-    font-family: var(--font-judul);
-    color: var(--putih);
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
+.table-perpus tbody td {
+    padding: 0.95rem 1.15rem;
+    border-bottom: 1px solid var(--cream-200);
+    vertical-align: middle;
+    color: var(--teks);
 }
 
-.footer-perpus a {
-    color: rgba(255, 255, 255, 0.7);
-    transition: var(--transisi-cepat);
+.table-perpus tbody tr {
+    transition: background-color 0.2s ease;
 }
 
-.footer-perpus a:hover {
-    color: var(--emas);
+/* Baris Selang-Seling Krem Sangat Tipis */
+.table-perpus tbody tr:nth-child(even) {
+    background-color: rgba(243, 235, 218, 0.24);
 }
 
-.footer-perpus .footer-bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-    padding-top: 1.5rem;
-    margin-top: 2rem;
-    font-size: 0.85rem;
-    text-align: center;
-    opacity: 0.7;
+/* Hover Baris = Krem Keemasan */
+.table-perpus tbody tr:hover {
+    background-color: rgba(240, 198, 116, 0.18) !important;
 }
 
-/* ===== Alert ===== */
-.alert-perpus {
+/* ==========================================================================
+   PAGINATION GLOBAL
+   ========================================================================== */
+.pagination {
+    margin-bottom: 0;
+    gap: 5px;
+}
+
+.pagination .page-item .page-link {
+    color: var(--green-800);
     border-radius: var(--radius-sm);
-    border: none;
-    font-size: 0.9rem;
-    padding: 1rem 1.25rem;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-}
-
-.alert-perpus.alert-success {
-    background: var(--status-dikembalikan-bg);
-    color: var(--status-dikembalikan);
-}
-
-.alert-perpus.alert-danger {
-    background: var(--status-terlambat-bg);
-    color: var(--status-terlambat);
-}
-
-.alert-perpus.alert-warning {
-    background: var(--status-diajukan-bg);
-    color: var(--status-diajukan);
-}
-
-.alert-perpus.alert-info {
-    background: var(--status-dipinjam-bg);
-    color: var(--status-dipinjam);
-}
-
-/* ===== Pagination ===== */
-.pagination .page-link {
-    color: var(--hijau-tua);
-    border-color: var(--garis);
-    font-family: var(--font-isi);
+    border: 1px solid var(--cream-300);
+    background-color: var(--putih);
+    padding: 0.45rem 0.85rem;
     font-size: 0.88rem;
+    font-weight: 500;
     transition: var(--transisi-cepat);
 }
 
-.pagination .page-link:hover {
-    background-color: rgba(47, 93, 80, 0.08);
-    border-color: var(--hijau-tua);
-    color: var(--hijau-tua);
+.pagination .page-item .page-link:hover {
+    background-color: var(--cream-100);
+    color: var(--green-900);
+    border-color: var(--gold-400);
+    box-shadow: 0 2px 6px rgba(212, 162, 76, 0.2);
 }
 
 .pagination .page-item.active .page-link {
-    background-color: var(--hijau-tua);
-    border-color: var(--hijau-tua);
+    background: var(--gradient-green);
+    border-color: var(--green-700);
     color: var(--putih);
+    box-shadow: 0 4px 10px rgba(31, 64, 55, 0.25);
+    font-weight: 600;
 }
 
-/* ===== Empty State ===== */
+.pagination .page-item.disabled .page-link {
+    color: var(--teks-muted);
+    background-color: transparent;
+    border-color: var(--garis);
+}
+
+.pagination svg {
+    width: 1rem !important;
+    height: 1rem !important;
+}
+
+/* ==========================================================================
+   ALERT / NOTIFIKASI
+   ========================================================================== */
+.alert-perpus {
+    border-radius: var(--radius-md);
+    border: 1px solid transparent;
+    font-size: 0.92rem;
+    padding: 1rem 1.35rem;
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.alert-perpus.alert-success {
+    background: linear-gradient(135deg, #EBF8F2 0%, #D4F2E4 100%);
+    color: var(--status-dikembalikan);
+    border-color: rgba(27, 94, 75, 0.25);
+}
+
+.alert-perpus.alert-danger {
+    background: linear-gradient(135deg, #FDEBEA 0%, #FAD5D3 100%);
+    color: var(--status-terlambat);
+    border-color: rgba(150, 36, 29, 0.25);
+}
+
+.alert-perpus.alert-warning {
+    background: linear-gradient(135deg, #FFF9EA 0%, #FCEAC1 100%);
+    color: var(--status-diajukan);
+    border-color: rgba(184, 134, 47, 0.25);
+}
+
+.alert-perpus.alert-info {
+    background: linear-gradient(135deg, #EBF5FC 0%, #D3E9FA 100%);
+    color: var(--status-dipinjam);
+    border-color: rgba(26, 86, 125, 0.25);
+}
+
+/* ==========================================================================
+   EMPTY STATE & ANIMASI
+   ========================================================================== */
 .empty-state {
     text-align: center;
-    padding: 3rem 1rem;
+    padding: 3.5rem 1.5rem;
     color: var(--teks-lembut);
 }
 
 .empty-state i {
     font-size: 3.5rem;
-    opacity: 0.4;
+    opacity: 0.75;
     margin-bottom: 1rem;
     display: block;
-    color: var(--hijau-tua);
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .empty-state h5 {
     font-family: var(--font-judul);
-    color: var(--teks);
+    color: var(--green-900);
     margin-bottom: 0.5rem;
+    font-weight: 700;
 }
 
 .empty-state p {
-    font-size: 0.9rem;
-    max-width: 400px;
+    font-size: 0.92rem;
+    max-width: 440px;
     margin: 0 auto;
 }
 
-/* ===== Animasi ===== */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -836,115 +2203,160 @@ a:hover {
     }
 }
 
-@keyframes heroGlow {
-    0%, 100% { transform: rotate(0deg) scale(1); }
-    50% { transform: rotate(3deg) scale(1.05); }
-}
-
 .fade-in-up {
     animation: fadeInUp 0.5s ease-out;
 }
 
-/* ===== Scrollbar ===== */
+/* ==========================================================================
+   SCROLLBAR MODERN
+   ========================================================================== */
 ::-webkit-scrollbar {
     width: 8px;
+    height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--krem);
+    background: var(--cream-100);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(47, 93, 80, 0.25);
+    background: var(--green-300);
     border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: rgba(47, 93, 80, 0.4);
+    background: var(--green-500);
 }
 
-/* ===== Utilitas ===== */
-.text-hijau { color: var(--hijau-tua) !important; }
-.text-emas { color: var(--emas) !important; }
-.text-lembut { color: var(--teks-lembut) !important; }
-.bg-krem { background-color: var(--krem) !important; }
-.bg-hijau { background-color: var(--hijau-tua) !important; }
+/* ==========================================================================
+   KELAS UTILITAS TEMA
+   ========================================================================== */
+.text-hijau   { color: var(--green-800) !important; }
+.text-emas    { color: var(--gold-500) !important; }
+.text-lembut  { color: var(--teks-lembut) !important; }
+.bg-krem      { background-color: var(--cream-50) !important; }
+.bg-hijau     { background-color: var(--green-800) !important; }
 .border-garis { border-color: var(--garis) !important; }
 
-/* ===== Responsive ===== */
-@media (max-width: 768px) {
-    .hero-section {
-        padding: 3rem 0 2.5rem;
-    }
-
-    .hero-section h1 {
-        font-size: 1.8rem;
-    }
-
-    .content-area {
-        padding: 1.25rem;
-    }
-
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+@media (max-width: 991.98px) {
     .sidebar-perpus {
         min-height: auto;
         border-right: none;
-        border-bottom: 1px solid var(--garis);
+        border-bottom: 1px solid rgba(212, 162, 76, 0.2);
+    }
+
+    .content-area {
+        padding: 1.5rem 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 3.5rem 0 3rem;
+        border-radius: 0 0 28px 28px;
+    }
+
+    .hero-section h1 {
+        font-size: 2rem;
     }
 
     .auth-card {
-        padding: 1.75rem;
+        padding: 2rem 1.5rem;
     }
 
     .stat-card {
-        padding: 1rem;
+        padding: 1.2rem 1rem;
     }
 
     .stat-card .stat-number {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
     }
 }
 
 @media (max-width: 576px) {
     .page-title {
-        font-size: 1.3rem;
+        font-size: 1.4rem;
     }
 
     .table-perpus {
-        font-size: 0.82rem;
+        font-size: 0.84rem;
     }
 }
 
-/* ===== Pagination Global ===== */
-.pagination {
-    margin-bottom: 0;
-    gap: 4px;
-}
-.pagination .page-item .page-link {
-    color: var(--hijau-tua);
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--garis);
-    background-color: var(--putih);
-    padding: 0.35rem 0.75rem;
-    font-size: 0.875rem;
-    transition: var(--transisi-cepat);
-}
-.pagination .page-item .page-link:hover {
-    background-color: var(--krem-gelap);
-    color: var(--hijau-tua-hover);
-    border-color: var(--garis-tebal);
-}
-.pagination .page-item.active .page-link {
-    background-color: var(--hijau-tua);
-    border-color: var(--hijau-tua);
-    color: var(--putih);
-}
-.pagination .page-item.disabled .page-link {
-    color: var(--teks-muted);
-    background-color: transparent;
-    border-color: var(--garis);
-}
-.pagination svg {
-    width: 1rem !important;
-    height: 1rem !important;
+/* Optimasi Partikel & Efek pada Layar Mobile / Tablet */
+@media (max-width: 768px) {
+    .hero-particles span:nth-child(n+11) {
+        display: none !important;
+    }
+    .hero-blob-3,
+    .hero-blob-4,
+    .hero-ring-2,
+    .hero-ray-3 {
+        display: none !important;
+    }
+    .hero-title {
+        font-size: 2.25rem !important;
+    }
 }
 
+/* ==========================================================================
+   AKSESIBILITAS: PREFERS-REDUCED-MOTION (RAMAH PENGGUNA)
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .hero-section {
+        background-position: 0% 0% !important;
+        animation: none !important;
+    }
+
+    .hero-blob,
+    .hero-particles,
+    .hero-particle,
+    .hero-ray,
+    .hero-ring,
+    .hero-badge-wrapper,
+    .badge-pulse-dot,
+    .hero-word,
+    .hero-accent-shimmer,
+    .hero-desc,
+    .hero-search-wrapper,
+    .hero-scroll-indicator,
+    .scroll-arrow,
+    .stat-icon-wobble,
+    .reveal-on-scroll {
+        animation: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+        filter: none !important;
+        transition: none !important;
+    }
+
+    .section-title::after {
+        width: 64px !important;
+        transition: none !important;
+    }
+
+    .book-card:hover,
+    .book-card:hover .book-cover,
+    .book-card:hover .card-img-top,
+    .book-card:hover .book-cover-placeholder,
+    .search-hero-box:focus-within {
+        transform: none !important;
+    }
+
+    .book-card .book-cover-container::after,
+    .book-card .position-relative:first-child::after,
+    .btn-emas-search::after,
+    .navbar-perpus .nav-link::after {
+        display: none !important;
+    }
+}

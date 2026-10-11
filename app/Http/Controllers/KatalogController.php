@@ -28,7 +28,7 @@ class KatalogController extends Controller
             $booksQuery->orderBy('created_at', 'desc'); // default Terbaru
         }
 
-        $books = $booksQuery->paginate(12)->withQueryString();
+        $books = $booksQuery->paginate(15)->withQueryString();
 
         return view('katalog.index', compact('books', 'kategoriList'));
     }

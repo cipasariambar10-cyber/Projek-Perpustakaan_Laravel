@@ -63,7 +63,7 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-hijau">
+                        <button type="submit" class="btn btn-emas">
                             <i class="bi bi-check-lg me-1"></i> Simpan Perubahan
                         </button>
                     </form>
@@ -105,7 +105,7 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-hijau">
+                        <button type="submit" class="btn btn-emas">
                             <i class="bi bi-lock me-1"></i> Ubah Password
                         </button>
                     </form>

@@ -21,13 +21,13 @@
                             </a>
                         </div>
                         <div class="card-body">
-                            <div class="d-flex align-items-center gap-3 mb-4 pb-3" style="border-bottom: 1px solid var(--garis);">
+                            <div class="d-flex align-items-center gap-3 mb-4 pb-3" style="border-bottom: 1px solid var(--cream-200);">
                                 <div class="d-flex align-items-center justify-content-center rounded-circle"
-                                     style="width:64px;height:64px;background:var(--hijau-tua);color:var(--putih);font-size:1.6rem;font-weight:700;flex-shrink:0;">
+                                     style="width:64px;height:64px;background:var(--gradient-green);color:var(--cream-50);font-size:1.6rem;font-weight:700;flex-shrink:0;box-shadow:var(--shadow-sm);">
                                     {{ strtoupper(substr($anggota->name, 0, 1)) }}
                                 </div>
                                 <div>
-                                    <h4 style="font-family: var(--font-judul); color: var(--hijau-tua); margin-bottom: 0.25rem;">
+                                    <h4 style="font-family: var(--font-judul); color: var(--green-900); margin-bottom: 0.25rem;">
                                         {{ $anggota->name }}
                                     </h4>
                                     <div class="d-flex gap-2 align-items-center">

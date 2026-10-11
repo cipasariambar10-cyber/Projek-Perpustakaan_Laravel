@@ -48,7 +48,7 @@
                                 <div class="d-flex gap-3 flex-grow-1">
                                     {{-- Ikon Buku --}}
                                     <div class="d-flex align-items-center justify-content-center rounded"
-                                         style="width:56px;height:56px;background:linear-gradient(135deg, var(--hijau-tua), var(--hijau-tua-light));color:var(--putih);font-size:1.3rem;flex-shrink:0;border-radius: var(--radius-sm);">
+                                         style="width:56px;height:56px;background:var(--gradient-green);color:var(--cream-50);font-size:1.3rem;flex-shrink:0;border-radius: var(--radius-md);box-shadow:var(--shadow-sm);">
                                         <i class="bi bi-book"></i>
                                     </div>
                                     <div>

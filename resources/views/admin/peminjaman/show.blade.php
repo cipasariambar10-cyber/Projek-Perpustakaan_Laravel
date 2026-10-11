@@ -38,7 +38,7 @@
                                     </h6>
                                     <div class="d-flex align-items-center gap-3 mb-3">
                                         <div class="d-flex align-items-center justify-content-center rounded-circle"
-                                             style="width:48px;height:48px;background:var(--hijau-tua);color:var(--putih);font-size:1.1rem;font-weight:700;flex-shrink:0;">
+                                             style="width:48px;height:48px;background:var(--gradient-green);color:var(--cream-50);font-size:1.1rem;font-weight:700;flex-shrink:0;box-shadow:var(--shadow-sm);">
                                             {{ strtoupper(substr($peminjaman->user->name ?? '?', 0, 1)) }}
                                         </div>
                                         <div>

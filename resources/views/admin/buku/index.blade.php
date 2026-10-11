@@ -8,7 +8,7 @@
         <h1 class="page-title">Kelola Buku</h1>
         <p class="page-subtitle mb-0">Daftar koleksi buku perpustakaan</p>
     </div>
-    <a href="{{ route('admin.buku.create') }}" class="btn btn-hijau">
+    <a href="{{ route('admin.buku.create') }}" class="btn btn-emas">
         <i class="bi bi-plus-circle me-1"></i> Tambah Buku
     </a>
 </div>
@@ -72,8 +72,8 @@
                         <td>{{ $b->lokasi_rak ?? '-' }}</td>
                         <td>
                             <div class="d-flex gap-1">
-                                <a href="{{ route('katalog.show', $b) }}" class="btn btn-sm btn-outline-secondary" title="Detail"><i class="bi bi-eye"></i></a>
-                                <a href="{{ route('admin.buku.edit', $b) }}" class="btn btn-sm btn-outline-secondary" title="Ubah"><i class="bi bi-pencil"></i></a>
+                                <a href="{{ route('katalog.show', $b) }}" class="btn btn-sm btn-outline-hijau" title="Detail"><i class="bi bi-eye"></i></a>
+                                <a href="{{ route('admin.buku.edit', $b) }}" class="btn btn-sm btn-hijau" title="Ubah"><i class="bi bi-pencil"></i></a>
                                 <form method="POST" action="{{ route('admin.buku.destroy', $b) }}"
                                       onsubmit="return confirm('Hapus buku {{ addslashes($b->judul) }}?')">
                                     @csrf

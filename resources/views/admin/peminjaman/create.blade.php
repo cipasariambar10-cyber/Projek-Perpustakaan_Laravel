@@ -92,7 +92,7 @@
                                     <a href="{{ route('admin.peminjaman.index') }}" class="btn btn-outline-hijau">
                                         <i class="bi bi-arrow-left me-1"></i> Kembali
                                     </a>
-                                    <button type="submit" class="btn btn-hijau">
+                                    <button type="submit" class="btn btn-emas">
                                         <i class="bi bi-check-lg me-1"></i> Simpan Peminjaman
                                     </button>
                                 </div>

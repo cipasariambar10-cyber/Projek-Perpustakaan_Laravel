@@ -131,13 +131,13 @@
             </div>
 
             {{-- Tombol Daftar --}}
-            <button type="submit" class="btn btn-hijau w-100 py-2 mb-3">
+            <button type="submit" class="btn btn-emas w-100 py-2 mb-3">
                 <i class="bi bi-person-plus me-1"></i> Daftar
             </button>
 
             <p class="text-center mb-0" style="font-size: 0.9rem; color: var(--teks-lembut);">
                 Sudah punya akun?
-                <a href="{{ route('login') }}" class="fw-semibold" style="color: var(--hijau-tua);">Masuk di sini</a>
+                <a href="{{ route('login') }}" class="fw-semibold" style="color: var(--green-800);">Masuk di sini</a>
             </p>
         </form>
     </div>

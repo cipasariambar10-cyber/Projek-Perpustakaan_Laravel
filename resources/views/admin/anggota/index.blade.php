@@ -8,7 +8,7 @@
                     <h1 class="page-title">Kelola Anggota</h1>
                     <p class="page-subtitle mb-0">Daftar semua pengguna perpustakaan</p>
                 </div>
-                <a href="{{ route('admin.anggota.create') }}" class="btn btn-hijau">
+                <a href="{{ route('admin.anggota.create') }}" class="btn btn-emas">
                     <i class="bi bi-person-plus me-1"></i> Tambah Anggota
                 </a>
             </div>
@@ -82,7 +82,7 @@
                                     <td>
                                         <div class="d-flex align-items-center gap-2">
                                             <div class="d-flex align-items-center justify-content-center rounded-circle"
-                                                 style="width:34px;height:34px;background:var(--hijau-tua);color:var(--putih);font-size:0.8rem;font-weight:600;flex-shrink:0;">
+                                                 style="width:34px;height:34px;background:var(--gradient-green);color:var(--cream-50);font-size:0.8rem;font-weight:600;flex-shrink:0;box-shadow:var(--shadow-sm);">
                                                 {{ strtoupper(substr($a->name, 0, 1)) }}
                                             </div>
                                             <div>
@@ -106,10 +106,10 @@
                                     </td>
                                     <td>
                                         <div class="d-flex gap-1">
-                                            <a href="{{ route('admin.anggota.show', $a) }}" class="btn btn-sm btn-outline-secondary" title="Detail">
+                                            <a href="{{ route('admin.anggota.show', $a) }}" class="btn btn-sm btn-outline-hijau" title="Detail">
                                                 <i class="bi bi-eye"></i>
                                             </a>
-                                            <a href="{{ route('admin.anggota.edit', $a) }}" class="btn btn-sm btn-outline-secondary" title="Ubah">
+                                            <a href="{{ route('admin.anggota.edit', $a) }}" class="btn btn-sm btn-hijau" title="Ubah">
                                                 <i class="bi bi-pencil"></i>
                                             </a>
                                             @if($a->id !== auth()->id())

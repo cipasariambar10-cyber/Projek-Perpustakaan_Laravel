@@ -20,7 +20,7 @@ class BerandaController extends Controller
 
         try {
             if (\Schema::hasTable('books')) {
-                $bukuTerbaru = \DB::table('books')->orderByDesc('created_at')->limit(8)->get();
+                $bukuTerbaru = \DB::table('books')->orderByDesc('created_at')->limit(10)->get();
                 $totalBuku = \DB::table('books')->count();
 
                 // Buku populer berdasarkan jumlah peminjaman
@@ -30,10 +30,10 @@ class BerandaController extends Controller
                         ->select('books.*', \DB::raw('COUNT(loans.id) as total_pinjam'))
                         ->groupBy('books.id')
                         ->orderByDesc('total_pinjam')
-                        ->limit(8)
+                        ->limit(10)
                         ->get();
                 } else {
-                    $bukuPopuler = \DB::table('books')->inRandomOrder()->limit(8)->get();
+                    $bukuPopuler = \DB::table('books')->inRandomOrder()->limit(10)->get();
                 }
             }
         } catch (\Exception $e) {
