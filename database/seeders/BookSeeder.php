@@ -11,7 +11,7 @@ class BookSeeder extends Seeder
 {
     public function run(): void
     {
-        $kategoriList = ['Fiksi', 'Non-Fiksi', 'Sains', 'Teknologi', 'Sejarah', 'Anak', 'Agama', 'Sastra'];
+        $kategoriList = ['Fiksi', 'Non-Fiksi', 'Sains', 'Teknologi', 'Sejarah', 'Anak', 'Agama', 'Sastra', 'Pendidikan'];
         $categories = [];
 
         foreach ($kategoriList as $kat) {
@@ -112,6 +112,56 @@ class BookSeeder extends Seeder
                 'stok' => 3,
                 'sampul' => 'covers/ronggeng-dukuh-paruk.jpg',
                 'sinopsis' => 'Mengangkat potret kehidupan masyarakat Dukuh Paruk, sebuah perkampungan miskin dan terpencil di pedalaman Jawa yang melestarikan warisan mistis nenek moyang Ki Secamenggala lewat kesenian ronggeng. Ketika pedukuhan terancam kehilangan identitas budayanya, Srintil, seorang gadis yatim piatu yang jelita, terpilih dirasuki indang ronggeng. Menjadi ronggeng mengharuskan Srintil merelakan kehormatan dirinya lewat tradisi bukak-klambu, sebuah kenyataan pahit yang menghancurkan hati Rasus, sahabat masa kecil yang mencintainya dengan tulus. Rasus memilih pergi meninggalkan desa dan menjadi prajurit militer, sementara Srintil terperangkap dalam kemegahan semu, eksploitasi nafsu, dan pusaran huru-hara politik 1965 yang meluluhlantakkan Dukuh Paruk.',
+            ],
+            [
+                'category' => 'Fiksi',
+                'judul' => 'Azzamine',
+                'pengarang' => 'Sophie Aulia',
+                'penerbit' => 'Bukune',
+                'tahun_terbit' => '2022',
+                'stok' => 6,
+                'sampul' => 'covers/azzamine.jpg',
+                'sinopsis' => 'Mengisahkan tentang perjalanan cinta dan komitmen antara Raden Azzam Al-Baihaqi, seorang pemuda religius, santun, dan penuh kelembutan, dengan Haura Jasmine, gadis berjiwa bebas, tomboi, dan ceplas-ceplos yang belum siap dengan konsep perjodohan. Pertemuan tak terduga yang berawal dari rencana perjodohan kedua keluarga ini menghadirkan benturan kepribadian yang kontras. Namun, alih-alih memaksa, Azzam memperlakukan Jasmine dengan penuh kesabaran, penghargaan, dan kehangatan tutur kata tanpa pernah menuntutnya berubah secara instan. Sikap teduh dan ketulusan Azzam perlahan meluluhkan keraguan serta rasa bimbang dalam hati Jasmine, mengubah skeptisisme perjodohan menjadi perjalanan mendewasakan diri dan memahami arti cinta yang diridhai.',
+            ],
+            [
+                'category' => 'Fiksi',
+                'judul' => 'Hujan',
+                'pengarang' => 'Tere Liye',
+                'penerbit' => 'Gramedia Pustaka Utama',
+                'tahun_terbit' => '2016',
+                'stok' => 8,
+                'sampul' => 'covers/hujan.png',
+                'sinopsis' => 'Berlatar di dunia masa depan tahun 2042 hingga 2050 yang serba canggih setelah Bumi porak-poranda oleh letusan gunung berapi purba yang memicu bencana global dahsyat. Novel ini mengikuti kisah hidup Lail, seorang gadis yang kehilangan kedua orang tuanya dalam bencana tersebut, dan Esok (Soke Bahtera), pemuda jenius yang menyelamatkan nyawa Lail. Di tengah pemulihan peradaban, kemajuan teknologi rekayasa cuaca, dan kepindahan manusia ke koloni luar angkasa, jalinan persahabatan manis antara Lail dan Esok terbentur oleh jarak, teknologi, dan rahasia takdir. Ketika Lail dihadapkan pada pilihan untuk menghapus seluruh memori kenangan pahitnya tentang hujan dan cinta di fasilitas modifikasi ingatan mutakhir, ia menyadari bahwa cinta sejati bukanlah tentang melupakan rasa sakit, melainkan tentang penerimaan dan keikhlasan.',
+            ],
+            [
+                'category' => 'Fiksi',
+                'judul' => 'Dikta dan Hukum',
+                'pengarang' => 'Dhia\'an Farah',
+                'penerbit' => 'Asoka x Loveable',
+                'tahun_terbit' => '2021',
+                'stok' => 5,
+                'sampul' => 'covers/dikta-dan-hukum.png',
+                'sinopsis' => 'Mengangkat kisah penuh haru tentang persahabatan masa kecil yang bertransformasi menjadi ikatan cinta mendalam antara Dikta, seorang mahasiswa tingkat akhir fakultas hukum yang tampan, pintar, dingin namun berhati hangat, dengan Nadhira, siswi SMA tingkat akhir yang ceroboh, pemalas, dan manja. Mengikuti wasiat dan perjodohan keluarga, Dikta dengan sabar membimbing dan menjadi mentor belajar bagi Nadhira agar bisa menembus perguruan tinggi impian. Namun, di balik kepedulian dan kelembutannya menjaga Nadhira, Dikta menyimpan rahasia besar yang memilukan tentang vonis penyakit ginjal kronis stadium akhir yang menggerogoti tubuhnya dan waktu hidupnya yang kian menipis. Kisah cinta yang terikat oleh pasal-pasal komitmen, pengorbanan, dan keikhlasan melepaskan orang terkasih.',
+            ],
+            [
+                'category' => 'Fiksi',
+                'judul' => 'Malioboro at Midnight',
+                'pengarang' => 'Skysphire',
+                'penerbit' => 'Bukune',
+                'tahun_terbit' => '2023',
+                'stok' => 7,
+                'sampul' => 'covers/malioboro-at-midnight.png',
+                'sinopsis' => 'Berlatar di sudut magis kota Yogyakarta dan temaram lampu jalanan Malioboro di tengah malam. Mengisahkan Serafia Els Maple (Sera), seorang gadis yang merasa patah hati, kesepian, dan tersesat di tengah rumitnya ekspektasi hidup serta hubungan masa lalu yang melukainya. Takdir mempertemukannya secara tak sengaja di tengah malam Malioboro dengan Malioboro Hartigan (Malio), seorang pemuda lokal yang ramah, hangat, dan apa adanya. Bersama Malio, Sera diajak berkeliling menikmati sudut-sudut syahdu kota Jogja, belajar melihat kehidupan dari sudut pandang yang lebih jujur dan sederhana, hingga perlahan menemukan kembali rasa percaya diri dan ketenangan batin yang sempat hilang. Kisah romansa manis bernuansa hangat tentang penyembuhan luka batin (healing), penerimaan diri, dan kehangatan kota Yogyakarta.',
+            ],
+            [
+                'category' => 'Fiksi',
+                'judul' => 'Hello, Cello.',
+                'pengarang' => 'Nadia Ristivani',
+                'penerbit' => 'Bukune',
+                'tahun_terbit' => '2023',
+                'stok' => 6,
+                'sampul' => 'covers/hello-cello.png',
+                'sinopsis' => 'Sebuah novel romansa remaja bernuansa segar dan penuh warna yang menceritakan dinamika hubungan antara Marcello Jonathan (Cello), pemuda populer berparas memikat dengan gaya hidup santai dan reputasi playboy di kampusnya, dengan Helga, mahasiswi yang tegas, mandiri, realistis, dan tidak mudah terbuai oleh pesona pria mana pun. Bermula dari interaksi tak terduga yang dipenuhi adu mulut dan taruhan gengsi, Cello mendapati dirinya justru terpikat pada kepribadian Helga yang tangguh dan apa adanya. Di balik sikap cuek dan santainya, Cello perlahan membuka sisi rapuh dan beban masa lalunya kepada Helga. Kisah cinta manis tentang bagaimana ketulusan, pendewasaan diri, dan saling menerima kekurangan mampu mengubah perspektif seseorang tentang cinta dan masa depan.',
             ],
 
             // Non-Fiksi (5 Buku)
@@ -337,6 +387,73 @@ class BookSeeder extends Seeder
                 'sampul' => 'covers/aku-ini-binatang-jalang.jpg',
                 'sinopsis' => 'Antologi puisi terlengkap karya pelopor Angkatan \'45 dan legenda sastra modern Indonesia, Chairil Anwar. Buku ini memuat karya-karya revolusioner seperti "Aku", "Krawang-Bekasi", "Diponegoro", "Doa", "Senja di Pelabuhan Kecil", dan "Derai-Derai Cemara". Dengan pilihan kata yang bertenaga, lugas, dan menolak kepalsuan estetika feodal, sajak-sajak Chairil memancarkan semangat vitalitas kemerdekaan, pemberontakan terhadap penindasan, keberanian mengambil risiko, serta kejujuran eksistensial menghadapi kesunyian dan maut. Sebuah monumen kesusastraan Indonesia yang terus menginspirasi generasi demi generasi untuk hidup berani, bebas, dan bermartabat.',
             ],
+
+            // Buku Baru Populer & Pelajaran (5 Buku)
+            [
+                'category' => 'Fiksi',
+                'judul' => '3726 MDPL',
+                'pengarang' => 'Nurwina Sari',
+                'penerbit' => 'Romancious',
+                'tahun_terbit' => '2024',
+                'stok' => 5,
+                'sampul' => 'covers/3726-mdpl.jpg',
+                'sinopsis' => 'Berlatar pesona megah Gunung Rinjani dengan ketinggian 3726 MDPL, novel ini mengisahkan perjalanan cinta dan pendewasaan Rangga Raja, seorang mahasiswa Fakultas Kehutanan yang gemar mendaki gunung. Selama empat tahun, Rangga setia memendam rasa kagum dan cinta dalam diam kepada adik tingkatnya yang jelita dan berprestasi, Andini Hangura. Di tengah perjuangan menyelesaikan skripsi dan dinamika kehidupan kampus, Rangga berusaha mengetuk hati Andini yang masih dibayangi trauma masa lalu yang belum usai. Sebuah kisah romansa New Adult yang sarat akan kesabaran, ketulusan, serta pencarian jati diri berlatar indahnya alam pegunungan Indonesia.',
+                'isbn' => '978-623-310-259-9',
+                'jumlah_halaman' => 280,
+                'lokasi_rak' => 'Rak F-3',
+            ],
+            [
+                'category' => 'Sastra',
+                'judul' => 'Seporsi Mie Ayam Sebelum Mati',
+                'pengarang' => 'Brian Khrisna',
+                'penerbit' => 'Grasindo',
+                'tahun_terbit' => '2025',
+                'stok' => 4,
+                'sampul' => 'covers/seporsi-mie-ayam-sebelum-mati.png',
+                'sinopsis' => 'Mengisahkan tentang Ale, seorang pria berusia 37 tahun yang berpostur tubuh bongsor dan telah kenyang menghadapi penolakan sosial serta perundungan sejak belia. Dihantam depresi akut dan merasa eksistensinya tidak lagi memiliki arti, Ale berniat mengakhiri hidupnya dalam kurun waktu 24 jam. Namun saat hendak menelan obat, ia teringat aturan makan sebelum minum obat. Ale pun memutuskan bahwa keinginan terakhirnya adalah menikmati seporsi mie ayam lezat di kedai langganannya. Sialnya, kedai mie ayam tersebut justru tutup. Penundaan sepele ini membawa Ale ke dalam rangkaian pertemuan dan peristiwa tak terduga yang hangat, getir, namun menyentuh tentang pentingnya kesehatan mental, arti bertahan hidup, dan secercah harapan dari interaksi kemanusiaan yang sederhana.',
+                'isbn' => '978-602-05-3132-8',
+                'jumlah_halaman' => 216,
+                'lokasi_rak' => 'Rak S-1',
+            ],
+            [
+                'category' => 'Pendidikan',
+                'judul' => 'Cerdas Cergas Berbahasa dan Bersastra Indonesia Kelas X',
+                'pengarang' => 'Fadillah Tri Aulia & Sefi Indra Gumilar',
+                'penerbit' => 'Kemendikbudristek RI',
+                'tahun_terbit' => '2021',
+                'stok' => 10,
+                'sampul' => 'covers/cerdas-cergas-berbahasa-dan-bersastra-indonesia-kelas-x.png',
+                'sinopsis' => 'Buku teks utama pembelajaran Bahasa dan Sastra Indonesia untuk peserta didik SMA/SMK Kelas X yang disusun berdasarkan Kurikulum Merdeka oleh Pusat Perbukuan Kemendikbudristek. Buku ini dirancang untuk memandu siswa mengembangkan kecakapan berbahasa secara kreatif, kritis, dan komunikatif melalui kegiatan menyimak, membaca, memirsa, berbicara, serta menulis. Dilengkapi sajian teks autentik seperti laporan hasil observasi, teks anekdot, hikayat, negosiasi, debat, biografi, hingga puisi yang mengintegrasikan Profil Pelajar Pancasila dan literasi abad ke-21.',
+                'isbn' => '978-602-244-325-4',
+                'jumlah_halaman' => 232,
+                'lokasi_rak' => 'Rak P-2',
+            ],
+            [
+                'category' => 'Fiksi',
+                'judul' => 'Home Sweet Loan',
+                'pengarang' => 'Almira Bastari',
+                'penerbit' => 'Gramedia Pustaka Utama',
+                'tahun_terbit' => '2022',
+                'stok' => 6,
+                'sampul' => 'covers/home-sweet-loan.png',
+                'sinopsis' => 'Mengisahkan empat sahabat karib sejak masa SMA yang bekerja di Jakarta dan menginjak usia 31 tahun: Kaluna, Tanisha, Kamamiya, dan Danan. Sorotan utama tertuju pada Kaluna, pegawai bagian umum bergaji pas-pasan yang berjuang mati-matian menabung dan bekerja sampingan demi membeli rumah impian agar bisa mandiri dan keluar dari rumah keluarga besarnya. Di tengah beban finansial sebagai generasi roti lapis (sandwich generation), tekanan gengsi ibu kota, dan ekspektasi pernikahan mewah dari calon pasangan, novel ini memotret realitas kaum pekerja menengah metropolitan yang berjuang mencari definisi tempat bernaung dan cinta sejati dengan gaya metropop yang segar dan sangat relatable.',
+                'isbn' => '978-602-065-804-9',
+                'jumlah_halaman' => 312,
+                'lokasi_rak' => 'Rak F-5',
+            ],
+            [
+                'category' => 'Fiksi',
+                'judul' => 'Bandung After Rain',
+                'pengarang' => 'Wulan Nur Amalia',
+                'penerbit' => 'Black Swan Books',
+                'tahun_terbit' => '2024',
+                'stok' => 5,
+                'sampul' => 'covers/bandung-after-rain.png',
+                'sinopsis' => 'Berlatar sudut-sudut kota Bandung yang sejuk, syahdu, dan sarat memori, novel ini merajut kisah cinta antara Hemachandra (Hema) dan Rania Azalea (Ra) yang telah berpacaran selama hampir tujuh tahun. Tepat satu bulan menjelang peringatan hari jadi mereka, jalinan cinta tersebut kandas akibat kesalahan fatal yang dilakukan Hema. Hema harus melewati hari-hari kelam penuh penyesalan di sela-sela perjuangan menyelesaikan skripsi, ditemani hawa dingin Bandung setelah hujan yang membangkitkan kenangan. Di sisi lain, Rania berusaha berdamai dengan luka dan menutup pintu kesempatan kedua demi menghargai dirinya sendiri. Sebuah narasi emosional tentang penerimaan, pendewasaan diri (coming of age), dan makna kesetaraan dalam cinta.',
+                'isbn' => '978-623-10-3143-3',
+                'jumlah_halaman' => 284,
+                'lokasi_rak' => 'Rak F-4',
+            ],
         ];
 
         foreach ($bukuContoh as $index => $buku) {
@@ -350,14 +467,20 @@ class BookSeeder extends Seeder
             $book->sinopsis = $buku['sinopsis'];
 
             if ($isNew) {
-                $book->isbn = '978-'.rand(100000000, 999999999);
+                $book->isbn = $buku['isbn'] ?? ('978-'.rand(100000000, 999999999));
                 $book->stok = $buku['stok'];
-                $book->lokasi_rak = 'Rak '.chr(rand(65, 70)).'-'.rand(1, 10);
+                $book->lokasi_rak = $buku['lokasi_rak'] ?? ('Rak '.chr(rand(65, 70)).'-'.rand(1, 10));
                 $book->sampul = $buku['sampul'] ?? null;
-                $book->jumlah_halaman = rand(100, 500);
+                $book->jumlah_halaman = $buku['jumlah_halaman'] ?? rand(100, 500);
             } else {
                 if (isset($buku['sampul']) && empty($book->sampul)) {
                     $book->sampul = $buku['sampul'];
+                }
+                if (isset($buku['isbn']) && empty($book->isbn)) {
+                    $book->isbn = $buku['isbn'];
+                }
+                if (isset($buku['jumlah_halaman']) && empty($book->jumlah_halaman)) {
+                    $book->jumlah_halaman = $buku['jumlah_halaman'];
                 }
             }
 
