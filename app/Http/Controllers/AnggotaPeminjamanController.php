@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Loan;
+use Illuminate\Http\Request;
 
 class AnggotaPeminjamanController extends Controller
 {
@@ -17,9 +17,9 @@ class AnggotaPeminjamanController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Loan::with('book')
-                     ->where('user_id', auth()->id())
-                     ->orderByDesc('created_at');
+        $query = Loan::with(['book.category'])
+            ->where('user_id', auth()->id())
+            ->orderByDesc('created_at');
 
         // Filter status
         if ($request->filled('status')) {

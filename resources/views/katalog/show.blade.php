@@ -61,10 +61,12 @@
 
             <div class="card border-0 shadow-sm rounded-4 mb-4" style="background-color: var(--putih); border: 1px solid var(--cream-200) !important;">
                 <div class="card-body p-4">
-                    <h5 class="fw-bold mb-3" style="color: var(--green-900);">Sinopsis</h5>
-                    <p class="card-text" style="color: var(--teks-lembut); line-height: 1.8;">
+                    <h5 class="fw-bold mb-3 d-flex align-items-center gap-2" style="color: var(--green-900);">
+                        <i class="bi bi-file-earmark-text text-warning"></i> Sinopsis Buku
+                    </h5>
+                    <div class="card-text" style="color: var(--teks-lembut); line-height: 1.85; text-align: justify; white-space: pre-line; font-size: 0.98rem;">
                         {{ $book->sinopsis ?: 'Belum ada sinopsis untuk buku ini.' }}
-                    </p>
+                    </div>
                 </div>
             </div>
 

@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Loan;
 use App\Models\Book;
+use App\Models\Loan;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class PeminjamanController extends Controller
 {
@@ -23,7 +23,7 @@ class PeminjamanController extends Controller
     public function index(Request $request)
     {
         $query = Loan::with(['user', 'book'])
-                     ->orderByDesc('created_at');
+            ->orderByDesc('created_at');
 
         // Filter status
         if ($request->filled('status')) {
@@ -37,12 +37,13 @@ class PeminjamanController extends Controller
         // Pencarian nama anggota atau judul buku
         if ($request->filled('cari')) {
             $cari = $request->cari;
-            $query->where(function ($q) use ($cari) {
-                $q->whereHas('user', function ($u) use ($cari) {
-                    $u->where('name', 'ilike', "%{$cari}%")
-                      ->orWhere('nis_nip', 'ilike', "%{$cari}%");
-                })->orWhereHas('book', function ($b) use ($cari) {
-                    $b->where('judul', 'ilike', "%{$cari}%");
+            $operator = $query->getConnection()->getDriverName() === 'pgsql' ? 'ilike' : 'like';
+            $query->where(function ($q) use ($cari, $operator) {
+                $q->whereHas('user', function ($u) use ($cari, $operator) {
+                    $u->where('name', $operator, "%{$cari}%")
+                        ->orWhere('nis_nip', $operator, "%{$cari}%");
+                })->orWhereHas('book', function ($b) use ($cari, $operator) {
+                    $b->where('judul', $operator, "%{$cari}%");
                 });
             });
         }
@@ -51,10 +52,10 @@ class PeminjamanController extends Controller
 
         // Statistik ringkas
         $stats = [
-            'total'       => Loan::count(),
-            'dipinjam'    => Loan::dipinjam()->count(),
-            'dikembalikan'=> Loan::dikembalikan()->count(),
-            'terlambat'   => Loan::terlambat()->count(),
+            'total' => Loan::count(),
+            'dipinjam' => Loan::dipinjam()->count(),
+            'dikembalikan' => Loan::dikembalikan()->count(),
+            'terlambat' => Loan::terlambat()->count(),
         ];
 
         return view('admin.peminjaman.index', compact('peminjaman', 'stats'));
@@ -66,13 +67,13 @@ class PeminjamanController extends Controller
     public function create()
     {
         $anggota = User::where('role', 'anggota')
-                       ->where('status', 'aktif')
-                       ->orderBy('name')
-                       ->get();
+            ->where('status', 'aktif')
+            ->orderBy('name')
+            ->get();
 
         $buku = Book::where('stok', '>', 0)
-                    ->orderBy('judul')
-                    ->get();
+            ->orderBy('judul')
+            ->get();
 
         return view('admin.peminjaman.create', compact('anggota', 'buku'));
     }
@@ -93,14 +94,14 @@ class PeminjamanController extends Controller
 
         // Validasi stok
         if ($book->stok <= 0) {
-            return back()->with('error', 'Stok buku "' . $book->judul . '" habis.')->withInput();
+            return back()->with('error', 'Stok buku "'.$book->judul.'" habis.')->withInput();
         }
 
         // Validasi: anggota sudah meminjam buku yang sama dan belum dikembalikan
         $sudahPinjam = Loan::where('user_id', $request->user_id)
-                           ->where('book_id', $request->book_id)
-                           ->where('status', 'dipinjam')
-                           ->exists();
+            ->where('book_id', $request->book_id)
+            ->where('status', 'dipinjam')
+            ->exists();
 
         if ($sudahPinjam) {
             return back()->with('error', 'Anggota masih meminjam buku ini.')->withInput();
@@ -110,11 +111,11 @@ class PeminjamanController extends Controller
 
         // Buat peminjaman
         Loan::create([
-            'user_id'        => $request->user_id,
-            'book_id'        => $request->book_id,
+            'user_id' => $request->user_id,
+            'book_id' => $request->book_id,
             'tanggal_pinjam' => $tanggalPinjam,
-            'batas_kembali'  => $tanggalPinjam->copy()->addDays(7),
-            'status'         => 'dipinjam',
+            'batas_kembali' => $tanggalPinjam->copy()->addDays(7),
+            'status' => 'dipinjam',
         ]);
 
         // Kurangi stok buku
@@ -157,8 +158,8 @@ class PeminjamanController extends Controller
         // Update status peminjaman
         $peminjaman->update([
             'tanggal_kembali' => $tanggalKembali,
-            'denda'           => $denda,
-            'status'          => 'dikembalikan',
+            'denda' => $denda,
+            'status' => 'dikembalikan',
         ]);
 
         // Tambah stok buku
@@ -166,7 +167,7 @@ class PeminjamanController extends Controller
 
         $pesan = 'Buku berhasil dikembalikan.';
         if ($denda > 0) {
-            $pesan .= ' Denda keterlambatan: Rp' . number_format($denda, 0, ',', '.');
+            $pesan .= ' Denda keterlambatan: Rp'.number_format($denda, 0, ',', '.');
         }
 
         return redirect()

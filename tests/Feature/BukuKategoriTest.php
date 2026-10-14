@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Book;
 use App\Models\Category;
+use App\Models\Loan;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -149,7 +150,26 @@ class BukuKategoriTest extends TestCase
         $this->get('/katalog')->assertOk()->assertSee('Laskar Pelangi')->assertSee('Doraemon');
         $this->get('/katalog?q=LASKAR')->assertOk()->assertSee('Laskar Pelangi')->assertDontSee('Doraemon');
         $this->get('/katalog?q=fujiko')->assertOk()->assertSee('Doraemon')->assertDontSee('Laskar Pelangi');
-        $this->get('/katalog?kategori=' . $komik->id)->assertOk()->assertSee('Doraemon')->assertDontSee('Laskar Pelangi');
+        $this->get('/katalog?kategori='.$komik->id)->assertOk()->assertSee('Doraemon')->assertDontSee('Laskar Pelangi');
         $this->get("/katalog/{$novel->id}")->assertOk()->assertSee('Laskar Pelangi')->assertSee('Andrea Hirata');
+    }
+
+    public function test_anggota_dapat_melihat_sampul_buku_di_halaman_peminjaman_saya(): void
+    {
+        $anggota = User::factory()->create(['role' => 'anggota', 'status' => 'aktif']);
+        $buku = $this->buku(['sampul' => 'covers/laskar-pelangi.jpg']);
+
+        Loan::create([
+            'user_id' => $anggota->id,
+            'book_id' => $buku->id,
+            'tanggal_pinjam' => now()->subDays(2),
+            'batas_kembali' => now()->addDays(5),
+            'status' => 'dipinjam',
+        ]);
+
+        $this->actingAs($anggota)->get('/anggota/peminjaman')
+            ->assertOk()
+            ->assertSee('Laskar Pelangi')
+            ->assertSee('storage/covers/laskar-pelangi.jpg');
     }
 }

@@ -108,8 +108,23 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="fw-semibold" style="font-size:0.88rem;">{{ $loan->book->judul ?? '-' }}</div>
-                                        <div style="font-size:0.75rem; color: var(--teks-lembut);">{{ $loan->book->pengarang ?? '' }}</div>
+                                        <div class="d-flex align-items-center gap-2">
+                                            @if(!empty($loan->book?->sampul))
+                                                <img src="{{ asset('storage/' . $loan->book->sampul) }}"
+                                                     alt="Cover"
+                                                     class="rounded shadow-sm flex-shrink-0"
+                                                     style="width: 34px; height: 48px; object-fit: cover; object-position: center top; border: 1px solid var(--cream-200);">
+                                            @else
+                                                <div class="d-flex align-items-center justify-content-center rounded text-center flex-shrink-0"
+                                                     style="width: 34px; height: 48px; background: var(--gradient-green); color: var(--cream-50); font-size: 0.8rem;">
+                                                    <i class="bi bi-book"></i>
+                                                </div>
+                                            @endif
+                                            <div>
+                                                <div class="fw-semibold" style="font-size:0.88rem;">{{ $loan->book->judul ?? '-' }}</div>
+                                                <div style="font-size:0.75rem; color: var(--teks-lembut);">{{ $loan->book->pengarang ?? '' }}</div>
+                                            </div>
+                                        </div>
                                     </td>
                                     <td style="white-space:nowrap;">{{ $loan->tanggal_pinjam->format('d/m/Y') }}</td>
                                     <td style="white-space:nowrap;">{{ $loan->batas_kembali->format('d/m/Y') }}</td>

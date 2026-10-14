@@ -159,19 +159,23 @@
                 @foreach($bukuTerbaru as $buku)
                 <div class="col">
                     <div class="book-card">
-                        <div class="book-cover-container">
-                            @if(!empty($buku->sampul))
-                                <img src="{{ asset('storage/' . $buku->sampul) }}" alt="{{ $buku->judul }}" class="book-cover">
-                            @else
-                                <div class="book-cover-placeholder">
-                                    <i class="bi bi-book"></i>
-                                    <span>Tanpa Sampul</span>
-                                </div>
-                            @endif
-                        </div>
+                        <a href="{{ route('katalog.show', $buku->id) }}" class="text-decoration-none">
+                            <div class="book-cover-container">
+                                @if(!empty($buku->sampul))
+                                    <img src="{{ asset('storage/' . $buku->sampul) }}" alt="{{ $buku->judul }}" class="book-cover">
+                                @else
+                                    <div class="book-cover-placeholder">
+                                        <i class="bi bi-book"></i>
+                                        <span>Tanpa Sampul</span>
+                                    </div>
+                                @endif
+                            </div>
+                        </a>
                         <div class="card-body">
                             <div class="book-info-top">
-                                <div class="book-title">{{ $buku->judul }}</div>
+                                <a href="{{ route('katalog.show', $buku->id) }}" class="text-decoration-none text-reset">
+                                    <div class="book-title">{{ $buku->judul }}</div>
+                                </a>
                                 <div class="book-author">
                                     <i class="bi bi-person-fill me-1"></i> {{ $buku->pengarang }}
                                 </div>
@@ -233,19 +237,23 @@
             @foreach($bukuPopuler as $buku)
             <div class="col">
                 <div class="book-card">
-                    <div class="book-cover-container">
-                        @if(!empty($buku->sampul))
-                            <img src="{{ asset('storage/' . $buku->sampul) }}" alt="{{ $buku->judul }}" class="book-cover">
-                        @else
-                            <div class="book-cover-placeholder">
-                                <i class="bi bi-book"></i>
-                                <span>Tanpa Sampul</span>
-                            </div>
-                        @endif
-                    </div>
+                    <a href="{{ route('katalog.show', $buku->id) }}" class="text-decoration-none">
+                        <div class="book-cover-container">
+                            @if(!empty($buku->sampul))
+                                <img src="{{ asset('storage/' . $buku->sampul) }}" alt="{{ $buku->judul }}" class="book-cover">
+                            @else
+                                <div class="book-cover-placeholder">
+                                    <i class="bi bi-book"></i>
+                                    <span>Tanpa Sampul</span>
+                                </div>
+                            @endif
+                        </div>
+                    </a>
                     <div class="card-body">
                         <div class="book-info-top">
-                            <div class="book-title">{{ $buku->judul }}</div>
+                            <a href="{{ route('katalog.show', $buku->id) }}" class="text-decoration-none text-reset">
+                                <div class="book-title">{{ $buku->judul }}</div>
+                            </a>
                             <div class="book-author">
                                 <i class="bi bi-person-fill me-1"></i> {{ $buku->pengarang }}
                             </div>

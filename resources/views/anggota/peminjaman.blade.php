@@ -44,19 +44,45 @@
                 <div class="col-12">
                     <div class="card-perpus">
                         <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
-                                <div class="d-flex gap-3 flex-grow-1">
-                                    {{-- Ikon Buku --}}
-                                    <div class="d-flex align-items-center justify-content-center rounded"
-                                         style="width:56px;height:56px;background:var(--gradient-green);color:var(--cream-50);font-size:1.3rem;flex-shrink:0;border-radius: var(--radius-md);box-shadow:var(--shadow-sm);">
-                                        <i class="bi bi-book"></i>
+                            <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
+                                <div class="d-flex gap-3 flex-grow-1 align-items-center">
+                                    {{-- Sampul Buku --}}
+                                    <div class="flex-shrink-0">
+                                        @if(!empty($loan->book?->sampul))
+                                            <a href="{{ route('katalog.show', $loan->book->id) }}" class="d-block text-decoration-none">
+                                                <img src="{{ asset('storage/' . $loan->book->sampul) }}"
+                                                     alt="Cover {{ $loan->book->judul }}"
+                                                     class="rounded-3 shadow-sm"
+                                                     style="width: 65px; height: 95px; object-fit: cover; object-position: center top; border: 1px solid var(--cream-200); transition: transform 0.2s ease, box-shadow 0.2s ease;"
+                                                     onmouseover="this.style.transform='scale(1.04)'; this.style.boxShadow='var(--shadow-md)';"
+                                                     onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='var(--shadow-sm)';">
+                                            </a>
+                                        @else
+                                            <div class="d-flex flex-column align-items-center justify-content-center rounded-3 shadow-sm text-center"
+                                                 style="width: 65px; height: 95px; background: var(--gradient-green); color: var(--cream-50); border: 1px solid var(--cream-200);">
+                                                <i class="bi bi-book" style="font-size: 1.5rem; margin-bottom: 2px;"></i>
+                                                <span style="font-size: 0.65rem; opacity: 0.85;">Tanpa Sampul</span>
+                                            </div>
+                                        @endif
                                     </div>
-                                    <div>
-                                        <h6 class="mb-1" style="font-family: var(--font-judul); font-size:1rem; font-weight:700;">
-                                            {{ $loan->book->judul ?? 'Buku tidak ditemukan' }}
+
+                                    <div class="flex-grow-1">
+                                        @if($loan->book?->category)
+                                            <span class="badge px-2 py-1 rounded-pill mb-1" style="background: rgba(212, 162, 76, 0.15); color: var(--gold-800); font-size: 0.72rem; border: 1px solid rgba(212, 162, 76, 0.3);">
+                                                {{ $loan->book->category->nama }}
+                                            </span>
+                                        @endif
+                                        <h6 class="mb-1" style="font-family: var(--font-judul); font-size: 1.05rem; font-weight: 700;">
+                                            @if($loan->book)
+                                                <a href="{{ route('katalog.show', $loan->book->id) }}" class="text-decoration-none text-reset" style="color: var(--green-900);">
+                                                    {{ $loan->book->judul }}
+                                                </a>
+                                            @else
+                                                Buku tidak ditemukan
+                                            @endif
                                         </h6>
                                         <div style="font-size:0.85rem; color: var(--teks-lembut); margin-bottom:0.5rem;">
-                                            {{ $loan->book->pengarang ?? '' }}
+                                            <i class="bi bi-person-fill me-1"></i>{{ $loan->book->pengarang ?? '-' }}
                                         </div>
                                         <div class="d-flex flex-wrap gap-3" style="font-size:0.82rem; color: var(--teks-lembut);">
                                             <span>
@@ -76,7 +102,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="text-end">
+                                <div class="text-end d-flex flex-column align-items-end justify-content-center">
                                     @if($loan->status === 'dipinjam' && $loan->isTerlambat())
                                         <span class="badge badge-status badge-terlambat">
                                             <i class="bi bi-exclamation-triangle me-1"></i> Terlambat
@@ -93,6 +119,14 @@
                                                 Denda: Rp{{ number_format($loan->denda, 0, ',', '.') }}
                                             </div>
                                         @endif
+                                    @endif
+
+                                    @if($loan->book)
+                                    <div class="mt-2">
+                                        <a href="{{ route('katalog.show', $loan->book->id) }}" class="btn btn-sm btn-outline-hijau rounded-pill py-1 px-3" style="font-size: 0.78rem;">
+                                            <i class="bi bi-eye me-1"></i> Detail Buku
+                                        </a>
+                                    </div>
                                     @endif
                                 </div>
                             </div>

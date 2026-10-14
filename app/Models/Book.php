@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -14,7 +13,6 @@ class Book extends Model
      * CRUD lengkap dikerjakan oleh Nasya.
      * Hayfa menambahkan relasi loans dan helper stok.
      */
-
     protected $fillable = [
         'category_id',
         'judul',
@@ -61,10 +59,11 @@ class Book extends Model
     public function scopeSearch($query, $term)
     {
         if ($term) {
-            $query->where(function($q) use ($term) {
-                $q->where('judul', 'ilike', "%{$term}%")
-                  ->orWhere('pengarang', 'ilike', "%{$term}%")
-                  ->orWhere('isbn', 'ilike', "%{$term}%");
+            $operator = $query->getConnection()->getDriverName() === 'pgsql' ? 'ilike' : 'like';
+            $query->where(function ($q) use ($term, $operator) {
+                $q->where('judul', $operator, "%{$term}%")
+                    ->orWhere('pengarang', $operator, "%{$term}%")
+                    ->orWhere('isbn', $operator, "%{$term}%");
             });
         }
 
