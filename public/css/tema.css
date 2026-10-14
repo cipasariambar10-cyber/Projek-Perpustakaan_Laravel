@@ -192,6 +192,7 @@ a:hover {
     font-size: 1.6rem;
     background: var(--gradient-gold);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     filter: drop-shadow(0 2px 4px rgba(212, 162, 76, 0.3));
 }
@@ -790,6 +791,7 @@ a:hover {
     );
     background-size: 250% 100%;
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: wordReveal 0.75s cubic-bezier(0.16, 1, 0.3, 1) var(--delay, 0s) both,
                textShimmer 6s ease-in-out infinite 0.8s;
@@ -1719,6 +1721,7 @@ section.section-krem {
     font-size: 3.2rem;
     background: var(--gradient-gold);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     filter: drop-shadow(0 4px 8px rgba(212, 162, 76, 0.35));
     margin-bottom: 0.75rem;
@@ -2176,6 +2179,7 @@ section.section-krem {
     display: block;
     background: var(--gradient-gold);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
