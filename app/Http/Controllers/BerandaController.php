@@ -2,42 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class BerandaController extends Controller
 {
     /**
      * Halaman beranda publik.
-     * Menampilkan buku terbaru & populer (jika tabel books sudah ada).
+     * Menampilkan buku terbaru & populer.
      */
     public function index()
     {
         $bukuTerbaru = collect();
         $bukuPopuler = collect();
         $totalBuku = 0;
-        $totalAnggota = User::where('role', 'anggota')->where('status', 'aktif')->count();
+        $totalAnggota = 0;
 
         try {
-            if (\Schema::hasTable('books')) {
-                $bukuTerbaru = \DB::table('books')->orderByDesc('created_at')->limit(10)->get();
-                $totalBuku = \DB::table('books')->count();
-
-                // Buku populer berdasarkan jumlah peminjaman
-                if (\Schema::hasTable('loans')) {
-                    $bukuPopuler = \DB::table('books')
-                        ->leftJoin('loans', 'books.id', '=', 'loans.book_id')
-                        ->select('books.*', \DB::raw('COUNT(loans.id) as total_pinjam'))
-                        ->groupBy('books.id')
-                        ->orderByDesc('total_pinjam')
-                        ->limit(10)
-                        ->get();
-                } else {
-                    $bukuPopuler = \DB::table('books')->inRandomOrder()->limit(10)->get();
-                }
-            }
-        } catch (\Exception $e) {
-            // Tabel books belum dibuat oleh Nasya
+            $totalAnggota = User::where('role', 'anggota')->where('status', 'aktif')->count();
+            $totalBuku = Book::count();
+            $bukuTerbaru = Book::orderByDesc('created_at')->limit(10)->get();
+            $bukuPopuler = Book::withCount('loans')
+                ->orderByDesc('loans_count')
+                ->limit(10)
+                ->get();
+        } catch (\Throwable $e) {
+            // Fallback jika belum ada data atau tabel
         }
 
         return view('beranda', compact('bukuTerbaru', 'bukuPopuler', 'totalBuku', 'totalAnggota'));

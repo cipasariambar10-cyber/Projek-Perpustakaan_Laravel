@@ -62,7 +62,7 @@
                            id="nis_nip"
                            name="nis_nip"
                            value="{{ old('nis_nip') }}"
-                           placeholder="Nomor induk">
+                           placeholder="Contoh: 0071234567">
                     @error('nis_nip')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror

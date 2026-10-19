@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Book;
+use App\Models\Loan;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
@@ -16,28 +16,32 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        $userStats = User::toBase()->selectRaw("
+            COUNT(CASE WHEN role = 'anggota' THEN 1 END) as total_anggota,
+            COUNT(CASE WHEN role = 'anggota' AND status = 'aktif' THEN 1 END) as anggota_aktif,
+            COUNT(CASE WHEN role = 'admin' THEN 1 END) as total_admin
+        ")->first();
+
         $stats = [
-            'total_anggota' => User::where('role', 'anggota')->count(),
-            'anggota_aktif' => User::where('role', 'anggota')->where('status', 'aktif')->count(),
-            'total_admin' => User::where('role', 'admin')->count(),
-            'total_buku' => 0,
+            'total_anggota' => (int) ($userStats->total_anggota ?? 0),
+            'anggota_aktif' => (int) ($userStats->anggota_aktif ?? 0),
+            'total_admin' => (int) ($userStats->total_admin ?? 0),
+            'total_buku' => Book::count(),
             'total_dipinjam' => 0,
             'total_terlambat' => 0,
         ];
 
-        // Total buku (milik Nasya)
-        $stats['total_buku'] = Book::count();
-
-        // Load statistik peminjaman jika tabel sudah ada (milik Hayfa)
         try {
-            if (\Schema::hasTable('loans')) {
-                $stats['total_dipinjam'] = \DB::table('loans')->where('status', 'dipinjam')->count();
-                $stats['total_terlambat'] = \DB::table('loans')
-                    ->where('status', 'dipinjam')
-                    ->whereDate('batas_kembali', '<', now()->toDateString())
-                    ->count();
+            $loanStats = Loan::toBase()->selectRaw("
+                COUNT(CASE WHEN status = 'dipinjam' THEN 1 END) as total_dipinjam,
+                COUNT(CASE WHEN status = 'dipinjam' AND batas_kembali < CURRENT_DATE THEN 1 END) as total_terlambat
+            ")->first();
+
+            if ($loanStats) {
+                $stats['total_dipinjam'] = (int) ($loanStats->total_dipinjam ?? 0);
+                $stats['total_terlambat'] = (int) ($loanStats->total_terlambat ?? 0);
             }
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             // Tabel belum ada
         }
 

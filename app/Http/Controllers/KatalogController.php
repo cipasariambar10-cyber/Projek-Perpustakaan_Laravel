@@ -13,7 +13,7 @@ class KatalogController extends Controller
     public function index(Request $request)
     {
         $kategoriList = Category::orderBy('nama', 'asc')->get();
-        
+
         $booksQuery = Book::with('category')
             ->search($request->q)
             ->kategori($request->kategori)
@@ -50,7 +50,7 @@ class KatalogController extends Controller
         $user = auth()->user();
 
         // Cek jika belum login
-        if (!$user) {
+        if (! $user) {
             return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu untuk meminjam buku.');
         }
 
@@ -90,7 +90,7 @@ class KatalogController extends Controller
 
             return redirect()->route('anggota.peminjaman')->with('success', 'Buku berhasil dipinjam! Silakan ambil di perpustakaan.');
         } catch (\Exception $e) {
-            return back()->with('error', 'Gagal meminjam buku. Silakan coba lagi. Error: ' . $e->getMessage());
+            return back()->with('error', 'Gagal meminjam buku. Silakan coba lagi. Error: '.$e->getMessage());
         }
     }
 }

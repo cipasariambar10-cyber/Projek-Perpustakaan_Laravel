@@ -50,12 +50,21 @@ class PeminjamanController extends Controller
 
         $peminjaman = $query->paginate(15)->withQueryString();
 
-        // Statistik ringkas
+        // Statistik ringkas (1 query agregasi)
+        $statsRaw = Loan::toBase()
+            ->selectRaw("
+                COUNT(*) as total,
+                COUNT(CASE WHEN status = 'dipinjam' THEN 1 END) as dipinjam,
+                COUNT(CASE WHEN status = 'dikembalikan' THEN 1 END) as dikembalikan,
+                COUNT(CASE WHEN status = 'dipinjam' AND batas_kembali < CURRENT_DATE THEN 1 END) as terlambat
+            ")
+            ->first();
+
         $stats = [
-            'total' => Loan::count(),
-            'dipinjam' => Loan::dipinjam()->count(),
-            'dikembalikan' => Loan::dikembalikan()->count(),
-            'terlambat' => Loan::terlambat()->count(),
+            'total' => (int) ($statsRaw->total ?? 0),
+            'dipinjam' => (int) ($statsRaw->dipinjam ?? 0),
+            'dikembalikan' => (int) ($statsRaw->dikembalikan ?? 0),
+            'terlambat' => (int) ($statsRaw->terlambat ?? 0),
         ];
 
         return view('admin.peminjaman.index', compact('peminjaman', 'stats'));

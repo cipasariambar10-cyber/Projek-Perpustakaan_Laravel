@@ -67,7 +67,7 @@
                             <div class="col-md-4 mb-3">
                                 <label for="nis_nip" class="form-label">NISN</label>
                                 <input type="text" class="form-control @error('nis_nip') is-invalid @enderror"
-                                       id="nis_nip" name="nis_nip" value="{{ old('nis_nip') }}">
+                                       id="nis_nip" name="nis_nip" value="{{ old('nis_nip') }}" placeholder="Contoh: 0071234567">
                                 @error('nis_nip')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -77,7 +77,7 @@
                             <div class="col-md-4 mb-3">
                                 <label for="kelas" class="form-label">Kelas</label>
                                 <input type="text" class="form-control @error('kelas') is-invalid @enderror"
-                                       id="kelas" name="kelas" value="{{ old('kelas') }}" placeholder="XII IPA 1">
+                                       id="kelas" name="kelas" value="{{ old('kelas') }}" placeholder="Contoh: XII PPLG 1">
                                 @error('kelas')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

@@ -11,16 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if (!Schema::hasTable('categories')) {
+        if (! Schema::hasTable('categories')) {
             Schema::create('categories', function (Blueprint $table) {
                 $table->id();
                 $table->string('nama');
                 $table->string('slug')->unique();
                 $table->timestamps();
             });
+        } elseif (! Schema::hasColumn('categories', 'slug')) {
+            Schema::table('categories', function (Blueprint $table) {
+                $table->string('slug')->nullable()->unique();
+            });
         }
 
-        if (!Schema::hasTable('books')) {
+        if (! Schema::hasTable('books')) {
             Schema::create('books', function (Blueprint $table) {
                 $table->id();
                 $table->foreignId('category_id')->nullable()->constrained('categories')->nullOnDelete();
@@ -38,22 +42,22 @@ return new class extends Migration
             });
         } else {
             Schema::table('books', function (Blueprint $table) {
-                if (!Schema::hasColumn('books', 'category_id')) {
+                if (! Schema::hasColumn('books', 'category_id')) {
                     $table->foreignId('category_id')->nullable()->constrained('categories')->nullOnDelete();
                 }
-                if (!Schema::hasColumn('books', 'isbn')) {
+                if (! Schema::hasColumn('books', 'isbn')) {
                     $table->string('isbn')->nullable();
                 }
-                if (!Schema::hasColumn('books', 'stok')) {
+                if (! Schema::hasColumn('books', 'stok')) {
                     $table->integer('stok')->default(0);
                 }
-                if (!Schema::hasColumn('books', 'sampul')) {
+                if (! Schema::hasColumn('books', 'sampul')) {
                     $table->string('sampul')->nullable();
                 }
-                if (!Schema::hasColumn('books', 'sinopsis')) {
+                if (! Schema::hasColumn('books', 'sinopsis')) {
                     $table->text('sinopsis')->nullable();
                 }
-                if (!Schema::hasColumn('books', 'jumlah_halaman')) {
+                if (! Schema::hasColumn('books', 'jumlah_halaman')) {
                     $table->integer('jumlah_halaman')->nullable();
                 }
             });
