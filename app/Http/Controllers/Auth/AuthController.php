@@ -44,11 +44,11 @@ class AuthController extends Controller
             // Redirect berdasarkan role
             if (auth()->user()->isAdmin()) {
                 return redirect()->intended(route('admin.dashboard'))
-                    ->with('success', 'Selamat datang, ' . auth()->user()->name . '!');
+                    ->with('success', 'Selamat datang, '.auth()->user()->name.'!');
             }
 
             return redirect()->intended('/')
-                ->with('success', 'Selamat datang, ' . auth()->user()->name . '!');
+                ->with('success', 'Selamat datang, '.auth()->user()->name.'!');
         }
 
         return back()
@@ -75,7 +75,9 @@ class AuthController extends Controller
             'password' => ['required', 'confirmed', Password::min(8)],
             'nis_nip' => ['nullable', 'string', 'max:30'],
             'kelas' => ['nullable', 'string', 'max:20'],
-            'no_hp' => ['nullable', 'string', 'max:20'],
+            'no_hp' => ['nullable', 'digits_between:10,13'],
+        ], [
+            'no_hp.digits_between' => 'Nomor telepon harus berupa angka dengan panjang antara 10 hingga 13 digit.',
         ]);
 
         $user = User::create([
@@ -92,7 +94,7 @@ class AuthController extends Controller
         Auth::login($user);
 
         return redirect('/')
-            ->with('success', 'Registrasi berhasil! Selamat datang, ' . $user->name . '.');
+            ->with('success', 'Registrasi berhasil! Selamat datang, '.$user->name.'.');
     }
 
     /**

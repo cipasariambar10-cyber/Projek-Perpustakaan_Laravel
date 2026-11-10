@@ -8,7 +8,7 @@
 <div class="auth-wrapper">
     <div class="auth-card">
         <div class="auth-logo">
-            <i class="bi bi-book-half"></i>
+            <img src="{{ asset('images/logo-lentera-icon.png') }}" alt="Logo Lentera Pustaka" class="auth-logo-img mb-3">
             <h2>Selamat Datang</h2>
             <p>Masuk ke akun perpustakaan Anda</p>
         </div>

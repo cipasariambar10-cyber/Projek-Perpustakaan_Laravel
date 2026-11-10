@@ -86,8 +86,9 @@
                             {{-- No HP --}}
                             <div class="col-md-4 mb-3">
                                 <label for="no_hp" class="form-label">No. HP</label>
-                                <input type="text" class="form-control @error('no_hp') is-invalid @enderror"
-                                       id="no_hp" name="no_hp" value="{{ old('no_hp') }}" placeholder="08xxxxxxxxxx">
+                                <input type="tel" inputmode="numeric" minlength="10" maxlength="13" pattern="[0-9]{10,13}"
+                                       class="form-control @error('no_hp') is-invalid @enderror"
+                                       id="no_hp" name="no_hp" value="{{ old('no_hp') }}" placeholder="08xxxxxxxxxx (10-13 digit)">
                                 @error('no_hp')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

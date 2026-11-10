@@ -21,8 +21,8 @@ class BerandaController extends Controller
         try {
             $totalAnggota = User::where('role', 'anggota')->where('status', 'aktif')->count();
             $totalBuku = Book::count();
-            $bukuTerbaru = Book::orderByDesc('created_at')->limit(10)->get();
-            $bukuPopuler = Book::withCount('loans')
+            $bukuTerbaru = Book::with('category')->orderByDesc('created_at')->limit(10)->get();
+            $bukuPopuler = Book::with('category')->withCount('loans')
                 ->orderByDesc('loans_count')
                 ->limit(10)
                 ->get();

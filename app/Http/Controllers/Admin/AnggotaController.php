@@ -22,8 +22,8 @@ class AnggotaController extends Controller
         if ($search = $request->get('search')) {
             $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('email', 'like', "%{$search}%")
-                  ->orWhere('nis_nip', 'like', "%{$search}%");
+                    ->orWhere('email', 'like', "%{$search}%")
+                    ->orWhere('nis_nip', 'like', "%{$search}%");
             });
         }
 
@@ -62,8 +62,10 @@ class AnggotaController extends Controller
             'role' => ['required', Rule::in(['admin', 'anggota'])],
             'nis_nip' => ['nullable', 'string', 'max:30'],
             'kelas' => ['nullable', 'string', 'max:20'],
-            'no_hp' => ['nullable', 'string', 'max:20'],
+            'no_hp' => ['nullable', 'digits_between:10,13'],
             'status' => ['required', Rule::in(['aktif', 'nonaktif'])],
+        ], [
+            'no_hp.digits_between' => 'Nomor telepon harus berupa angka dengan panjang antara 10 hingga 13 digit.',
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
@@ -110,6 +112,7 @@ class AnggotaController extends Controller
     public function edit(User $anggotum)
     {
         $anggota = $anggotum;
+
         return view('admin.anggota.edit', compact('anggota'));
     }
 
@@ -127,8 +130,10 @@ class AnggotaController extends Controller
             'role' => ['required', Rule::in(['admin', 'anggota'])],
             'nis_nip' => ['nullable', 'string', 'max:30'],
             'kelas' => ['nullable', 'string', 'max:20'],
-            'no_hp' => ['nullable', 'string', 'max:20'],
+            'no_hp' => ['nullable', 'digits_between:10,13'],
             'status' => ['required', Rule::in(['aktif', 'nonaktif'])],
+        ], [
+            'no_hp.digits_between' => 'Nomor telepon harus berupa angka dengan panjang antara 10 hingga 13 digit.',
         ]);
 
         // Hanya update password jika diisi

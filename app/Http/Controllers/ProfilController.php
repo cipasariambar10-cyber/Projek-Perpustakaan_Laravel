@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
@@ -16,6 +15,7 @@ class ProfilController extends Controller
     public function edit()
     {
         $user = auth()->user();
+
         return view('profil.edit', compact('user'));
     }
 
@@ -31,7 +31,9 @@ class ProfilController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'nis_nip' => ['nullable', 'string', 'max:30'],
             'kelas' => ['nullable', 'string', 'max:20'],
-            'no_hp' => ['nullable', 'string', 'max:20'],
+            'no_hp' => ['nullable', 'digits_between:10,13'],
+        ], [
+            'no_hp.digits_between' => 'Nomor telepon harus berupa angka dengan panjang antara 10 hingga 13 digit.',
         ]);
 
         $user->update($validated);

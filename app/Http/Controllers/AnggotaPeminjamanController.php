@@ -34,6 +34,14 @@ class AnggotaPeminjamanController extends Controller
 
         $peminjaman = $query->paginate(10)->withQueryString();
 
-        return view('anggota.peminjaman', compact('peminjaman'));
+        $userId = auth()->id();
+        $stats = [
+            'total' => Loan::where('user_id', $userId)->count(),
+            'dipinjam' => Loan::where('user_id', $userId)->where('status', 'dipinjam')->count(),
+            'dikembalikan' => Loan::where('user_id', $userId)->where('status', 'dikembalikan')->count(),
+            'terlambat' => Loan::where('user_id', $userId)->terlambat()->count(),
+        ];
+
+        return view('anggota.peminjaman', compact('peminjaman', 'stats'));
     }
 }

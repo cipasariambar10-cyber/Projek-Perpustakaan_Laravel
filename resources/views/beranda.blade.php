@@ -81,60 +81,87 @@
     </div>
 </section>
 
-{{-- ===== STATISTIK SINGKAT ===== --}}
-<section id="section-stats" class="py-4 stat-section" style="background: var(--cream-100); border-bottom: 1px solid var(--cream-200); box-shadow: inset 0 -4px 12px rgba(31,64,55,0.03);">
+{{-- ===== STATISTIK SINGKAT (FLOATING EMERALD-GOLD LUXURY RIBBON) ===== --}}
+<section id="section-stats" class="stat-ribbon-wrapper">
     <div class="container">
-        <div class="row g-3 text-center">
-            <div class="col-6 col-md-3">
-                <div class="py-2">
-                    <div class="stat-count-up" data-target="{{ $totalBuku }}" style="font-family: var(--font-judul); font-size: 1.8rem; font-weight: 900; color: var(--hijau-tua);">
-                        {{ number_format($totalBuku) }}
+        <div class="stat-luxury-dock">
+            <div class="stat-dock-shimmer" aria-hidden="true"></div>
+            <div class="row g-0 align-items-center">
+                {{-- 1. Koleksi Buku --}}
+                <div class="col-6 col-lg-3 stat-dock-col">
+                    <div class="stat-dock-item">
+                        <div class="stat-dock-ring">
+                            <i class="bi bi-journal-bookmark-fill"></i>
+                        </div>
+                        <div class="stat-dock-text">
+                            <div class="d-flex align-items-baseline gap-1">
+                                <span class="stat-count-up stat-dock-val" data-target="{{ $totalBuku }}">{{ number_format($totalBuku) }}</span>
+                                <span class="stat-dock-plus">+</span>
+                            </div>
+                            <span class="stat-dock-lbl">Koleksi Buku</span>
+                        </div>
                     </div>
-                    <div style="font-size: 0.85rem; color: var(--teks-lembut);">Koleksi Buku</div>
                 </div>
-            </div>
-            <div class="col-6 col-md-3">
-                <div class="py-2">
-                    <div class="stat-count-up" data-target="{{ $totalAnggota }}" style="font-family: var(--font-judul); font-size: 1.8rem; font-weight: 900; color: var(--hijau-tua);">
-                        {{ number_format($totalAnggota) }}
+
+                {{-- 2. Anggota Aktif --}}
+                <div class="col-6 col-lg-3 stat-dock-col">
+                    <div class="stat-dock-item">
+                        <div class="stat-dock-ring">
+                            <i class="bi bi-people-fill"></i>
+                        </div>
+                        <div class="stat-dock-text">
+                            <div class="d-flex align-items-baseline gap-1">
+                                <span class="stat-count-up stat-dock-val" data-target="{{ $totalAnggota }}">{{ number_format($totalAnggota) }}</span>
+                                <span class="stat-dock-plus">Aktif</span>
+                            </div>
+                            <span class="stat-dock-lbl">Anggota Terdaftar</span>
+                        </div>
                     </div>
-                    <div style="font-size: 0.85rem; color: var(--teks-lembut);">Anggota Aktif</div>
                 </div>
-            </div>
-            <div class="col-6 col-md-3">
-                <div class="py-2">
-                    <div style="font-family: var(--font-judul); font-size: 1.8rem; font-weight: 900; color: var(--emas);">
-                        <i class="bi bi-clock stat-icon-wobble"></i>
+
+                {{-- 3. Jam Real-time --}}
+                <div class="col-6 col-lg-3 stat-dock-col">
+                    <div class="stat-dock-item">
+                        <div class="stat-dock-ring ring-gold">
+                            <i class="bi bi-clock-fill stat-icon-wobble"></i>
+                        </div>
+                        <div class="stat-dock-text">
+                            <div class="d-flex align-items-center gap-2">
+                                <span id="realtime-clock" class="stat-dock-clock">Loading...</span>
+                                <span class="live-pulse-badge"><span class="live-dot"></span>LIVE</span>
+                            </div>
+                            <span class="stat-dock-lbl">Waktu Operasional</span>
+                        </div>
                     </div>
-                    <div id="realtime-clock" style="font-size: 0.85rem; color: var(--teks-lembut); font-weight: bold;">Loading... WIB</div>
                 </div>
-            </div>
-            <div class="col-6 col-md-3">
-                <div class="py-2">
-                    <div style="font-family: var(--font-judul); font-size: 1.8rem; font-weight: 900; color: var(--emas);">
-                        <i class="bi bi-calendar-check stat-icon-wobble"></i>
+
+                {{-- 4. Tanggal Real-time --}}
+                <div class="col-6 col-lg-3 stat-dock-col">
+                    <div class="stat-dock-item">
+                        <div class="stat-dock-ring ring-gold">
+                            <i class="bi bi-calendar2-week-fill stat-icon-wobble"></i>
+                        </div>
+                        <div class="stat-dock-text">
+                            <span id="realtime-date" class="stat-dock-date">Loading...</span>
+                            <span class="stat-dock-lbl">Kalender Akademik</span>
+                        </div>
                     </div>
-                    <div id="realtime-date" style="font-size: 0.85rem; color: var(--teks-lembut); font-weight: bold;">Loading...</div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-{{-- Lengkungan Pemisah Halus: Statistik ke Buku Terbaru --}}
-<div class="section-curve-divider" aria-hidden="true" style="background: var(--cream-100); margin-bottom: -1px;">
-    <svg viewBox="0 0 1440 40" fill="none" preserveAspectRatio="none">
-        <path d="M0,0 C360,32 1080,32 1440,0 L1440,40 L0,40 Z" fill="#FDFBF6"></path>
-    </svg>
-</div>
-
 {{-- ===== BUKU TERBARU ===== --}}
 <section class="py-5 section-buku-terbaru position-relative">
-    {{-- Glow Blur Tipis --}}
+    {{-- Aurora Mesh, Mandala Berputar, & Bintang Emas Melayang --}}
     <div class="section-glow-orbs" aria-hidden="true">
         <div class="section-glow-1"></div>
         <div class="section-glow-2"></div>
+        <div class="section-decor-ring section-ring-left"></div>
+        <div class="section-decor-ring section-ring-right"></div>
     </div>
+    <div class="section-ambient-particles" aria-hidden="true"></div>
 
     <div class="container position-relative" style="z-index: 2;">
         <div class="d-flex justify-content-between align-items-start mb-4">
@@ -158,34 +185,7 @@
             <div class="row books-grid-row">
                 @foreach($bukuTerbaru as $buku)
                 <div class="col">
-                    <div class="book-card">
-                        <a href="{{ route('katalog.show', $buku->id) }}" class="text-decoration-none">
-                            <div class="book-cover-container">
-                                @if(!empty($buku->sampul))
-                                    <img src="{{ asset('storage/' . $buku->sampul) }}" alt="{{ $buku->judul }}" class="book-cover">
-                                @else
-                                    <div class="book-cover-placeholder">
-                                        <i class="bi bi-book"></i>
-                                        <span>Tanpa Sampul</span>
-                                    </div>
-                                @endif
-                            </div>
-                        </a>
-                        <div class="card-body">
-                            <div class="book-info-top">
-                                <a href="{{ route('katalog.show', $buku->id) }}" class="text-decoration-none text-reset">
-                                    <div class="book-title">{{ $buku->judul }}</div>
-                                </a>
-                                <div class="book-author">
-                                    <i class="bi bi-person-fill me-1"></i> {{ $buku->pengarang }}
-                                </div>
-                            </div>
-                            <div class="book-meta">
-                                <span><i class="bi bi-calendar3 me-1"></i> {{ $buku->tahun_terbit ?? '-' }}</span>
-                                <span><i class="bi bi-box me-1"></i> Stok: {{ $buku->stok ?? 0 }}</span>
-                            </div>
-                        </div>
-                    </div>
+                    <x-book-card :book="$buku" :showActions="false" />
                 </div>
                 @endforeach
             </div>
@@ -209,11 +209,14 @@
 {{-- ===== BUKU POPULER ===== --}}
 @if($bukuPopuler->count() > 0)
 <section class="py-5 section-buku-populer position-relative">
-    {{-- Glow Blur Tipis --}}
+    {{-- Glow Blur, Partikel Kunang-Kunang Emas, & Cincin Geometris --}}
     <div class="section-glow-orbs" aria-hidden="true">
         <div class="section-glow-1"></div>
         <div class="section-glow-2"></div>
+        <div class="section-decor-ring section-ring-left"></div>
+        <div class="section-decor-ring section-ring-right"></div>
     </div>
+    <div class="section-ambient-particles" aria-hidden="true"></div>
 
     <div class="container position-relative" style="z-index: 2;">
         <div class="d-flex justify-content-between align-items-start mb-4">
@@ -236,34 +239,7 @@
         <div class="row books-grid-row">
             @foreach($bukuPopuler as $buku)
             <div class="col">
-                <div class="book-card">
-                    <a href="{{ route('katalog.show', $buku->id) }}" class="text-decoration-none">
-                        <div class="book-cover-container">
-                            @if(!empty($buku->sampul))
-                                <img src="{{ asset('storage/' . $buku->sampul) }}" alt="{{ $buku->judul }}" class="book-cover">
-                            @else
-                                <div class="book-cover-placeholder">
-                                    <i class="bi bi-book"></i>
-                                    <span>Tanpa Sampul</span>
-                                </div>
-                            @endif
-                        </div>
-                    </a>
-                    <div class="card-body">
-                        <div class="book-info-top">
-                            <a href="{{ route('katalog.show', $buku->id) }}" class="text-decoration-none text-reset">
-                                <div class="book-title">{{ $buku->judul }}</div>
-                            </a>
-                            <div class="book-author">
-                                <i class="bi bi-person-fill me-1"></i> {{ $buku->pengarang }}
-                            </div>
-                        </div>
-                        <div class="book-meta">
-                            <span><i class="bi bi-calendar3 me-1"></i> {{ $buku->tahun_terbit ?? '-' }}</span>
-                            <span><i class="bi bi-box me-1"></i> Stok: {{ $buku->stok ?? 0 }}</span>
-                        </div>
-                    </div>
-                </div>
+                <x-book-card :book="$buku" :showActions="false" />
             </div>
             @endforeach
         </div>

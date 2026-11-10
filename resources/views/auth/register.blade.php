@@ -8,7 +8,7 @@
 <div class="auth-wrapper">
     <div class="auth-card" style="max-width: 520px;">
         <div class="auth-logo">
-            <i class="bi bi-person-plus-fill"></i>
+            <img src="{{ asset('images/logo-lentera-icon.png') }}" alt="Logo Lentera Pustaka" class="auth-logo-img mb-3">
             <h2>Daftar Akun</h2>
             <p>Buat akun untuk mulai meminjam buku</p>
         </div>
@@ -90,15 +90,19 @@
                 <label for="no_hp" class="form-label">
                     <i class="bi bi-phone me-1"></i> No. HP
                 </label>
-                <input type="text"
+                <input type="tel"
+                       inputmode="numeric"
                        class="form-control @error('no_hp') is-invalid @enderror"
                        id="no_hp"
                        name="no_hp"
                        value="{{ old('no_hp') }}"
-                       placeholder="08xxxxxxxxxx">
-                @error('no_hp')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
+                       minlength="10"
+                       maxlength="13"
+                       pattern="[0-9]{10,13}"
+                       placeholder="08xxxxxxxxxx (10-13 digit angka)">
+                <div id="no_hp_warning" class="invalid-feedback" style="{{ $errors->has('no_hp') ? 'display: block;' : 'display: none;' }}">
+                    {{ $errors->first('no_hp') ?: 'Nomor telepon harus terdiri dari 10 hingga 13 digit angka.' }}
+                </div>
             </div>
 
             {{-- Password --}}
@@ -143,3 +147,50 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const noHpInput = document.getElementById('no_hp');
+    const noHpWarning = document.getElementById('no_hp_warning');
+    if (!noHpInput || !noHpWarning) return;
+
+    function validatePhone() {
+        // Hanya izinkan karakter angka
+        const cleaned = noHpInput.value.replace(/[^0-9]/g, '');
+        if (noHpInput.value !== cleaned) {
+            noHpInput.value = cleaned;
+        }
+
+        const len = cleaned.length;
+        if (len === 0) {
+            noHpInput.classList.remove('is-invalid', 'is-valid');
+            noHpInput.setCustomValidity('');
+            noHpWarning.style.display = 'none';
+        } else if (len < 10) {
+            noHpInput.classList.add('is-invalid');
+            noHpInput.classList.remove('is-valid');
+            const msg = 'Nomor telepon terlalu pendek (' + len + ' digit). Minimal 10 digit angka.';
+            noHpWarning.textContent = msg;
+            noHpWarning.style.display = 'block';
+            noHpInput.setCustomValidity(msg);
+        } else if (len > 13) {
+            noHpInput.classList.add('is-invalid');
+            noHpInput.classList.remove('is-valid');
+            const msg = 'Nomor telepon terlalu panjang (' + len + ' digit). Maksimal 13 digit angka.';
+            noHpWarning.textContent = msg;
+            noHpWarning.style.display = 'block';
+            noHpInput.setCustomValidity(msg);
+        } else {
+            noHpInput.classList.remove('is-invalid');
+            noHpInput.classList.add('is-valid');
+            noHpInput.setCustomValidity('');
+            noHpWarning.style.display = 'none';
+        }
+    }
+
+    noHpInput.addEventListener('input', validatePhone);
+    noHpInput.addEventListener('blur', validatePhone);
+});
+</script>
+@endpush

@@ -18,8 +18,23 @@
     {{-- Bootstrap Icons --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
 
+    {{-- Favicon --}}
+    <link rel="icon" type="image/png" href="{{ asset('images/logo-lentera-icon.png') }}">
+
     {{-- Tema Perpustakaan (variabel warna) --}}
     <link href="{{ asset('css/tema.css') }}" rel="stylesheet">
+
+    {{-- Inisialisasi Mode Gelap (Cegah kedipan layar / FOUC) --}}
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('lentera_theme');
+            if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
 
     @stack('styles')
 </head>
@@ -28,17 +43,24 @@
     {{-- ===== NAVBAR ===== --}}
     <nav class="navbar navbar-expand-lg navbar-perpus sticky-top">
         <div class="container">
+            {{-- Kiri: Brand Logo Elegan --}}
             <a class="navbar-brand" href="{{ url('/') }}">
-                <i class="bi bi-lamp-fill brand-icon"></i>
-                Lentera Pustaka
+                <span class="brand-logo-wrap">
+                    <img src="{{ asset('images/logo-lentera-icon.png') }}" alt="Logo Lentera Pustaka" class="brand-logo-img">
+                </span>
+                <span class="brand-text-wrap">
+                    <span class="brand-title">Lentera</span>
+                    <span class="brand-subtitle">Pustaka</span>
+                </span>
             </a>
 
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarMain">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                {{-- Tengah: Kapsul Navigasi Utama (Centered Pill Dock) --}}
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 nav-pill-dock">
                     <li class="nav-item">
                         <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="{{ url('/') }}">
                             <i class="bi bi-house-door me-1"></i> Beranda
@@ -46,7 +68,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ request()->is('katalog*') ? 'active' : '' }}" href="{{ route('katalog.index') }}">
-                            <i class="bi bi-search me-1"></i> Katalog
+                            <i class="bi bi-compass me-1"></i> Katalog
                         </a>
                     </li>
 
@@ -55,7 +77,7 @@
                             {{-- Menu Admin --}}
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle {{ request()->is('admin*') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown">
-                                    <i class="bi bi-gear me-1"></i> Kelola
+                                    <i class="bi bi-grid-1x2 me-1"></i> Kelola
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
@@ -107,31 +129,40 @@
                     @endauth
                 </ul>
 
-                {{-- Bagian Kanan Navbar --}}
-                <ul class="navbar-nav ms-auto">
+                {{-- Kanan: Toggle Mode Gelap & Kapsul Profil / Auth --}}
+                <ul class="navbar-nav align-items-lg-center gap-lg-2">
+                    {{-- Tombol Toggle Mode Gelap --}}
+                    <li class="nav-item mb-2 mb-lg-0">
+                        <button type="button" class="btn-theme-toggle" id="themeToggleBtn" title="Ganti Mode Gelap / Terang" aria-label="Ganti Mode Gelap / Terang">
+                            <i class="bi bi-moon-stars-fill icon-moon"></i>
+                            <i class="bi bi-sun-fill icon-sun"></i>
+                        </button>
+                    </li>
                     @guest
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">
+                            <a class="nav-link nav-login-btn" href="{{ route('login') }}">
                                 <i class="bi bi-box-arrow-in-right me-1"></i> Masuk
                             </a>
                         </li>
-                        <li class="nav-item ms-lg-2">
-                            <a class="btn btn-emas btn-sm px-3" href="{{ route('register') }}">
+                        <li class="nav-item">
+                            <a class="btn btn-emas btn-sm px-3 rounded-pill" href="{{ route('register') }}">
                                 <i class="bi bi-person-plus me-1"></i> Daftar
                             </a>
                         </li>
                     @else
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" role="button" data-bs-toggle="dropdown">
-                                <div class="d-flex align-items-center justify-content-center rounded-circle"
-                                     style="width:34px;height:34px;background:var(--gradient-green);color:var(--cream-50);font-size:0.85rem;font-weight:600;box-shadow:var(--shadow-sm);">
+                            <a class="nav-link dropdown-toggle nav-user-pill" href="#" role="button" data-bs-toggle="dropdown">
+                                <div class="nav-user-avatar">
                                     {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
                                 </div>
-                                <span class="d-none d-lg-inline">{{ auth()->user()->name }}</span>
+                                <div class="nav-user-info d-none d-lg-flex">
+                                    <span class="nav-user-name">{{ Str::limit(auth()->user()->name, 18) }}</span>
+                                    <span class="nav-user-role">{{ auth()->user()->isAdmin() ? 'Administrator' : 'Anggota Aktif' }}</span>
+                                </div>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li class="px-3 py-2">
-                                    <div class="fw-semibold" style="font-size:0.9rem;">{{ auth()->user()->name }}</div>
+                                    <div class="fw-semibold dropdown-user-name" style="font-size:0.9rem; color: var(--teks);">{{ auth()->user()->name }}</div>
                                     <div class="text-muted" style="font-size:0.78rem;">{{ auth()->user()->email }}</div>
                                     <span class="badge badge-status mt-1 {{ auth()->user()->isAdmin() ? 'badge-admin' : 'badge-anggota' }}">
                                         {{ ucfirst(auth()->user()->role) }}
@@ -209,36 +240,102 @@
     @hasSection('hide_footer')
     @else
     <footer class="footer-perpus">
-        <div class="container">
-            <div class="row g-4">
-                <div class="col-lg-4">
-                    <h5><i class="bi bi-lamp-fill me-2" style="color: var(--gold-400);"></i>Lentera Pustaka</h5>
-                    <p style="font-size: 0.9rem; line-height: 1.8;">
-                        Sistem informasi perpustakaan sekolah untuk memudahkan pengelolaan buku,
-                        peminjaman, dan keanggotaan.
+        <div class="footer-glow-orb footer-glow-1" aria-hidden="true"></div>
+        <div class="footer-glow-orb footer-glow-2" aria-hidden="true"></div>
+
+        <div class="container position-relative" style="z-index: 2;">
+            <div class="row g-4 g-lg-5 justify-content-between">
+                {{-- Kolom 1: Brand & Deskripsi --}}
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-brand mb-3">
+                        <a href="{{ url('/') }}" class="d-inline-flex align-items-center text-decoration-none">
+                            <img src="{{ asset('images/logo-lentera-full.png') }}" alt="Lentera Pustaka" class="footer-logo-full">
+                        </a>
+                    </div>
+                    <p class="footer-desc mb-3">
+                        Sistem informasi perpustakaan sekolah modern untuk memudahkan penelusuran koleksi buku, sirkulasi peminjaman, dan pengelolaan keanggotaan secara digital.
                     </p>
+                    <div class="footer-quote-pill">
+                        <i class="bi bi-stars me-1" style="color: var(--gold-400);"></i>
+                        <span>"Membuka Jendela Dunia Lewat Literasi"</span>
+                    </div>
                 </div>
-                <div class="col-lg-4">
-                    <h5>Tautan Cepat</h5>
-                    <ul class="list-unstyled" style="font-size: 0.9rem; line-height: 2;">
-                        <li><a href="{{ url('/') }}"><i class="bi bi-chevron-right me-1" style="font-size:0.7rem;"></i> Beranda</a></li>
-                        <li><a href="{{ route('katalog.index') }}"><i class="bi bi-chevron-right me-1" style="font-size:0.7rem;"></i> Katalog Buku</a></li>
-                        @if(Route::has('info.perpustakaan'))
-                        <li><a href="{{ route('info.perpustakaan') }}"><i class="bi bi-chevron-right me-1" style="font-size:0.7rem;"></i> Info Perpustakaan</a></li>
+
+                {{-- Kolom 2: Navigasi / Tautan Cepat --}}
+                <div class="col-lg-3 col-md-6 ps-lg-4">
+                    <h5 class="footer-heading">Tautan Cepat</h5>
+                    <ul class="list-unstyled footer-links mb-0">
+                        <li>
+                            <a href="{{ url('/') }}">
+                                <span class="footer-link-bullet"><i class="bi bi-chevron-right"></i></span>
+                                <span>Beranda</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('katalog.index') }}">
+                                <span class="footer-link-bullet"><i class="bi bi-chevron-right"></i></span>
+                                <span>Katalog Buku</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.dashboard') }}">
+                                <span class="footer-link-bullet"><i class="bi bi-chevron-right"></i></span>
+                                <span>Dashboard Admin</span>
+                            </a>
+                        </li>
+                        @if(Route::has('admin.peminjaman.index'))
+                        <li>
+                            <a href="{{ route('admin.peminjaman.index') }}">
+                                <span class="footer-link-bullet"><i class="bi bi-chevron-right"></i></span>
+                                <span>Sirkulasi Peminjaman</span>
+                            </a>
+                        </li>
                         @endif
                     </ul>
                 </div>
-                <div class="col-lg-4">
-                    <h5>Kontak</h5>
-                    <ul class="list-unstyled" style="font-size: 0.9rem; line-height: 2;">
-                        <li><i class="bi bi-geo-alt me-2" style="color: var(--gold-400);"></i> Jl. Laladon No. 1</li>
-                        <li><i class="bi bi-clock me-2" style="color: var(--gold-400);"></i> Senin–Jumat: 07.00–15.00</li>
-                        <li><i class="bi bi-envelope me-2" style="color: var(--gold-400);"></i> perpus@gmail.com</li>
+
+                {{-- Kolom 3: Informasi Kontak & Jam Layanan --}}
+                <div class="col-lg-5 col-md-12">
+                    <h5 class="footer-heading">Informasi & Kontak</h5>
+                    <ul class="list-unstyled footer-contact-list mb-0">
+                        <li>
+                            <div class="footer-contact-icon">
+                                <i class="bi bi-geo-alt-fill"></i>
+                            </div>
+                            <div class="footer-contact-info">
+                                <span class="footer-contact-label">Alamat Perpustakaan</span>
+                                <span class="footer-contact-value">Jl. Laladon Baru No. 17, Ciomas, Bogor, Jawa Barat 16610</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="footer-contact-icon">
+                                <i class="bi bi-clock-fill"></i>
+                            </div>
+                            <div class="footer-contact-info">
+                                <span class="footer-contact-label">Jam Operasional</span>
+                                <span class="footer-contact-value">Senin – Jumat: 07.00 – 15.00 WIB</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="footer-contact-icon">
+                                <i class="bi bi-envelope-fill"></i>
+                            </div>
+                            <div class="footer-contact-info">
+                                <span class="footer-contact-label">E-mail</span>
+                                <a href="mailto:lenterapustaka@gmail.com" class="footer-contact-value text-decoration-none">lenterapustaka@gmail.com</a>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
-            <div class="footer-bottom">
-                &copy; {{ date('Y') }} Lentera Pustaka.
+
+            <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+                <div>
+                    &copy; {{ date('Y') }} <strong style="color: var(--gold-300); font-weight: 600;">Lentera Pustaka</strong> — Perpustakaan Sekolah. Hak Cipta Dilindungi.
+                </div>
+                <div class="footer-bottom-badge">
+                    <i class="bi bi-book-half me-1" style="color: var(--gold-400);"></i> Gerakan Literasi Sekolah Digital
+                </div>
             </div>
         </div>
     </footer>
@@ -247,7 +344,7 @@
     {{-- Bootstrap 5 JS --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    {{-- Auto-dismiss alerts --}}
+    {{-- Auto-dismiss alerts & Theme Toggle --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             setTimeout(function() {
@@ -256,6 +353,16 @@
                     bsAlert.close();
                 });
             }, 5000);
+
+            const themeBtn = document.getElementById('themeToggleBtn');
+            if (themeBtn) {
+                themeBtn.addEventListener('click', function() {
+                    const current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+                    const next = current === 'dark' ? 'light' : 'dark';
+                    document.documentElement.setAttribute('data-theme', next);
+                    localStorage.setItem('lentera_theme', next);
+                });
+            }
         });
     </script>
 

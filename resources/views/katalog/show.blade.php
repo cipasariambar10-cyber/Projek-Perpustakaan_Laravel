@@ -4,12 +4,22 @@
 @section('meta_description', Str::limit($book->sinopsis, 150))
 
 @section('content')
-<div class="container py-5 my-4" style="background: var(--cream-50); border: 1px solid var(--cream-200); border-radius: var(--radius-xl); box-shadow: var(--shadow-card);">
-    <!-- Breadcrumb -->
+<section class="section-buku-terbaru position-relative" style="min-height: 82vh;">
+    {{-- Aurora Mesh, Mandala Berputar, & Bintang Emas Melayang --}}
+    <div class="section-glow-orbs" aria-hidden="true">
+        <div class="section-glow-1"></div>
+        <div class="section-glow-2"></div>
+        <div class="section-decor-ring section-ring-left"></div>
+        <div class="section-decor-ring section-ring-right"></div>
+    </div>
+    <div class="section-ambient-particles" aria-hidden="true"></div>
+
+    <div class="container py-5 position-relative" style="z-index: 2;">
+        <!-- Breadcrumb -->
     <nav aria-label="breadcrumb" class="mb-4">
-        <ol class="breadcrumb">
+        <ol class="breadcrumb mb-0">
             <li class="breadcrumb-item"><a href="{{ route('katalog.index') }}" class="fw-medium text-decoration-none" style="color: var(--green-700);">Katalog</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{ Str::limit($book->judul, 30) }}</li>
+            <li class="breadcrumb-item active" aria-current="page" style="color: var(--teks-lembut);">{{ Str::limit($book->judul, 30) }}</li>
         </ol>
     </nav>
 
@@ -61,12 +71,10 @@
 
             <div class="card border-0 shadow-sm rounded-4 mb-4" style="background-color: var(--putih); border: 1px solid var(--cream-200) !important;">
                 <div class="card-body p-4">
-                    <h5 class="fw-bold mb-3 d-flex align-items-center gap-2" style="color: var(--green-900);">
+                    <h5 class="fw-bold mb-2 d-flex align-items-center gap-2" style="color: var(--green-900);">
                         <i class="bi bi-file-earmark-text text-warning"></i> Sinopsis Buku
                     </h5>
-                    <div class="card-text" style="color: var(--teks-lembut); line-height: 1.85; text-align: justify; white-space: pre-line; font-size: 0.98rem;">
-                        {{ $book->sinopsis ?: 'Belum ada sinopsis untuk buku ini.' }}
-                    </div>
+                    <div class="card-text" style="color: var(--teks-lembut); line-height: 1.85; text-align: justify; white-space: pre-line; font-size: 0.98rem;">{{ trim($book->sinopsis) ?: 'Belum ada sinopsis untuk buku ini.' }}</div>
                 </div>
             </div>
 
@@ -96,13 +104,6 @@
                     </div>
                 </div>
             </div>
-
-            <form action="{{ route('katalog.pinjam', $book->id) }}" method="POST">
-                @csrf
-                <button type="submit" class="btn btn-emas btn-lg px-5 py-3 rounded-pill fw-bold" {{ $book->stok <= 0 ? 'disabled' : '' }}>
-                    <i class="bi bi-bookmark-plus me-2"></i> Pinjam Buku Ini
-                </button>
-            </form>
         </div>
     </div>
 
@@ -123,5 +124,6 @@
             @endforeach
         </div>
     @endif
-</div>
+    </div>
+</section>
 @endsection
