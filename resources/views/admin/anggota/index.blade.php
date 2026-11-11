@@ -16,7 +16,7 @@
             {{-- Filter & Pencarian --}}
             <div class="card-perpus mb-4">
                 <div class="card-body py-3">
-                    <form method="GET" action="{{ route('admin.anggota.index') }}" class="row g-3 align-items-end">
+                    <form method="GET" action="{{ route('admin.anggota.index') }}" class="row g-3 align-items-end form-perpus">
                         <div class="col-md-4">
                             <label class="form-label" style="font-size:0.85rem;">Cari</label>
                             <div class="input-group">
@@ -91,9 +91,9 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td>{{ $a->nis_nip ?? '-' }}</td>
-                                    <td>{{ $a->kelas ?? '-' }}</td>
-                                    <td>{{ $a->no_hp ?? '-' }}</td>
+                                    <td style="white-space: nowrap;">{{ $a->nis_nip ?? '-' }}</td>
+                                    <td style="white-space: nowrap;">{{ $a->kelas ?? '-' }}</td>
+                                    <td style="white-space: nowrap;">{{ $a->no_hp ?? '-' }}</td>
                                     <td>
                                         <span class="badge badge-status {{ $a->role === 'admin' ? 'badge-admin' : 'badge-anggota' }}">
                                             {{ ucfirst($a->role) }}
@@ -140,14 +140,12 @@
                     </div>
 
                     {{-- Pagination --}}
-                    @if($anggota->hasPages())
-                    <div class="d-flex justify-content-between align-items-center px-3 py-3">
-                        <div class="text-lembut" style="font-size:0.85rem;">
-                            Menampilkan {{ $anggota->firstItem() }}–{{ $anggota->lastItem() }} dari {{ $anggota->total() }} data
+                    <div class="table-pagination-footer">
+                        <div class="pagination-info-text">
+                            Menampilkan <strong>{{ $anggota->firstItem() }}–{{ $anggota->lastItem() }}</strong> dari <strong>{{ $anggota->total() }}</strong> data anggota
                         </div>
                         {{ $anggota->links() }}
                     </div>
-                    @endif
 
                     @else
                     <div class="empty-state">

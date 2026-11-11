@@ -6,6 +6,11 @@
 
 @section('content')
 <div class="auth-wrapper">
+    <a href="{{ route('beranda') }}" class="btn-back-nav auth-back-top">
+        <span class="back-nav-icon"><i class="bi bi-arrow-left"></i></span>
+        <span>Kembali</span>
+    </a>
+
     <div class="auth-card">
         <div class="auth-logo">
             <img src="{{ asset('images/logo-lentera-icon.png') }}" alt="Logo Lentera Pustaka" class="auth-logo-img mb-3">

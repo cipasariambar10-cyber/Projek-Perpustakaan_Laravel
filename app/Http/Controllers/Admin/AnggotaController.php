@@ -37,7 +37,7 @@ class AnggotaController extends Controller
             $query->where('status', $status);
         }
 
-        $anggota = $query->orderBy('name')->paginate(15)->withQueryString();
+        $anggota = $query->orderBy('name')->paginate(6)->withQueryString();
 
         return view('admin.anggota.index', compact('anggota'));
     }
@@ -60,11 +60,12 @@ class AnggotaController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Password::min(8)],
             'role' => ['required', Rule::in(['admin', 'anggota'])],
-            'nis_nip' => ['nullable', 'string', 'max:30'],
+            'nis_nip' => ['nullable', 'digits:10'],
             'kelas' => ['nullable', 'string', 'max:20'],
             'no_hp' => ['nullable', 'digits_between:10,13'],
             'status' => ['required', Rule::in(['aktif', 'nonaktif'])],
         ], [
+            'nis_nip.digits' => 'NISN harus berupa angka dan terdiri dari tepat 10 digit.',
             'no_hp.digits_between' => 'Nomor telepon harus berupa angka dengan panjang antara 10 hingga 13 digit.',
         ]);
 
@@ -128,11 +129,12 @@ class AnggotaController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($anggota->id)],
             'password' => ['nullable', 'confirmed', Password::min(8)],
             'role' => ['required', Rule::in(['admin', 'anggota'])],
-            'nis_nip' => ['nullable', 'string', 'max:30'],
+            'nis_nip' => ['nullable', 'digits:10'],
             'kelas' => ['nullable', 'string', 'max:20'],
             'no_hp' => ['nullable', 'digits_between:10,13'],
             'status' => ['required', Rule::in(['aktif', 'nonaktif'])],
         ], [
+            'nis_nip.digits' => 'NISN harus berupa angka dan terdiri dari tepat 10 digit.',
             'no_hp.digits_between' => 'Nomor telepon harus berupa angka dengan panjang antara 10 hingga 13 digit.',
         ]);
 

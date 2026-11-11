@@ -48,7 +48,7 @@ class PeminjamanController extends Controller
             });
         }
 
-        $peminjaman = $query->paginate(15)->withQueryString();
+        $peminjaman = $query->paginate(5)->withQueryString();
 
         // Statistik ringkas (1 query agregasi)
         $statsRaw = Loan::toBase()
@@ -68,6 +68,84 @@ class PeminjamanController extends Controller
         ];
 
         return view('admin.peminjaman.index', compact('peminjaman', 'stats'));
+    }
+
+    /**
+     * Cetak laporan peminjaman & daftar buku berdasarkan rentang tanggal.
+     */
+    public function cetak(Request $request)
+    {
+        $request->validate([
+            'tanggal_mulai' => ['nullable', 'date'],
+            'tanggal_selesai' => ['nullable', 'date', 'after_or_equal:tanggal_mulai'],
+            'status' => ['nullable', 'in:dipinjam,dikembalikan,terlambat'],
+        ], [
+            'tanggal_selesai.after_or_equal' => 'Tanggal selesai harus sama atau setelah tanggal mulai.',
+        ]);
+
+        $tanggalMulai = $request->filled('tanggal_mulai')
+            ? Carbon::parse($request->tanggal_mulai)->startOfDay()
+            : null;
+        $tanggalSelesai = $request->filled('tanggal_selesai')
+            ? Carbon::parse($request->tanggal_selesai)->endOfDay()
+            : null;
+
+        $query = Loan::with(['user', 'book.category'])
+            ->orderBy('tanggal_pinjam')
+            ->orderBy('id');
+
+        if ($tanggalMulai) {
+            $query->whereDate('tanggal_pinjam', '>=', $tanggalMulai->toDateString());
+        }
+
+        if ($tanggalSelesai) {
+            $query->whereDate('tanggal_pinjam', '<=', $tanggalSelesai->toDateString());
+        }
+
+        if ($request->filled('status')) {
+            if ($request->status === 'terlambat') {
+                $query->terlambat();
+            } else {
+                $query->where('status', $request->status);
+            }
+        }
+
+        $peminjaman = $query->get();
+
+        // Rekap daftar buku yang dipinjam dalam rentang tanggal tersebut
+        $rekapBuku = $peminjaman
+            ->filter(fn (Loan $loan) => $loan->book !== null)
+            ->groupBy('book_id')
+            ->map(function ($items) {
+                $book = $items->first()->book;
+
+                return [
+                    'book' => $book,
+                    'total_dipinjam' => $items->count(),
+                    'masih_dipinjam' => $items->where('status', 'dipinjam')->count(),
+                    'sudah_kembali' => $items->where('status', 'dikembalikan')->count(),
+                ];
+            })
+            ->sortByDesc('total_dipinjam')
+            ->values();
+
+        // Ringkasan statistik pada periode laporan
+        $ringkasan = [
+            'total' => $peminjaman->count(),
+            'dipinjam' => $peminjaman->where('status', 'dipinjam')->count(),
+            'dikembalikan' => $peminjaman->where('status', 'dikembalikan')->count(),
+            'terlambat' => $peminjaman->filter(fn (Loan $l) => $l->status === 'dipinjam' && $l->isTerlambat())->count(),
+            'total_denda' => $peminjaman->sum(fn (Loan $l) => $l->status === 'dipinjam' ? $l->hitungDenda() : (int) $l->denda),
+            'total_judul_buku' => $rekapBuku->count(),
+        ];
+
+        return view('admin.peminjaman.cetak', compact(
+            'peminjaman',
+            'rekapBuku',
+            'ringkasan',
+            'tanggalMulai',
+            'tanggalSelesai'
+        ));
     }
 
     /**

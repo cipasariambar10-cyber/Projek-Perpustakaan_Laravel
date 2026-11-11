@@ -254,20 +254,62 @@
 </div>
 @endif
 
-{{-- ===== CTA SECTION ===== --}}
+{{-- ===== CTA SECTION (LUXURY MEMBERSHIP INVITATION) ===== --}}
 @guest
-<section class="py-5">
-    <div class="container">
-        <div class="cta-section text-center p-5 reveal-on-scroll">
-            <h2 style="font-family: var(--font-judul); color: var(--cream-50); font-size: 2.2rem; margin-bottom: 1rem; font-weight: 800;">
-                Siap Menjelajahi Perpustakaan?
-            </h2>
-            <p style="color: rgba(253, 251, 246, 0.9); font-size: 1.1rem; max-width: 540px; margin: 0 auto 1.75rem;">
-                Daftar sekarang dan mulai pinjam buku favoritmu. Gratis, praktis, dan mudah!
-            </p>
-            <a href="{{ route('register') }}" class="btn btn-emas btn-lg px-5 py-3" style="font-size: 1rem;">
-                <i class="bi bi-person-plus me-2"></i> Daftar Sekarang
-            </a>
+<section class="py-4 section-buku-terbaru position-relative">
+    <div class="container position-relative" style="z-index: 2;">
+        <div class="cta-luxury-card reveal-on-scroll">
+            {{-- Ornamen Cahaya & Cincin Geometris di Dalam Kartu CTA --}}
+            <div class="cta-glow-orb cta-orb-gold" aria-hidden="true"></div>
+            <div class="cta-glow-orb cta-orb-emerald" aria-hidden="true"></div>
+            <div class="cta-decor-ring cta-ring-1" aria-hidden="true"></div>
+            <div class="cta-decor-ring cta-ring-2" aria-hidden="true"></div>
+
+            <div class="cta-content-inner text-center position-relative" style="z-index: 3;">
+                <div class="mb-2">
+                    <span class="cta-badge-pill">
+                        <span class="cta-badge-dot"></span>
+                        <span>Keanggotaan Digital Perpustakaan</span>
+                    </span>
+                </div>
+
+                <h2 class="cta-luxury-title mb-2">
+                    Siap Menjelajahi <span class="hero-accent-shimmer">Dunia Literasi?</span>
+                </h2>
+
+                <p class="cta-luxury-desc mx-auto mb-3">
+                    Bergabunglah bersama komunitas pembaca <strong>Lentera Pustaka</strong>. Pinjam buku favoritmu, kelola riwayat bacaan, dan nikmati kemudahan sirkulasi digital.
+                </p>
+
+                {{-- 3 Keunggulan Singkat --}}
+                <div class="cta-perks-row d-flex justify-content-center flex-wrap gap-2 mb-3">
+                    <span class="cta-perk-item">
+                        <i class="bi bi-patch-check-fill"></i>
+                        <span>Pendaftaran Gratis</span>
+                    </span>
+                    <span class="cta-perk-item">
+                        <i class="bi bi-journal-bookmark-fill"></i>
+                        <span>Ratusan Koleksi Pilihan</span>
+                    </span>
+                    <span class="cta-perk-item">
+                        <i class="bi bi-lightning-charge-fill"></i>
+                        <span>Proses Pinjam Cepat</span>
+                    </span>
+                </div>
+
+                {{-- Tombol Aksi Utama & Sekunder --}}
+                <div class="d-flex justify-content-center align-items-center flex-wrap gap-2 pt-1">
+                    <a href="{{ route('register') }}" class="btn-cta-gold">
+                        <i class="bi bi-person-plus-fill"></i>
+                        <span>Daftar Sekarang</span>
+                        <i class="bi bi-arrow-right-short cta-arrow-icon"></i>
+                    </a>
+                    <a href="{{ route('login') }}" class="btn-cta-glass">
+                        <i class="bi bi-box-arrow-in-right"></i>
+                        <span>Sudah Punya Akun? Masuk</span>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </section>

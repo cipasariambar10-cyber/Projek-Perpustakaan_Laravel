@@ -56,7 +56,7 @@
         {{-- Bar Aksi Modern: Detail & Pinjam (Khusus Halaman Katalog) --}}
         <div class="book-actions">
             <a href="{{ route('katalog.show', $book->id) }}" class="btn-book-action btn-book-detail">
-                <i class="bi bi-book-half"></i>
+                <i class="bi bi-journal-text"></i>
                 <span>Detail</span>
             </a>
             <form action="{{ route('katalog.pinjam', $book->id) }}" method="POST">

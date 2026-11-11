@@ -4,12 +4,18 @@
 
 @section('content')
             <div class="mb-4">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb" style="font-size:0.85rem;">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.peminjaman.index') }}">Peminjaman</a></li>
-                        <li class="breadcrumb-item active">Detail #{{ $peminjaman->id }}</li>
-                    </ol>
-                </nav>
+                <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
+                    <a href="{{ route('admin.peminjaman.index') }}" class="btn-back-nav">
+                        <span class="back-nav-icon"><i class="bi bi-arrow-left"></i></span>
+                        <span>Kembali</span>
+                    </a>
+                    <nav aria-label="breadcrumb" class="mb-0">
+                        <ol class="breadcrumb mb-0" style="font-size:0.85rem;">
+                            <li class="breadcrumb-item"><a href="{{ route('admin.peminjaman.index') }}">Peminjaman</a></li>
+                            <li class="breadcrumb-item active">Detail #{{ $peminjaman->id }}</li>
+                        </ol>
+                    </nav>
+                </div>
                 <h1 class="page-title">Detail Peminjaman</h1>
             </div>
 

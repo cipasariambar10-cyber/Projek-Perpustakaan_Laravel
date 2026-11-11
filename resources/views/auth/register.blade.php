@@ -6,6 +6,11 @@
 
 @section('content')
 <div class="auth-wrapper">
+    <a href="{{ route('beranda') }}" class="btn-back-nav auth-back-top">
+        <span class="back-nav-icon"><i class="bi bi-arrow-left"></i></span>
+        <span>Kembali</span>
+    </a>
+
     <div class="auth-card" style="max-width: 520px;">
         <div class="auth-logo">
             <img src="{{ asset('images/logo-lentera-icon.png') }}" alt="Logo Lentera Pustaka" class="auth-logo-img mb-3">
@@ -58,14 +63,17 @@
                         <i class="bi bi-card-text me-1"></i> NISN
                     </label>
                     <input type="text"
+                           inputmode="numeric"
                            class="form-control @error('nis_nip') is-invalid @enderror"
                            id="nis_nip"
                            name="nis_nip"
                            value="{{ old('nis_nip') }}"
-                           placeholder="Contoh: 0071234567">
-                    @error('nis_nip')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                           minlength="10"
+                           maxlength="10"
+                           pattern="[0-9]{10}">
+                    <div id="nis_nip_warning" class="invalid-feedback" style="{{ $errors->has('nis_nip') ? 'display: block;' : 'display: none;' }}">
+                        {{ $errors->first('nis_nip') ?: 'NISN harus terdiri dari tepat 10 digit angka.' }}
+                    </div>
                 </div>
 
                 {{-- Kelas --}}
@@ -98,8 +106,7 @@
                        value="{{ old('no_hp') }}"
                        minlength="10"
                        maxlength="13"
-                       pattern="[0-9]{10,13}"
-                       placeholder="08xxxxxxxxxx (10-13 digit angka)">
+                       pattern="[0-9]{10,13}">
                 <div id="no_hp_warning" class="invalid-feedback" style="{{ $errors->has('no_hp') ? 'display: block;' : 'display: none;' }}">
                     {{ $errors->first('no_hp') ?: 'Nomor telepon harus terdiri dari 10 hingga 13 digit angka.' }}
                 </div>
@@ -151,6 +158,42 @@
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function () {
+    // Validasi Real-time NISN (Tepat 10 Digit Angka)
+    const nisnInput = document.getElementById('nis_nip');
+    const nisnWarning = document.getElementById('nis_nip_warning');
+
+    if (nisnInput && nisnWarning) {
+        function validateNisn() {
+            const cleaned = nisnInput.value.replace(/[^0-9]/g, '').slice(0, 10);
+            if (nisnInput.value !== cleaned) {
+                nisnInput.value = cleaned;
+            }
+
+            const len = cleaned.length;
+            if (len === 0) {
+                nisnInput.classList.remove('is-invalid', 'is-valid');
+                nisnInput.setCustomValidity('');
+                nisnWarning.style.display = 'none';
+            } else if (len !== 10) {
+                nisnInput.classList.add('is-invalid');
+                nisnInput.classList.remove('is-valid');
+                const msg = 'NISN harus tepat 10 digit angka (saat ini ' + len + ' digit).';
+                nisnWarning.textContent = msg;
+                nisnWarning.style.display = 'block';
+                nisnInput.setCustomValidity(msg);
+            } else {
+                nisnInput.classList.remove('is-invalid');
+                nisnInput.classList.add('is-valid');
+                nisnInput.setCustomValidity('');
+                nisnWarning.style.display = 'none';
+            }
+        }
+
+        nisnInput.addEventListener('input', validateNisn);
+        nisnInput.addEventListener('blur', validateNisn);
+    }
+
+    // Validasi Real-time No. HP (10-13 Digit Angka)
     const noHpInput = document.getElementById('no_hp');
     const noHpWarning = document.getElementById('no_hp_warning');
     if (!noHpInput || !noHpWarning) return;

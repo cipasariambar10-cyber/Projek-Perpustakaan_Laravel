@@ -32,7 +32,7 @@ class AnggotaPeminjamanController extends Controller
             }
         }
 
-        $peminjaman = $query->paginate(10)->withQueryString();
+        $peminjaman = $query->paginate(4)->withQueryString();
 
         $userId = auth()->id();
         $stats = [

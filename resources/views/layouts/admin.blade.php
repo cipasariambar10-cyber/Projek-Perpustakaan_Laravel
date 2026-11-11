@@ -334,7 +334,10 @@
                     &copy; {{ date('Y') }} <strong style="color: var(--gold-300); font-weight: 600;">Lentera Pustaka</strong> — Perpustakaan Sekolah. Hak Cipta Dilindungi.
                 </div>
                 <div class="footer-bottom-badge">
-                    <i class="bi bi-book-half me-1" style="color: var(--gold-400);"></i> Gerakan Literasi Sekolah Digital
+                    <span class="footer-bottom-icon">
+                        <i class="bi bi-mortarboard-fill"></i>
+                    </span>
+                    <span>Gerakan Literasi Sekolah Digital</span>
                 </div>
             </div>
         </div>

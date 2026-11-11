@@ -4,8 +4,9 @@
 
 @section('content')
             <div class="mb-4">
-                <a href="{{ route('admin.anggota.index') }}" class="text-lembut" style="font-size:0.88rem;">
-                    <i class="bi bi-arrow-left me-1"></i> Kembali ke Daftar Anggota
+                <a href="{{ route('admin.anggota.index') }}" class="btn-back-nav mb-2">
+                    <span class="back-nav-icon"><i class="bi bi-arrow-left"></i></span>
+                    <span>Kembali ke Daftar Anggota</span>
                 </a>
                 <h1 class="page-title mt-2">Detail Anggota</h1>
             </div>

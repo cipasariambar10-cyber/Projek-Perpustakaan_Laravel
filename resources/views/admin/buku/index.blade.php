@@ -15,7 +15,7 @@
 
 <div class="card-perpus mb-4">
     <div class="card-body py-3">
-        <form method="GET" action="{{ route('admin.buku.index') }}" class="row g-3 align-items-end">
+        <form method="GET" action="{{ route('admin.buku.index') }}" class="row g-3 align-items-end form-perpus">
             <div class="col-md-5">
                 <label for="q" class="form-label" style="font-size:0.85rem;">Cari</label>
                 <input type="text" id="q" name="q" class="form-control" placeholder="Judul atau pengarang..."
@@ -60,8 +60,23 @@
                     <tr>
                         <td class="text-lembut">{{ $buku->firstItem() + $i }}</td>
                         <td>
-                            <div class="fw-semibold" style="font-size:0.88rem;">{{ $b->judul }}</div>
-                            <div class="text-lembut" style="font-size:0.78rem;">ISBN: {{ $b->isbn ?? '-' }}</div>
+                            <div class="d-flex align-items-center gap-2">
+                                @if(!empty($b->sampul))
+                                    <img src="{{ asset('storage/' . $b->sampul) }}"
+                                         alt="Cover {{ $b->judul }}"
+                                         class="rounded shadow-sm flex-shrink-0"
+                                         style="width: 34px; height: 48px; object-fit: cover; object-position: center top; border: 1px solid var(--cream-200);">
+                                @else
+                                    <div class="d-flex align-items-center justify-content-center rounded text-center flex-shrink-0"
+                                         style="width: 34px; height: 48px; background: var(--gradient-green); color: var(--cream-50); font-size: 0.8rem;">
+                                        <i class="bi bi-book"></i>
+                                    </div>
+                                @endif
+                                <div>
+                                    <div class="fw-semibold" style="font-size:0.88rem;">{{ $b->judul }}</div>
+                                    <div class="text-lembut" style="font-size:0.78rem;">ISBN: {{ $b->isbn ?? '-' }}</div>
+                                </div>
+                            </div>
                         </td>
                         <td>{{ $b->pengarang }}</td>
                         <td>{{ $b->category->nama ?? '-' }}</td>
@@ -88,14 +103,12 @@
             </table>
         </div>
 
-        @if($buku->hasPages())
-        <div class="d-flex justify-content-between align-items-center px-3 py-3 border-top">
-            <div class="text-lembut" style="font-size:0.85rem;">
-                Menampilkan {{ $buku->firstItem() }}–{{ $buku->lastItem() }} dari {{ $buku->total() }} data
+        <div class="table-pagination-footer">
+            <div class="pagination-info-text">
+                Menampilkan <strong>{{ $buku->firstItem() }}–{{ $buku->lastItem() }}</strong> dari <strong>{{ $buku->total() }}</strong> data buku
             </div>
             {{ $buku->links() }}
         </div>
-        @endif
         @else
         <div class="empty-state">
             <i class="bi bi-book"></i>

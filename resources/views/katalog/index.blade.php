@@ -126,8 +126,14 @@
         {{-- Baris Info Hasil & Reset Filter --}}
         <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-4 px-1">
             <div class="katalog-result-text">
-                <i class="bi bi-book-half me-2" style="color: var(--gold-600);"></i>
-                <span>Menampilkan <strong>{{ $books->count() }}</strong> dari <strong>{{ $books->total() }}</strong> koleksi buku</span>
+                <span class="katalog-result-icon">
+                    <i class="bi bi-journals"></i>
+                </span>
+                @if($books->total() > 0)
+                    <span>Menampilkan <strong>{{ $books->firstItem() }}–{{ $books->lastItem() }}</strong> dari <strong>{{ $books->total() }}</strong> koleksi buku</span>
+                @else
+                    <span>Menampilkan <strong>0</strong> koleksi buku</span>
+                @endif
             </div>
 
             @if(request()->hasAny(['q', 'kategori', 'tersedia', 'urutan']) && (request('q') || request('kategori') || (request('tersedia') && request('tersedia') !== 'Semua') || (request('urutan') && request('urutan') !== 'terbaru')))

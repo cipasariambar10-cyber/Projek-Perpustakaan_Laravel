@@ -3,14 +3,19 @@
 @section('title', 'Kelola Peminjaman — Perpustakaan')
 
 @section('content')
-            <div class="d-flex justify-content-between align-items-center mb-4">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4">
                 <div>
                     <h1 class="page-title">Peminjaman</h1>
                     <p class="page-subtitle mb-0">Kelola peminjaman dan pengembalian buku</p>
                 </div>
-                <a href="{{ route('admin.peminjaman.create') }}" class="btn btn-emas">
-                    <i class="bi bi-plus-circle me-2"></i> Catat Peminjaman
-                </a>
+                <div class="d-flex flex-wrap align-items-center gap-2">
+                    <button type="button" class="btn btn-hijau" data-bs-toggle="modal" data-bs-target="#modalCetakLaporan">
+                        <i class="bi bi-printer me-2"></i> Cetak Laporan
+                    </button>
+                    <a href="{{ route('admin.peminjaman.create') }}" class="btn btn-emas">
+                        <i class="bi bi-plus-circle me-2"></i> Catat Peminjaman
+                    </a>
+                </div>
             </div>
 
             {{-- Kartu Statistik Peminjaman --}}
@@ -185,11 +190,12 @@
                     </div>
 
                     {{-- Pagination --}}
-                    @if($peminjaman->hasPages())
-                    <div class="d-flex justify-content-center py-3">
+                    <div class="table-pagination-footer">
+                        <div class="pagination-info-text">
+                            Menampilkan <strong>{{ $peminjaman->firstItem() }}–{{ $peminjaman->lastItem() }}</strong> dari <strong>{{ $peminjaman->total() }}</strong> data peminjaman
+                        </div>
                         {{ $peminjaman->links() }}
                     </div>
-                    @endif
 
                     @else
                     <div class="empty-state py-5">
@@ -203,4 +209,128 @@
                     @endif
                 </div>
             </div>
+
+            {{-- Modal Filter Rentang Tanggal Cetak Laporan Peminjaman --}}
+            <div class="modal fade" id="modalCetakLaporan" tabindex="-1" aria-labelledby="modalCetakLaporanLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content modal-perpus">
+                        <div class="modal-header modal-header-perpus">
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="modal-icon-badge">
+                                    <i class="bi bi-printer-fill"></i>
+                                </span>
+                                <div>
+                                    <h5 class="modal-title mb-0" id="modalCetakLaporanLabel">Cetak Laporan Peminjaman</h5>
+                                    <small class="modal-subtitle">Pilih rentang tanggal transaksi peminjaman buku</small>
+                                </div>
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                        </div>
+                        <form method="GET" action="{{ route('admin.peminjaman.cetak') }}" target="_blank" class="form-perpus" id="formCetakLaporan">
+                            <input type="hidden" name="auto_print" value="1">
+                            <div class="modal-body p-4">
+                                {{-- Pilihan Cepat Rentang Tanggal --}}
+                                <div class="mb-3">
+                                    <label class="form-label d-block mb-2" style="font-size: 0.8rem;">
+                                        <i class="bi bi-lightning-charge me-1" style="color: var(--gold-500);"></i> Pilihan Cepat Periode
+                                    </label>
+                                    <div class="d-flex flex-wrap gap-2">
+                                        <button type="button" class="btn btn-sm btn-outline-hijau rounded-pill px-3" onclick="setRentangCetak('hari_ini')">Hari Ini</button>
+                                        <button type="button" class="btn btn-sm btn-outline-hijau rounded-pill px-3" onclick="setRentangCetak('7_hari')">7 Hari Terakhir</button>
+                                        <button type="button" class="btn btn-sm btn-outline-hijau rounded-pill px-3" onclick="setRentangCetak('bulan_ini')">Bulan Ini</button>
+                                        <button type="button" class="btn btn-sm btn-outline-hijau rounded-pill px-3" onclick="setRentangCetak('semua')">Semua Periode</button>
+                                    </div>
+                                </div>
+
+                                <div class="row g-3 mb-3">
+                                    <div class="col-sm-6">
+                                        <label for="cetak_tanggal_mulai" class="form-label">
+                                            <i class="bi bi-calendar-plus me-1"></i> Dari Tanggal
+                                        </label>
+                                        <input type="date" id="cetak_tanggal_mulai" name="tanggal_mulai"
+                                               class="form-control"
+                                               value="{{ now()->startOfMonth()->format('Y-m-d') }}">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="cetak_tanggal_selesai" class="form-label">
+                                            <i class="bi bi-calendar-check me-1"></i> Sampai Tanggal
+                                        </label>
+                                        <input type="date" id="cetak_tanggal_selesai" name="tanggal_selesai"
+                                               class="form-control"
+                                               value="{{ now()->format('Y-m-d') }}">
+                                    </div>
+                                </div>
+
+                                <div class="mb-2">
+                                    <label for="cetak_status" class="form-label">
+                                        <i class="bi bi-funnel me-1"></i> Filter Status Peminjaman
+                                    </label>
+                                    <select id="cetak_status" name="status" class="form-select">
+                                        <option value="">Semua Status (Dipinjam, Dikembalikan & Terlambat)</option>
+                                        <option value="dipinjam">Sedang Dipinjam</option>
+                                        <option value="dikembalikan">Sudah Dikembalikan</option>
+                                        <option value="terlambat">Terlambat</option>
+                                    </select>
+                                    <div class="form-text mt-2">
+                                        <i class="bi bi-info-circle me-1"></i> Kosongkan tanggal jika ingin mencetak seluruh riwayat dari awal hingga sekarang.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer modal-footer-perpus">
+                                <button type="button" class="btn btn-outline-hijau" data-bs-dismiss="modal">Batal</button>
+                                <button type="submit" class="btn btn-emas">
+                                    <i class="bi bi-printer me-1"></i> Tampilkan & Cetak Laporan
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 @endsection
+
+@push('scripts')
+<script>
+function setRentangCetak(tipe) {
+    const inputMulai = document.getElementById('cetak_tanggal_mulai');
+    const inputSelesai = document.getElementById('cetak_tanggal_selesai');
+    const today = new Date();
+    const formatYmd = (d) => {
+        const y = d.getFullYear();
+        const m = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        return `${y}-${m}-${day}`;
+    };
+
+    if (tipe === 'hari_ini') {
+        const str = formatYmd(today);
+        inputMulai.value = str;
+        inputSelesai.value = str;
+    } else if (tipe === '7_hari') {
+        const past = new Date(today);
+        past.setDate(today.getDate() - 6);
+        inputMulai.value = formatYmd(past);
+        inputSelesai.value = formatYmd(today);
+    } else if (tipe === 'bulan_ini') {
+        const firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
+        inputMulai.value = formatYmd(firstDay);
+        inputSelesai.value = formatYmd(today);
+    } else if (tipe === 'semua') {
+        inputMulai.value = '';
+        inputSelesai.value = '';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const inputMulai = document.getElementById('cetak_tanggal_mulai');
+    const inputSelesai = document.getElementById('cetak_tanggal_selesai');
+    if (inputMulai && inputSelesai) {
+        inputMulai.addEventListener('change', function () {
+            if (inputMulai.value && inputSelesai.value && inputSelesai.value < inputMulai.value) {
+                inputSelesai.value = inputMulai.value;
+            }
+            inputSelesai.min = inputMulai.value || '';
+        });
+    }
+});
+</script>
+@endpush

@@ -29,10 +29,11 @@ class ProfilController extends Controller
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
-            'nis_nip' => ['nullable', 'string', 'max:30'],
+            'nis_nip' => ['nullable', 'digits:10'],
             'kelas' => ['nullable', 'string', 'max:20'],
             'no_hp' => ['nullable', 'digits_between:10,13'],
         ], [
+            'nis_nip.digits' => 'NISN harus berupa angka dan terdiri dari tepat 10 digit.',
             'no_hp.digits_between' => 'Nomor telepon harus berupa angka dengan panjang antara 10 hingga 13 digit.',
         ]);
 

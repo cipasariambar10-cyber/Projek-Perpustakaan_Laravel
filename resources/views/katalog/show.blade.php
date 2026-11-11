@@ -15,13 +15,20 @@
     <div class="section-ambient-particles" aria-hidden="true"></div>
 
     <div class="container py-5 position-relative" style="z-index: 2;">
-        <!-- Breadcrumb -->
-    <nav aria-label="breadcrumb" class="mb-4">
-        <ol class="breadcrumb mb-0">
-            <li class="breadcrumb-item"><a href="{{ route('katalog.index') }}" class="fw-medium text-decoration-none" style="color: var(--green-700);">Katalog</a></li>
-            <li class="breadcrumb-item active" aria-current="page" style="color: var(--teks-lembut);">{{ Str::limit($book->judul, 30) }}</li>
-        </ol>
-    </nav>
+        <!-- Tombol Kembali & Breadcrumb -->
+        <div class="d-flex flex-wrap align-items-center gap-3 mb-4">
+            <a href="{{ url()->previous() !== url()->current() ? url()->previous() : route('katalog.index') }}" class="btn-back-nav">
+                <span class="back-nav-icon"><i class="bi bi-arrow-left"></i></span>
+                <span>Kembali</span>
+            </a>
+
+            <nav aria-label="breadcrumb" class="mb-0">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="{{ route('katalog.index') }}" class="fw-medium text-decoration-none" style="color: var(--green-700);">Katalog</a></li>
+                    <li class="breadcrumb-item active" aria-current="page" style="color: var(--teks-lembut);">{{ Str::limit($book->judul, 35) }}</li>
+                </ol>
+            </nav>
+        </div>
 
     <!-- Flash Messages -->
     @if(session('success'))

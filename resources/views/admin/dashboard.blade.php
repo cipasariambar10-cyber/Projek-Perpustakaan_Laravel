@@ -17,7 +17,7 @@
             <div class="row g-4 mb-4">
                 <div class="col-sm-6 col-xl-3">
                     <div class="stat-card stat-green">
-                        <div class="stat-icon-wrapper"><i class="bi bi-book-half"></i></div>
+                        <div class="stat-icon-wrapper"><i class="bi bi-journals"></i></div>
                         <div class="stat-number">{{ number_format($stats['total_buku']) }}</div>
                         <div class="stat-label">Total Buku</div>
                     </div>

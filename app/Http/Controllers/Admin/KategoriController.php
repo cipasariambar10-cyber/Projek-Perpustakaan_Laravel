@@ -11,7 +11,7 @@ class KategoriController extends Controller
 {
     public function index()
     {
-        $kategori = Category::withCount('books')->orderBy('nama')->paginate(10);
+        $kategori = Category::withCount('books')->orderBy('nama')->paginate(6);
 
         return view('admin.kategori.index', compact('kategori'));
     }

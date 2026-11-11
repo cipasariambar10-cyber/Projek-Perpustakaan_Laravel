@@ -53,14 +53,12 @@
             </table>
         </div>
 
-        @if($kategori->hasPages())
-        <div class="d-flex justify-content-between align-items-center px-3 py-3">
-            <div class="text-lembut" style="font-size:0.85rem;">
-                Menampilkan {{ $kategori->firstItem() }}–{{ $kategori->lastItem() }} dari {{ $kategori->total() }} data
+        <div class="table-pagination-footer">
+            <div class="pagination-info-text">
+                Menampilkan <strong>{{ $kategori->firstItem() }}–{{ $kategori->lastItem() }}</strong> dari <strong>{{ $kategori->total() }}</strong> data kategori
             </div>
             {{ $kategori->links() }}
         </div>
-        @endif
         @else
         <div class="empty-state">
             <i class="bi bi-tags"></i>

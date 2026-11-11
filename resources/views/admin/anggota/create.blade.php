@@ -4,8 +4,9 @@
 
 @section('content')
             <div class="mb-4">
-                <a href="{{ route('admin.anggota.index') }}" class="text-lembut" style="font-size:0.88rem;">
-                    <i class="bi bi-arrow-left me-1"></i> Kembali ke Daftar Anggota
+                <a href="{{ route('admin.anggota.index') }}" class="btn-back-nav mb-2">
+                    <span class="back-nav-icon"><i class="bi bi-arrow-left"></i></span>
+                    <span>Kembali ke Daftar Anggota</span>
                 </a>
                 <h1 class="page-title mt-2">Tambah Anggota</h1>
                 <p class="page-subtitle mb-0">Tambahkan pengguna baru ke sistem perpustakaan</p>
@@ -66,8 +67,10 @@
                             {{-- NISN --}}
                             <div class="col-md-4 mb-3">
                                 <label for="nis_nip" class="form-label">NISN</label>
-                                <input type="text" class="form-control @error('nis_nip') is-invalid @enderror"
-                                       id="nis_nip" name="nis_nip" value="{{ old('nis_nip') }}" placeholder="Contoh: 0071234567">
+                                <input type="text" inputmode="numeric" minlength="10" maxlength="10" pattern="[0-9]{10}"
+                                       oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10)"
+                                       class="form-control @error('nis_nip') is-invalid @enderror"
+                                       id="nis_nip" name="nis_nip" value="{{ old('nis_nip') }}">
                                 @error('nis_nip')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -88,7 +91,7 @@
                                 <label for="no_hp" class="form-label">No. HP</label>
                                 <input type="tel" inputmode="numeric" minlength="10" maxlength="13" pattern="[0-9]{10,13}"
                                        class="form-control @error('no_hp') is-invalid @enderror"
-                                       id="no_hp" name="no_hp" value="{{ old('no_hp') }}" placeholder="08xxxxxxxxxx (10-13 digit)">
+                                       id="no_hp" name="no_hp" value="{{ old('no_hp') }}">
                                 @error('no_hp')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

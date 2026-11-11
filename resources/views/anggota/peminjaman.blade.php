@@ -65,7 +65,7 @@
                 <div class="col-6 col-lg-3">
                     <div class="peminjaman-stat-card">
                         <div class="pstat-icon pstat-gold">
-                            <i class="bi bi-book-half"></i>
+                            <i class="bi bi-journal-bookmark-fill"></i>
                         </div>
                         <div class="pstat-info">
                             <span class="pstat-value">{{ $stats['dipinjam'] ?? 0 }}</span>
@@ -223,7 +223,7 @@
 
                                 @if($loan->book)
                                     <a href="{{ route('katalog.show', $loan->book->id) }}" class="btn-book-action btn-book-detail px-3 flex-shrink-0" style="height: 38px;">
-                                        <i class="bi bi-book-half"></i>
+                                        <i class="bi bi-journal-text"></i>
                                         <span>Lihat Buku</span>
                                     </a>
                                 @endif
@@ -235,11 +235,12 @@
             </div>
 
             {{-- Pagination --}}
-            @if($peminjaman->hasPages())
-            <div class="d-flex justify-content-center mt-4 custom-pagination">
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-4 pt-2 custom-pagination">
+                <div class="pagination-info-text">
+                    Menampilkan <strong>{{ $peminjaman->firstItem() }}–{{ $peminjaman->lastItem() }}</strong> dari <strong>{{ $peminjaman->total() }}</strong> riwayat peminjaman
+                </div>
                 {{ $peminjaman->links('pagination::bootstrap-5') }}
             </div>
-            @endif
 
         @else
             <div class="empty-state-luxury text-center py-5 my-3">
