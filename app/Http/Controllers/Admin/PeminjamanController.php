@@ -177,6 +177,11 @@ class PeminjamanController extends Controller
             'tanggal_pinjam' => 'required|date',
         ]);
 
+        $targetUser = User::findOrFail($request->user_id);
+        if ($targetUser->status !== 'aktif') {
+            return back()->with('error', 'Anggota yang dipilih berstatus nonaktif.')->withInput();
+        }
+
         $book = Book::findOrFail($request->book_id);
 
         // Validasi stok
@@ -250,7 +255,7 @@ class PeminjamanController extends Controller
         ]);
 
         // Tambah stok buku
-        $peminjaman->book->increment('stok');
+        $peminjaman->book?->increment('stok');
 
         $pesan = 'Buku berhasil dikembalikan.';
         if ($denda > 0) {
@@ -269,7 +274,7 @@ class PeminjamanController extends Controller
     {
         // Jika masih dipinjam, kembalikan stok
         if ($peminjaman->status === 'dipinjam') {
-            $peminjaman->book->increment('stok');
+            $peminjaman->book?->increment('stok');
         }
 
         $peminjaman->delete();

@@ -55,19 +55,41 @@ class AnggotaController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $isAdminRole = $request->input('role') === 'admin';
+
+        $rules = [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Password::min(8)],
             'role' => ['required', Rule::in(['admin', 'anggota'])],
-            'nis_nip' => ['nullable', 'digits:10'],
-            'kelas' => ['nullable', 'string', 'max:20'],
             'no_hp' => ['nullable', 'digits_between:10,13'],
             'status' => ['required', Rule::in(['aktif', 'nonaktif'])],
-        ], [
-            'nis_nip.digits' => 'NISN harus berupa angka dan terdiri dari tepat 10 digit.',
+        ];
+
+        $messages = [
+            'name.required' => 'Nama lengkap wajib diisi.',
+            'email.required' => 'Email wajib diisi.',
+            'email.email' => 'Format email tidak valid.',
+            'email.unique' => 'Email sudah terdaftar.',
+            'password.required' => 'Password wajib diisi.',
+            'password.min' => 'Password minimal 8 karakter.',
+            'password.confirmed' => 'Konfirmasi password tidak cocok.',
             'no_hp.digits_between' => 'Nomor telepon harus berupa angka dengan panjang antara 10 hingga 13 digit.',
-        ]);
+        ];
+
+        if ($isAdminRole) {
+            $rules['nis_nip'] = ['nullable', 'string', 'max:30'];
+            $rules['kelas'] = ['nullable', 'string', 'max:100'];
+            $messages['nis_nip.max'] = 'NIP maksimal 30 karakter.';
+            $messages['kelas.max'] = 'Jabatan maksimal 100 karakter.';
+        } else {
+            $rules['nis_nip'] = ['nullable', 'digits:10'];
+            $rules['kelas'] = ['nullable', 'string', 'max:20'];
+            $messages['nis_nip.digits'] = 'NISN harus berupa angka dan terdiri dari tepat 10 digit.';
+            $messages['kelas.max'] = 'Kelas maksimal 20 karakter.';
+        }
+
+        $validated = $request->validate($rules, $messages);
 
         $validated['password'] = Hash::make($validated['password']);
 
@@ -123,20 +145,40 @@ class AnggotaController extends Controller
     public function update(Request $request, User $anggotum)
     {
         $anggota = $anggotum;
+        $isAdminRole = $request->input('role') === 'admin';
 
-        $validated = $request->validate([
+        $rules = [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($anggota->id)],
             'password' => ['nullable', 'confirmed', Password::min(8)],
             'role' => ['required', Rule::in(['admin', 'anggota'])],
-            'nis_nip' => ['nullable', 'digits:10'],
-            'kelas' => ['nullable', 'string', 'max:20'],
             'no_hp' => ['nullable', 'digits_between:10,13'],
             'status' => ['required', Rule::in(['aktif', 'nonaktif'])],
-        ], [
-            'nis_nip.digits' => 'NISN harus berupa angka dan terdiri dari tepat 10 digit.',
+        ];
+
+        $messages = [
+            'name.required' => 'Nama lengkap wajib diisi.',
+            'email.required' => 'Email wajib diisi.',
+            'email.email' => 'Format email tidak valid.',
+            'email.unique' => 'Email sudah terdaftar.',
+            'password.min' => 'Password minimal 8 karakter.',
+            'password.confirmed' => 'Konfirmasi password tidak cocok.',
             'no_hp.digits_between' => 'Nomor telepon harus berupa angka dengan panjang antara 10 hingga 13 digit.',
-        ]);
+        ];
+
+        if ($isAdminRole) {
+            $rules['nis_nip'] = ['nullable', 'string', 'max:30'];
+            $rules['kelas'] = ['nullable', 'string', 'max:100'];
+            $messages['nis_nip.max'] = 'NIP maksimal 30 karakter.';
+            $messages['kelas.max'] = 'Jabatan maksimal 100 karakter.';
+        } else {
+            $rules['nis_nip'] = ['nullable', 'digits:10'];
+            $rules['kelas'] = ['nullable', 'string', 'max:20'];
+            $messages['nis_nip.digits'] = 'NISN harus berupa angka dan terdiri dari tepat 10 digit.';
+            $messages['kelas.max'] = 'Kelas maksimal 20 karakter.';
+        }
+
+        $validated = $request->validate($rules, $messages);
 
         // Hanya update password jika diisi
         if (empty($validated['password'])) {
@@ -182,6 +224,10 @@ class AnggotaController extends Controller
 
         if ($anggota->id === auth()->id()) {
             return back()->with('error', 'Anda tidak dapat menghapus akun sendiri.');
+        }
+
+        if ($anggota->loans()->where('status', 'dipinjam')->exists()) {
+            return back()->with('error', "Akun {$anggota->name} masih memiliki peminjaman buku yang aktif dan belum dikembalikan.");
         }
 
         $anggota->delete();

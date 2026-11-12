@@ -48,11 +48,11 @@
                                     <div class="fw-semibold">{{ $anggota->email }}</div>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label class="text-lembut" style="font-size:0.8rem; text-transform:uppercase; letter-spacing:0.05em;">NISN</label>
+                                    <label class="text-lembut" style="font-size:0.8rem; text-transform:uppercase; letter-spacing:0.05em;">{{ $anggota->isAdmin() ? 'NIP' : 'NISN' }}</label>
                                     <div class="fw-semibold">{{ $anggota->nis_nip ?? '-' }}</div>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label class="text-lembut" style="font-size:0.8rem; text-transform:uppercase; letter-spacing:0.05em;">Kelas</label>
+                                    <label class="text-lembut" style="font-size:0.8rem; text-transform:uppercase; letter-spacing:0.05em;">{{ $anggota->isAdmin() ? 'Jabatan' : 'Kelas' }}</label>
                                     <div class="fw-semibold">{{ $anggota->kelas ?? '-' }}</div>
                                 </div>
                                 <div class="col-md-6 mb-3">

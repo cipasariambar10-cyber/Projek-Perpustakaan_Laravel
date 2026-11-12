@@ -49,7 +49,12 @@
         <!-- Cover Section -->
         <div class="col-md-4 col-lg-3 text-center">
             @if($book->sampul)
-                <img src="{{ asset('storage/' . $book->sampul) }}" class="img-fluid rounded-4 shadow" alt="Cover {{ $book->judul }}">
+                <img src="{{ asset('storage/' . $book->sampul) }}" class="img-fluid rounded-4 shadow" alt="Cover {{ $book->judul }}"
+                     onerror="this.onerror=null; this.classList.add('d-none'); if(this.nextElementSibling) this.nextElementSibling.classList.remove('d-none');">
+                <div class="rounded-4 book-cover-placeholder shadow d-none" style="height: 400px; width: 100%;">
+                    <i class="bi bi-book" style="font-size: 5rem;"></i>
+                    <span style="font-size: 1rem;">Tanpa Sampul</span>
+                </div>
             @else
                 <div class="rounded-4 book-cover-placeholder shadow" style="height: 400px; width: 100%;">
                     <i class="bi bi-book" style="font-size: 5rem;"></i>

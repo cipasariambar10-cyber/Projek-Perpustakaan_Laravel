@@ -143,7 +143,12 @@
                                 <div class="loan-cover-thumb flex-shrink-0">
                                     @if(!empty($loan->book?->sampul))
                                         <a href="{{ route('katalog.show', $loan->book->id) }}" class="d-block text-decoration-none position-relative">
-                                            <img src="{{ asset('storage/' . $loan->book->sampul) }}" alt="Cover {{ $loan->book->judul }}">
+                                            <img src="{{ asset('storage/' . $loan->book->sampul) }}" alt="Cover {{ $loan->book->judul }}"
+                                                 onerror="this.onerror=null; this.classList.add('d-none'); if(this.nextElementSibling) this.nextElementSibling.classList.remove('d-none');">
+                                            <div class="loan-cover-placeholder d-none">
+                                                <i class="bi bi-book"></i>
+                                                <span>No Cover</span>
+                                            </div>
                                         </a>
                                     @else
                                         <div class="loan-cover-placeholder">

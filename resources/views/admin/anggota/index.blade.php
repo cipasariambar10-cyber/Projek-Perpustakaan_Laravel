@@ -67,8 +67,8 @@
                                 <tr>
                                     <th style="width: 40px;">#</th>
                                     <th>Nama</th>
-                                    <th>NISN</th>
-                                    <th>Kelas</th>
+                                    <th>NISN / NIP</th>
+                                    <th>Kelas / Jabatan</th>
                                     <th>No. HP</th>
                                     <th>Role</th>
                                     <th>Status</th>

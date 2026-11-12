@@ -64,23 +64,24 @@
                         </div>
 
                         <div class="row">
-                            {{-- NISN --}}
+                            {{-- NISN / NIP --}}
                             <div class="col-md-4 mb-3">
-                                <label for="nis_nip" class="form-label">NISN</label>
-                                <input type="text" inputmode="numeric" minlength="10" maxlength="10" pattern="[0-9]{10}"
-                                       oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10)"
+                                <label for="nis_nip" class="form-label" id="label-nis-nip">{{ old('role', 'anggota') === 'admin' ? 'NIP' : 'NISN' }}</label>
+                                <input type="text"
                                        class="form-control @error('nis_nip') is-invalid @enderror"
-                                       id="nis_nip" name="nis_nip" value="{{ old('nis_nip') }}">
+                                       id="nis_nip" name="nis_nip" value="{{ old('nis_nip') }}"
+                                       placeholder="{{ old('role', 'anggota') === 'admin' ? 'Contoh: 198501012010011001' : '10 digit NISN' }}">
                                 @error('nis_nip')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
-                            {{-- Kelas --}}
+                            {{-- Kelas / Jabatan --}}
                             <div class="col-md-4 mb-3">
-                                <label for="kelas" class="form-label">Kelas</label>
+                                <label for="kelas" class="form-label" id="label-kelas">{{ old('role', 'anggota') === 'admin' ? 'Jabatan' : 'Kelas' }}</label>
                                 <input type="text" class="form-control @error('kelas') is-invalid @enderror"
-                                       id="kelas" name="kelas" value="{{ old('kelas') }}" placeholder="Contoh: XII PPLG 1">
+                                       id="kelas" name="kelas" value="{{ old('kelas') }}"
+                                       placeholder="{{ old('role', 'anggota') === 'admin' ? 'Contoh: Pustakawan / Pengelola Perpustakaan' : 'Contoh: XII PPLG 1' }}">
                                 @error('kelas')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -91,7 +92,8 @@
                                 <label for="no_hp" class="form-label">No. HP</label>
                                 <input type="tel" inputmode="numeric" minlength="10" maxlength="13" pattern="[0-9]{10,13}"
                                        class="form-control @error('no_hp') is-invalid @enderror"
-                                       id="no_hp" name="no_hp" value="{{ old('no_hp') }}">
+                                       id="no_hp" name="no_hp" value="{{ old('no_hp') }}"
+                                       placeholder="Contoh: 081234567890">
                                 @error('no_hp')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -130,3 +132,50 @@
                 </div>
             </div>
 @endsection
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const roleSelect = document.getElementById('role');
+        const labelNisNip = document.getElementById('label-nis-nip');
+        const inputNisNip = document.getElementById('nis_nip');
+        const labelKelas = document.getElementById('label-kelas');
+        const inputKelas = document.getElementById('kelas');
+
+        function updateRoleFields() {
+            if (!roleSelect || !labelNisNip || !inputNisNip || !labelKelas || !inputKelas) return;
+
+            const isAdmin = roleSelect.value === 'admin';
+            if (isAdmin) {
+                labelNisNip.textContent = 'NIP';
+                inputNisNip.placeholder = 'Contoh: 198501012010011001';
+                inputNisNip.removeAttribute('pattern');
+                inputNisNip.removeAttribute('minlength');
+                inputNisNip.oninput = null;
+                inputNisNip.maxLength = 30;
+
+                labelKelas.textContent = 'Jabatan';
+                inputKelas.placeholder = 'Contoh: Pustakawan / Pengelola Perpustakaan';
+                inputKelas.maxLength = 100;
+            } else {
+                labelNisNip.textContent = 'NISN';
+                inputNisNip.placeholder = '10 digit NISN';
+                inputNisNip.setAttribute('inputmode', 'numeric');
+                inputNisNip.setAttribute('pattern', '[0-9]{10}');
+                inputNisNip.setAttribute('minlength', '10');
+                inputNisNip.oninput = function () {
+                    this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);
+                };
+                inputNisNip.maxLength = 10;
+
+                labelKelas.textContent = 'Kelas';
+                inputKelas.placeholder = 'Contoh: XII PPLG 1';
+                inputKelas.maxLength = 20;
+            }
+        }
+
+        roleSelect.addEventListener('change', updateRoleFields);
+        updateRoleFields();
+    });
+</script>
+@endpush

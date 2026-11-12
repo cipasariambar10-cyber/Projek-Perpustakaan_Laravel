@@ -69,6 +69,22 @@ class User extends Authenticatable
     }
 
     /**
+     * Label dinamis untuk NISN / NIP sesuai peran.
+     */
+    public function getLabelNisNip(): string
+    {
+        return $this->isAdmin() ? 'NIP / Nomor Identitas' : 'NISN';
+    }
+
+    /**
+     * Label dinamis untuk Kelas / Jabatan sesuai peran.
+     */
+    public function getLabelKelas(): string
+    {
+        return $this->isAdmin() ? 'Jabatan' : 'Kelas';
+    }
+
+    /**
      * Cek apakah akun aktif.
      */
     public function isAktif(): bool
@@ -81,6 +97,6 @@ class User extends Authenticatable
      */
     public function loans()
     {
-        return $this->hasMany(\App\Models\Loan::class);
+        return $this->hasMany(Loan::class);
     }
 }

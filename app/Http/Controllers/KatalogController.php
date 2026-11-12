@@ -54,6 +54,11 @@ class KatalogController extends Controller
             return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu untuk meminjam buku.');
         }
 
+        // Cek status user
+        if ($user->status !== 'aktif') {
+            return back()->with('error', 'Akun Anda sedang dinonaktifkan. Anda tidak dapat meminjam buku.');
+        }
+
         // Cek apakah user sudah meminjam buku ini dan belum dikembalikan
         $alreadyBorrowed = Loan::where('user_id', $user->id)
             ->where('book_id', $book->id)

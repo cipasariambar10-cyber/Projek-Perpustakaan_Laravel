@@ -5,7 +5,12 @@
     <div class="book-cover-stage">
         <a href="{{ route('katalog.show', $book->id) }}" class="d-block text-decoration-none book-cover-container">
             @if($book->sampul)
-                <img src="{{ asset('storage/' . $book->sampul) }}" class="card-img-top book-cover" alt="Cover {{ $book->judul }}">
+                <img src="{{ asset('storage/' . $book->sampul) }}" class="card-img-top book-cover" alt="Cover {{ $book->judul }}"
+                     onerror="this.onerror=null; this.classList.add('d-none'); if(this.nextElementSibling) this.nextElementSibling.classList.remove('d-none');">
+                <div class="book-cover-placeholder d-none">
+                    <i class="bi bi-book"></i>
+                    <span>Tanpa Sampul</span>
+                </div>
             @else
                 <div class="book-cover-placeholder">
                     <i class="bi bi-book"></i>

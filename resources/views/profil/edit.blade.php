@@ -43,29 +43,59 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-4 mb-3">
-                                <label for="nis_nip" class="form-label">NISN</label>
-                                <input type="text" inputmode="numeric" minlength="10" maxlength="10" pattern="[0-9]{10}"
-                                       oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10)"
-                                       class="form-control @error('nis_nip') is-invalid @enderror"
-                                       id="nis_nip" name="nis_nip" value="{{ old('nis_nip', $user->nis_nip) }}">
-                                @error('nis_nip')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="kelas" class="form-label">Kelas</label>
-                                <input type="text" class="form-control @error('kelas') is-invalid @enderror"
-                                       id="kelas" name="kelas" value="{{ old('kelas', $user->kelas) }}">
-                                @error('kelas')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
+                            @if($user->isAdmin())
+                                {{-- NIP / Nomor Identitas untuk Admin / Petugas --}}
+                                <div class="col-md-4 mb-3">
+                                    <label for="nis_nip" class="form-label">NIP / Nomor Identitas</label>
+                                    <input type="text" maxlength="30"
+                                           class="form-control @error('nis_nip') is-invalid @enderror"
+                                           id="nis_nip" name="nis_nip" value="{{ old('nis_nip', $user->nis_nip) }}"
+                                           placeholder="Contoh: 198501012010011001">
+                                    @error('nis_nip')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                {{-- Jabatan untuk Admin / Petugas --}}
+                                <div class="col-md-4 mb-3">
+                                    <label for="kelas" class="form-label">Jabatan</label>
+                                    <input type="text" maxlength="100" class="form-control @error('kelas') is-invalid @enderror"
+                                           id="kelas" name="kelas" value="{{ old('kelas', $user->kelas) }}"
+                                           placeholder="Contoh: Pustakawan / Pengelola Perpustakaan">
+                                    @error('kelas')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            @else
+                                {{-- NISN untuk Siswa / Anggota --}}
+                                <div class="col-md-4 mb-3">
+                                    <label for="nis_nip" class="form-label">NISN</label>
+                                    <input type="text" inputmode="numeric" minlength="10" maxlength="10" pattern="[0-9]{10}"
+                                           oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10)"
+                                           class="form-control @error('nis_nip') is-invalid @enderror"
+                                           id="nis_nip" name="nis_nip" value="{{ old('nis_nip', $user->nis_nip) }}"
+                                           placeholder="10 digit NISN">
+                                    @error('nis_nip')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                {{-- Kelas untuk Siswa / Anggota --}}
+                                <div class="col-md-4 mb-3">
+                                    <label for="kelas" class="form-label">Kelas</label>
+                                    <input type="text" maxlength="20" class="form-control @error('kelas') is-invalid @enderror"
+                                           id="kelas" name="kelas" value="{{ old('kelas', $user->kelas) }}"
+                                           placeholder="Contoh: XII PPLG 1">
+                                    @error('kelas')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            @endif
+
                             <div class="col-md-4 mb-3">
                                 <label for="no_hp" class="form-label">No. HP</label>
                                 <input type="tel" inputmode="numeric" minlength="10" maxlength="13" pattern="[0-9]{10,13}"
                                        class="form-control @error('no_hp') is-invalid @enderror"
-                                       id="no_hp" name="no_hp" value="{{ old('no_hp', $user->no_hp) }}">
+                                       id="no_hp" name="no_hp" value="{{ old('no_hp', $user->no_hp) }}"
+                                       placeholder="Contoh: 081234567890">
                                 @error('no_hp')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
